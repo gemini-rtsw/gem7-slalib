@@ -1,0 +1,47 @@
+#
+# VxWorks startup script to load and execute system (iocCore) software.
+#
+# First, vxWorks startup issues:
+
+# Network stuff: Change to your default router if required
+# routeAdd "0", "127.0.0.1"
+
+# Login stuff: If you use vxWorks security you might use one of the following
+# loginUserAdd "user", "GaRbAgEpWd"
+# < /opt/vxWorks/passwd
+
+# Make delete key work for backspace
+tyBackspaceSet 0177
+
+# cd to application install directory (beware automounter problems)
+cd "$(iocpath)"
+pwd
+
+# Load EPICS core and sequencer
+ld < $(base)/bin/$(arch)/iocCore
+ld < $(base)/bin/$(arch)/seq
+
+# Records, device and driver support for a Gemini base system
+ld < $(version)/bin/$(arch)/gemini$(dbname).Support
+
+# Load any application records, device support or drivers here,
+# or code for subroutine records
+# ld < $(version)/bin/$(arch)/testsub.o
+
+# Load sequences here
+# ld < $(version)/bin/$(arch)/testseq.o
+
+# Configure the Timestamp system, 1=Master IOC
+TSconfigure 1, 0, 0, 0, 0, 0
+
+# Load one or more ASCII databases here
+dbLoadDatabase "$(version)/dbd/gemini$(dbname).dbd"
+# dbLoadRecords "$(version)/data/test.db"
+
+# This turns off logging
+# iocLogDisable=1
+
+iocInit "$(version)/data/resource.def"
+
+# Start sequences
+# seq &testseq
