@@ -14,7 +14,7 @@ extern "C" {
 **
 **  Prototype function declarations for slalib library.
 **
-**  Last revision:   23 September 2001
+**  Last revision:   19 June 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -218,6 +218,8 @@ double slaEpj ( double date );
 
 double slaEpj2d ( double epj );
 
+void slaEpv ( double, double[3], double[3], double[3], double[3] );
+
 void slaEqecl ( double dr, double dd, double date, double *dl, double *db );
 
 double slaEqeqx ( double date );
@@ -282,6 +284,8 @@ void slaHfk5z ( double rh, double dh, double epoch,
                 double *r5, double *d5, double *dr5, double *dd5 );
 
 void slaImxv ( float rm[3][3], float va[3], float vb[3] );
+
+void slaInt2in ( char *string, int *nstrt, int *ireslt, int *jflag );
 
 void slaIntin ( char *string, int *nstrt, long *ireslt, int *jflag );
 
@@ -359,6 +363,9 @@ void slaPlanet ( double date, int np, double pv[6], int *j );
 void slaPlante ( double date, double elong, double phi, int jform,
                  double epoch, double orbinc, double anode, double perih,
                  double aorq, double e, double aorl, double dm,
+                 double *ra, double *dec, double *r, int *jstat );
+
+void slaPlantu ( double date, double elong, double phi, double u[],
                  double *ra, double *dec, double *r, int *jstat );
 
 void slaPm ( double r0, double d0, double pr, double pd,
