@@ -2,10 +2,10 @@
 include ../.applTop
 include $(APPLIC_TOP)/config/CONFIG
 
+# The resource.def will be placed in the data directory
+DATA    = $(wildcard ../resource.def)
+
 # The *.vws scripts will be edited and put in the bin/$(T_A) directory
 PROD    = $(patsubst ../%.vws, %, $(wildcard ../*.vws))
-
-# We're loading the IOC via NFS so build Distfile
-TARGETS += Distfile.$(T_A)
 
 include $(APPLIC_TOP)/config/RULES.Build

@@ -12,22 +12,29 @@ COMPRESS = gzip
 release:
 	$(RM) $(PROD).tar $(PROD).tar.Z $(PROD).tar.gz .xfile
 	find * \
-	\( -name bin -o -name config -o -name epics     \
-	-o -name 'O.*' -o -name '*%' -o -name '*~'      \
-	-o -name '*.Z' -o -name '*.gz' -o -name include \
-	-o -name Distfile -o -name data -o -name CVS    \
+	\( -name .applTop     -o \
+	   -name .cvsignore   -o \
+           -name CVS          -o \
+	   -name bin          -o \
+	   -name lib          -o \
+           -name build.log    -o \
+           -name config       -o \
+           -name data         -o \
+           -name db           -o \
+           -name dbd          -o \
+           -name include      -o \
+           -name javalib      -o \
+	   -name cad.rc       -o \
+	   -name Distfile     -o \
+           -name local.vws    -o \
+           -name resource.def -o \
+           -name UAE.dist     -o \
+	   -name 'O.*'        -o \
+           -name '*%'         -o \
+           -name '*~'         -o \
+	   -name '*.Z'        -o \
+           -name '*.gz'          \
 	\) -prune -print > .xfile
-	echo 'capfast/cad.rc' >> .xfile
-	echo 'data/resource.def' >> .xfile
-	echo 'dl/template.adl' >> .xfile
-#
-# Because some systems still don't use the default colors.adl
-# Also because 'applSetup' does not copy the local colors.adl
-# from templates if the 'dl' directory exists
-#       echo 'dl/colors.adl' >> .xfile
-#
-	echo 'startup/local.vws' >> .xfile
-	echo 'startup/resource.def' >> .xfile
 	$(TAR) cvXf .xfile $(PROD).tar *
 	$(COMPRESS) $(PROD).tar
 	$(RM) .xfile
