@@ -1,0 +1,56 @@
+# Include file identifying the target architecture (defines the T_A
+# macro) and application configuration definitions
+
+include Target.include
+include .applTop/config/CONFIG
+
+# External libraries on which this directory is dependent.
+# DEPLIBS      =
+
+# User compiler and loader flags
+# SNC_FLAGS    =
+# USR_CFLAGS   =
+# USR_INCLUDES =
+# USR_LDFLAGS  =
+# USR_LDLIBS   =
+
+# Add the source code files to this variable. The default has all .c files 
+SRCS.c	= $(wildcard ../*.c) 
+
+# Add the object files in one of these two variables. 
+LIBOBJS	=  $(strip $(patsubst ../%.c,    %.o, $(SRCS.c))             \
+		   $(patsubst ../%.st,   %.o, $(wildcard ../*.st  )) \
+                   $(patsubst ../%.stpp, %.o, $(wildcard ../*.stpp)))
+
+# Standard macros for files which are to be built and installed.
+# PROD (products) and SCRIPTS are installed in INSTALL_BIN
+PROD	= $(strip $(patsubst %.o, %, $(OBJS))                        \
+		  $(patsubst ../%.vws, %, $(wildcard ../*.vws)))
+SCRIPTS	=
+
+# LIBNAME is installed in INSTALL_LIB
+LIBNAME	= slalib
+
+# INC is installed in INSTALL_INCLUDE
+INC	= slalib.h slamac.h
+
+# MAN1 is installed in INSTALL_MAN/man1
+MAN1	=
+
+# DOCS are installed in INSTALL_DOC
+DOCS	=
+
+# DATA are installed in INSTALL_DATA
+DATA	=
+
+# Any extra targets can be placed in a TARGETS macro (the build target
+# builds only pre_build, LIBNAME, TARGETS and PROD, not SCRIPTS, INC etc)
+TARGETS	=
+
+# Rules for building targets
+include .applTop/config/RULES.Build
+
+# There is no product rule, but one can be added and edited.
+#$(PROD): $(OBJS)
+#	$(RM) $@
+#	$(LINK.c) $@ $(OBJS)
