@@ -37,7 +37,7 @@ void slaPreces ( char sys[3], double ep0, double ep1,
 **  3)  If an invalid sys is supplied, values of -99.0,-99.0 will
 **      be returned for both ra and dc.
 **
-**  Last revision:   22 December 1993
+**  Last revision:   15 June 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -45,15 +45,15 @@ void slaPreces ( char sys[3], double ep0, double ep1,
    double pm[3][3], v1[3], v2[3];
 
 /* Validate sys */
-   if ( ( toupper ( sys[0] ) != 'F' )
-     || ( toupper ( sys[1] ) != 'K' )
-     || ( sys[2] != '4' && sys[2] != '5' ) ) {
+   if ( ( toupper ( (int) sys[0] ) != 'F' )
+     || ( toupper ( (int) sys[1] ) != 'K' )
+     || ( (int) sys[2] != '4' && (int) sys[2] != '5' ) ) {
          *ra = -99.0;          /* Error */
          *dc = -99.0;
    } else {
 
    /* Generate appropriate precession matrix */
-      if ( sys[2] == '4' )
+      if ( (int) sys[2] == '4' )
          slaPrebn ( ep0, ep1, pm );
       else
          slaPrec ( ep0, ep1, pm );

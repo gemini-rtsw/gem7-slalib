@@ -22,6 +22,8 @@ void slaDcmpf ( double coeffs[6],
 **     *perp     double        nonperpendicularity (radians)
 **     *orient   double        orientation (radians)
 **
+**  Called:  slaDrange
+**
 **  The model relates two sets of [x,y] coordinates as follows.
 **  Naming the elements of coeffs:
 **
@@ -62,7 +64,7 @@ void slaDcmpf ( double coeffs[6],
 **
 **  See also slaFitxy, slaPxy, slaInvf, slaXy2xy
 **
-**  Last revision:   22 September 1995
+**  Last revision:   19 December 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -70,7 +72,8 @@ void slaDcmpf ( double coeffs[6],
    double a, b, c, d, e, f, rb2e2, rc2f2, xsc, ysc, p,
           ws, wc, or, hp, shp, chp, sor, cor, det, x0, y0;
 
-/* Copy the six coefficients */
+
+/* Copy the six coefficients. */
    a = coeffs[0];
    b = coeffs[1];
    c = coeffs[2];
@@ -78,28 +81,28 @@ void slaDcmpf ( double coeffs[6],
    e = coeffs[4];
    f = coeffs[5];
 
-/* Scales */
+/* Scales. */
    rb2e2 = sqrt ( b * b + e * e );
    rc2f2 = sqrt ( c * c + f * f );
    if ( ( b * f - c * e ) >= 0.0 )
-     xsc = rb2e2;
+      xsc = rb2e2;
    else {
-     b = -b;
-     c = -c;
-     xsc = -rb2e2;
+      b = -b;
+      e = -e;
+      xsc = -rb2e2;
    }
    ysc = rc2f2;
 
-/* Non-perpendicularity */
-   p = ( ( c != 0.0 || f != 0.0 ) ? atan2 ( c, f ) : 0.0 ) +
-       ( ( e != 0.0 || b != 0.0 ) ? atan2 ( e, b ) : 0.0 );
+/* Non-perpendicularity. */
+   p = slaDrange ( ( ( c != 0.0 || f != 0.0 ) ? atan2 ( c, f ) : 0.0 ) +
+                   ( ( e != 0.0 || b != 0.0 ) ? atan2 ( e, b ) : 0.0 ) );
 
-/* Orientation */
+/* Orientation. */
    ws = ( c * rb2e2 ) - ( e * rc2f2 );
    wc = ( b * rc2f2 ) + ( f * rb2e2 );
    or = ( ws != 0.0 || wc != 0.0 ) ? atan2 ( ws, wc ) : 0.0;
 
-/* Zero corrections */
+/* Zero points. */
    hp = p / 2.0;
    shp = sin ( hp );
    chp = cos ( hp );
@@ -107,17 +110,17 @@ void slaDcmpf ( double coeffs[6],
    cor = cos ( or );
    det = xsc * ysc * ( chp + shp ) * ( chp - shp );
    if ( fabs ( det ) > 0.0 ) {
-     x0 = ysc * ( a * ( ( chp * cor ) - ( shp * sor ) )
-                - d * ( ( chp * sor ) + ( shp * cor ) ) ) / det;
-     y0 = xsc * ( a * ( ( chp * sor ) - ( shp * cor ) )
-                + d * ( ( chp * cor ) + ( shp * sor ) ) ) / det;
+      x0 = ysc * ( a * ( ( chp * cor ) - ( shp * sor ) )
+                 - d * ( ( chp * sor ) + ( shp * cor ) ) ) / det;
+      y0 = xsc * ( a * ( ( chp * sor ) - ( shp * cor ) )
+                 + d * ( ( chp * cor ) + ( shp * sor ) ) ) / det;
    }
    else {
-     x0 = 0.0;
-     y0 = 0.0;
+      x0 = 0.0;
+      y0 = 0.0;
    }
 
-/* Results */
+/* Results. */
    *xz = x0;
    *yz = y0;
    *xs = xsc;

@@ -104,7 +104,7 @@ void slaOapqk ( char *type, double ob1, double ob2,
 **
 **  Called:  slaDcs2c, slaDcc2s, slaRefro, slaDranrm
 **
-**  Last revision:   3 February 2000
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -172,7 +172,7 @@ void slaOapqk ( char *type, double ob1, double ob2,
    }
 
 /* Azimuth (S=0,E=90) */
-   az = xaeo != 0.0 && yaeo != 0.0 ? atan2 ( yaeo, xaeo ) : 0.0;
+   az = ( xaeo != 0.0 || yaeo != 0.0 ) ? atan2 ( yaeo, xaeo ) : 0.0;
 
 /* Sine of observed ZD, and observed ZD */
    sz = sqrt ( xaeo * xaeo + yaeo * yaeo );

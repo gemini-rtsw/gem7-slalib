@@ -113,9 +113,9 @@ void slaPertel (int jform, double date0, double date1,
 **
 **  Called:  slaEl2ue,  slaPertue,  slaUe2el
 **
-**  Last revision:   14 March 1999
+**  Last revision:   23 May 2001
 **
-**  Copyright 1999 P.T.Wallace.  All rights reserved.
+**  Copyright 2001 P.T.Wallace.  All rights reserved.
 */
 {
    double u[13], dm;
@@ -146,7 +146,7 @@ void slaPertel (int jform, double date0, double date1,
    }
 
 /* Transform from universal to conventional elements. */
-   slaUe2el ( u, 2,
+   slaUe2el ( u, jform,
               &jf, epoch1, orbi1, anode1, perih1, aorq1, e1, am1, &dm, &j );
    if ( jf != jform || j ) *jstat = -5;
 

@@ -31,12 +31,12 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
 **  Given:
 **     m,n    int            numbers of rows and columns in matrix a
 **     mp,np  int            physical dimensions of the array containing a
-**     a      double[mp][np] array containing m x n matrix a
+**     a      double[mp,np]  array containing m x n matrix a
 **
 **  Returned:
-**     *a     double[mp][np] array containing m x n column-orthogonal matrix u
+**     *a     double[mp,np]  array containing m x n column-orthogonal matrix u
 **     *w     double[n]      n x n diagonal matrix w (diagonal elements only)
-**     *v     double[np][np] array containing n x n orthogonal matrix v
+**     *v     double[np,np]  array containing n x n orthogonal matrix v
 **     *work  double[n]      workspace
 **     *jstat int            0 = OK
 **                          -1 = the a array is the wrong shape
@@ -63,7 +63,7 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
 **     :
 **    slaSvd ( m, n, MP, NP, (double *) a, w, (double *) v, work, &j );
 **
-**  Last revision:   24 June 1997
+**  Last revision:   19 August 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -74,53 +74,51 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
 
    int i, k, l, j, k1, its, l1, i1, cancel;
    double g, scale, an, s, x, f, h, cn, c, y, z;
-   double *ai, *aj, *ak;
-   double *vi, *vj, *vk;
 
-/* Check that the matrix is the right size and shape */
+/* Check that the matrix is the right size and shape. */
    if ( m < n || m > mp || n > np ) {
       *jstat = -1;
    } else {
       *jstat = 0;
 
-   /* Householder reduction to bidiagonal form */
+   /* Householder reduction to bidiagonal form. */
       g = 0.0;
       scale = 0.0;
       an = 0.0;
-      for ( i = 0, ai = a; i < n; i++, ai += np ) {
+      for ( i = 0; i < n; i++ ) {
          l = i + 1;
          work[i] = scale * g;
          g = 0.0;
          s = 0.0;
          scale = 0.0;
          if ( i < m ) {
-            for ( k = i, ak = ai; k < m; k++, ak += np ) {
-               scale += fabs ( ak[i] );
+            for ( k = i; k < m; k++ ) {
+               scale += fabs ( a[k*np+i] );
             }
             if ( scale != 0.0 ) {
-               for ( k = i, ak = ai; k < m; k++, ak += np ) {
-                  x = ak[i] / scale;
-                  ak[i] = x;
+               for ( k = i; k < m; k++ ) {
+                  x = a[k*np+i] / scale;
+                  a[k*np+i] = x;
                   s += x * x;
                }
-               f = ai[i];
+               f = a[i*np+i];
                g = - dsign ( sqrt ( s ), f );
                h = f * g - s;
-               ai[i] = f - g;
-               if ( i != n - 1 ) {
+               a[i*np+i] = f - g;
+               if ( i != n-1 ) {
                   for ( j = l; j < n; j++ ) {
                      s = 0.0;
-                     for ( k = i, ak = ai; k < m; k++, ak += np ) {
-                        s += ak[i] * ak[j];
+                     for ( k = i; k < m; k++ ) {
+                        s += a[k*np+i] * a[k*np+j];
                      }
                      f = s / h;
-                     for ( k = i, ak = ai; k < m; k++, ak += np ) {
-                        ak[j] += f * ak[i];
+                     for ( k = i; k < m; k++ ) {
+                        a[k*np+j] += f * a[k*np+i];
                      }
                   }
                }
-               for ( k = i, ak = ai; k < m; k++, ak += np ) {
-                  ak[i] *= scale;
+               for ( k = i; k < m; k++ ) {
+                  a[k*np+i] *= scale;
                }
             }
          }
@@ -128,115 +126,113 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
          g = 0.0;
          s = 0.0;
          scale = 0.0;
-         if ( i < m && i != n - 1 ) {
+         if ( i < m && i != n-1 ) {
             for ( k = l;  k < n;  k++ ) {
-               scale += fabs ( ai[k] );
+               scale += fabs ( a[i*np+k] );
             }
             if ( scale != 0.0 ) {
                for ( k = l; k < n; k++ ) {
-                  x = ai[k] / scale;
-                  ai[k] = x;
+                  x = a[i*np+k] / scale;
+                  a[i*np+k] = x;
                   s += x * x;
                }
-               f = ai[l];
+               f = a[i*np+l];
                g = - dsign ( sqrt ( s ), f );
                h = f * g - s;
-               ai[l] = f - g;
+               a[i*np+l] = f - g;
                for ( k = l; k < n; k++ ) {
-                  work[k] = ai[k] / h;
+                  work[k] = a[i*np+k] / h;
                }
                if ( i != m-1 ) {
-                  for ( j = l,  aj = a + l*np; j < m; j++,  aj += np ) {
+                  for ( j = l; j < m; j++ ) {
                      s = 0.0;
                      for ( k = l; k < n; k++ ) {
-                        s += aj[k] * ai[k];
+                        s += a[j*np+k] * a[i*np+k];
                      }
                      for ( k = l; k < n; k++ ) {
-                        aj[k] += s * work[k];
+                        a[j*np+k] += s * work[k];
                      }
                   }
                }
                for ( k = l; k < n; k++ ) {
-                  ai[k] *= scale;
+                  a[i*np+k] *= scale;
                }
             }
          }
 
-      /* Overestimate of largest column norm for convergence test */
+      /* Overestimate of largest column norm for convergence test. */
          cn = fabs ( w[i] ) + fabs ( work[i] );
          an = gmax ( an, cn );
       }
 
-   /* Accumulation of right-hand transformations */
-      for ( i = n - 1, ai = a + ( n - 1 ) * np, vi = v + ( n - 1 ) * np;
-            i >= 0;
-            i--, ai -= np, vi -= np ) {
-         if ( i != n - 1 ) {
+   /* Accumulation of right-hand transformations. */
+      for ( i = n-1; i >= 0; i-- ) {
+         if ( i != n-1 ) {
             if ( g != 0.0 ) {
-               for ( j = l, vj = v + l * np; j < n; j++, vj += np ) {
-                  vj[i] = ( ai[j] / ai[l] ) / g;
+               for ( j = l; j < n; j++ ) {
+                  v[j*np+i] = ( a[i*np+j] / a[i*np+l] ) / g;
                }
                for ( j = l; j < n; j++ ) {
                   s = 0.0;
-                  for ( k = l, vk = v + l*np; k < n; k++, vk += np ) {
-                     s += ai[k] * vk[j];
+                  for ( k = l; k < n; k++ ) {
+                     s += a[i*np+k] * v[k*np+j];
                   }
-                  for ( k = l, vk = v + l*np; k < n; k++, vk += np ) {
-                     vk[j] += s * vk[i];
+                  for ( k = l; k < n; k++ ) {
+                     v[k*np+j] += s * v[k*np+i];
                   }
                }
             }
-            for ( j = l, vj = v + l*np; j < n; j++, vj += np ) {
-               vi[j] = 0.0;
-               vj[i] = 0.0;
+            for ( j = l; j < n; j++ ) {
+               v[i*np+j] = 0.0;
+               v[j*np+i] = 0.0;
             }
          }
-         vi[i] = 1.0;
+         v[i*np+i] = 1.0;
          g = work[i];
          l = i;
       }
 
-   /* Accumulation of left-hand transformations */
-      for ( i = n - 1, ai = a + i*np; i >= 0; i--, ai -= np ) {
+   /* Accumulation of left-hand transformations. */
+      for ( i = n-1; i >= 0; i-- ) {
          l = i + 1;
          g = w[i];
-         if ( i != n - 1 ) {
+         if ( i != n-1 ) {
             for ( j = l; j < n; j++ ) {
-               ai[j] = 0.0;
+               a[i*np+j] = 0.0;
             }
          }
          if ( g != 0.0 ) {
-            if ( i != n - 1 ) {
+            if ( i != n-1 ) {
                for ( j = l; j < n; j++ ) {
                   s = 0.0;
-                  for ( k = l, ak = a + l * np; k < m; k++, ak += np ) {
-                     s += ak[i] * ak[j];
+                  for ( k = l; k < m; k++ ) {
+                     s += a[k*np+i] * a[k*np+j];
                   }
-                  f = ( s / ai[i] ) / g;
-                  for ( k = i, ak = a + i * np; k < m; k++, ak += np ) {
-                     ak[j] += f * ak[i];
+                  f = ( s / a[i*np+i] ) / g;
+                  for ( k = i; k < m; k++ ) {
+                     a[k*np+j] += f * a[k*np+i];
                   }
                }
             }
-            for ( j = i, aj = ai; j < m; j++, aj += np ) {
-               aj[i] /= g;
+            for ( j = i; j < m; j++ ) {
+               a[j*np+i] /= g;
             }
          } else {
-            for ( j = i, aj = ai; j < m; j++, aj += np ) {
-               aj[i] = 0.0;
+            for ( j = i; j < m; j++ ) {
+               a[j*np+i] = 0.0;
             }
          }
-         ai[i] += 1.0;
+         a[i*np+i] += 1.0;
       }
 
-   /* Diagonalization of the bidiagonal form */
-      for ( k = n - 1; k >= 0; k-- ) {
+   /* Diagonalization of the bidiagonal form. */
+      for ( k = n-1; k >= 0; k-- ) {
          k1 = k - 1;
 
-      /* Iterate until converged */
+      /* Iterate until converged. */
          for ( its = 1; its <= ITMAX; its++ ) {
 
-         /* Test for splitting into submatrices */
+         /* Test for splitting into submatrices. */
             cancel = TRUE;
             for ( l = k; l >= 0; l-- ) {
                l1 = l - 1;
@@ -244,31 +240,26 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
                   cancel = FALSE;
                   break;
                }
-            /* (Following never attempted for l=0 because work[0] is zero) */
-               if ( an + fabs ( w[l1] ) == an ) {
-                  break;
-               }
+            /* (Following never attempted for l=0 because work[0] is zero.) */
+               if ( an + fabs ( w[l1] ) == an ) break;
             }
 
-         /* Cancellation of work[l] if l>0 */
+         /* Cancellation of work[l] if l>0. */
             if ( cancel ) {
-               c = 0.0;
                s = 1.0;
                for ( i = l; i <= k; i++ ) {
                   f = s * work[i];
-                  if ( an + fabs ( f ) == an ) {
-                     break;
-                  }
+                  if ( an + fabs ( f ) == an ) break;
                   g = w[i];
                   h = rms ( f, g );
                   w[i] = h;
                   c = g / h;
                   s = - f / h;
-                  for ( j = 0, aj = a; j < m; j++, aj += np ) {
-                     y = aj[l1];
-                     z = aj[i];
-                     aj[l1] = y * c + z * s;
-                     aj[i] = - y * s + z * c;
+                  for ( j = 0; j < m; j++ ) {
+                     y = a[j*np+l1];
+                     z = a[j*np+i];
+                     a[j*np+l1] = y * c + z * s;
+                     a[j*np+i] = - y * s + z * c;
                   }
                }
             }
@@ -277,25 +268,25 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
             z = w[k];
             if ( l == k ) {
 
-            /* Yes: ensure singular values non-negative */
+            /* Yes: ensure singular values non-negative. */
                if ( z < 0.0 ) {
                   w[k] = -z;
-                  for ( j = 0, vj = v; j < n; j++, vj += np ) {
-                     vj[k] = -vj[k];
+                  for ( j = 0; j < n; j++ ) {
+                     v[j*np+k] *= -1.0;
                   }
                }
 
-            /* Stop iterating */
+            /* Stop iterating. */
                break;
 
             } else {
 
-            /* Not converged yet: set status if iteration limit reached */
+            /* Not converged yet: set status if iteration limit reached. */
                if ( its >= ITMAX ) {
                   *jstat = k + 1;
                }
 
-            /* Shift from bottom 2 x 2 minor */
+            /* Shift from bottom 2 x 2 minor. */
                x = w[l];
                y = w[k1];
                g = work[k1];
@@ -306,7 +297,7 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
                f = ( ( x - z ) * ( x + z )
                        + h * ( y / ( f + dsign ( g, f ) ) - h ) ) / x;
 
-            /* Next QR transformation */
+            /* Next QR transformation. */
                c = 1.0;
                s = 1.0;
                for ( i1 = l; i1 <= k1; i1++ ) {
@@ -328,11 +319,11 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
                   g = - x * s + g * c;
                   h = y * s;
                   y = y * c;
-                  for ( j = 0, vj = v; j < n; j++, vj += np ) {
-                     x = vj[i1];
-                     z = vj[i];
-                     vj[i1] = x * c + z * s;
-                     vj[i]  = - x * s + z * c;
+                  for ( j = 0; j < n; j++ ) {
+                     x = v[j*np+i1];
+                     z = v[j*np+i];
+                     v[j*np+i1] = x * c + z * s;
+                     v[j*np+i]  = - x * s + z * c;
                   }
                   z = rms ( f, h );
                   w[i1] = z;
@@ -342,11 +333,11 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
                   }
                   f = c * g + s * y;
                   x = - s * g + c * y;
-                  for ( j = 0, aj = a; j < m; j++, aj += np ) {
-                     y = aj[i1];
-                     z = aj[i];
-                     aj[i1] = y * c + z * s;
-                     aj[i] = - y * s + z * c;
+                  for ( j = 0; j < m; j++ ) {
+                     y = a[j*np+i1];
+                     z = a[j*np+i];
+                     a[j*np+i1] = y * c + z * s;
+                     a[j*np+i] = - y * s + z * c;
                   }
                }
                work[l] = 0.0;
@@ -360,7 +351,7 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
 
 double rms ( double a, double b )
 
-/* sqrt(a*a+b*b) with protection against under/overflow */
+/* sqrt(a*a+b*b) with protection against under/overflow. */
 
 {
    double wa, wb, w;
@@ -378,6 +369,6 @@ double rms ( double a, double b )
       return 0.0;
    } else {
       w = wa / wb;
-      return wb * sqrt ( 1.0 + w * w );
+      return ( wb * sqrt ( 1.0 + w * w ) );
    }
 }

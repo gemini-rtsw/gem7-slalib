@@ -14,7 +14,7 @@ extern "C" {
 **
 **  Prototype function declarations for slalib library.
 **
-**  Last revision:   16 June 2000
+**  Last revision:   23 September 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -313,6 +313,8 @@ void slaMxv ( float rm[3][3], float va[3], float vb[3] );
 void slaNut ( double date, double rmatn[3][3] );
 
 void slaNutc ( double date, double *dpsi, double *deps, double *eps0 );
+
+void slaNutc80 ( double date, double *dpsi, double *deps, double *eps0 );
 
 void slaOap ( char *type, double ob1, double ob2, double date,
               double dut, double elongm, double phim, double hm,

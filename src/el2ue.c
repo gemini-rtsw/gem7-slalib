@@ -123,7 +123,7 @@ void slaEl2ue ( double date, int jform, double epoch, double orbinc,
 **
 **  Reference:  Everhart, E. & Pitkin, E.T., Am.J.Phys. 51, 712, 1983.
 **
-**  Last revision:   18 March 1999
+**  Last revision:   11 April 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -169,18 +169,27 @@ void slaEl2ue ( double date, int jform, double epoch, double orbinc,
 ** cm    = combined mass, M+m (mu)
 */
 
-   if ( jform == 1 ) {
+   switch ( jform ) {
+
+/* Major planet. */
+   case 1:
       pht = epoch - ( aorl - perih ) / dm;
       argph = perih - anode;
       q = aorq * ( 1.0 - e );
       w = dm / GCON;
       cm =  w * w * aorq * aorq * aorq;
-   } else if ( jform == 2 ) {
+      break;
+
+/* Minor planet. */
+   case 2:
       pht = epoch - aorl * sqrt ( aorq * aorq * aorq ) / GCON;
       argph = perih;
       q = aorq * ( 1.0 - e );
       cm = 1.0;
-   } else if ( jform == 3 ) {
+      break;
+
+/* Comet. */
+   default:
       pht = epoch;
       argph = perih;
       q = aorq;

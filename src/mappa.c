@@ -46,12 +46,9 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **  3)  The parameters AMPRMS produced by this routine are used by
 **      slaAmpqk, slaMapqk and slaMapqkz.
 **
-**  4)  The accuracy is limited by imperfections in the IAU 1976/1980
-**      models for precession and nutation.  Corrections are tabulated
-**      in IERS Bulletin B and at the present epoch are of order 50 mas.
-**      An improved precession-nutation model can be introduced by
-**      first calling the present routine and then replacing the
-**      precession-nutation matrix into the AMPRMS array directly.
+**  4)  The accuracy is sub-milliarcsecond, limited by the
+**      precession-nutation model (IAU 1976 precession, Shirai &
+**      Fukushima 2001 forced nutation and precession corrections).
 **
 **  5)  A further limit to the accuracy of routines using the parameter
 **      array AMPRMS is imposed by the routine slaEvp, used here to
@@ -62,7 +59,7 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **  Called:
 **     slaEpj, slaEvp, slaDvn, slaPrenut
 **
-**  Last revision:   8 May 2000
+**  Last revision:   17 September 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -50,7 +50,7 @@ void slaDtps2c ( double xi, double eta, double ra, double dec,
 **
 **  Called:  slaDranrm
 **
-**  Last revision:   5 June 1995
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -67,9 +67,7 @@ void slaDtps2c ( double xi, double eta, double ra, double dec,
      r = sqrt ( r2 );
      s = sdf - eta * r;
      c = sdf * eta + r;
-     if ( xi == 0.0 && r == 0.0 ) {
-        r = 1.0;
-     }
+     if ( xi == 0.0 && r == 0.0 ) r = 1.0;
      *raz1 = slaDranrm ( ra - atan2 ( xi, r ) );
      *decz1 = atan2 ( s, c );
      r = -r;

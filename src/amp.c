@@ -43,13 +43,9 @@ void slaAmp ( double ra, double da, double date, double eq,
 **      use the slaMappa routine to compute the required parameters
 **      once, followed by one call to slaAmpqk per star.
 **
-**  4)  The accuracy is limited by imperfections in the IAU 1976/1980
-**      models for precession and nutation.  Corrections are tabulated
-**      in IERS Bulletin B and at the present epoch are of order 50 mas.
-**      An improved precession-nutation model can be introduced by
-**      using slaMappa and slaAmpqk (see the previous note) and
-**      replacing the precession-nutation matrix into the parameter
-**      array directly.
+**  4)  The accuracy is sub-milliarcsecond, limited by the
+**      precession-nutation model (IAU 1976 precession, Shirai &
+**      Fukushima 2001 forced nutation and precession corrections).
 **
 **  5)  The accuracy is further limited by the routine slaEvp, called
 **      by slaMappa, which computes the Earth position and velocity
@@ -58,7 +54,7 @@ void slaAmp ( double ra, double da, double date, double eq,
 **
 **  Called:  slaMappa, slaAmpqk
 **
-**  Last revision:   8 May 2000
+**  Last revision:   17 September 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 **

@@ -108,7 +108,7 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **
 **  Called:  slaGeoc, slaRefco, slaEqeqx, slaAoppat
 **
-**  Last revision:   6 September 1999
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -128,7 +128,7 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
    yc = yt + yp * zt;
    zc = xp * xt - yp * yt + zt;
 
-   elong = ( ( xc == 0.0 ) && ( yc == 0.0 ) ) ? 0.0 : atan2 ( yc, xc );
+   elong = ( xc != 0.0 || yc != 0.0 ) ? atan2 ( yc, xc ) : 0.0;
 
    phi = atan2 ( zc, sqrt ( xc * xc + yc * yc ) );
    aoprms[0] = phi;

@@ -6,14 +6,13 @@ void slaNut ( double date, double rmatn[3][3] )
 **   s l a N u t
 **  - - - - - - -
 **
-**  Form the matrix of nutation for a given date (IAU 1980 theory).
+**  Form the matrix of nutation for a given date - Shirai & Fukushima
+**  2001 theory
 **
 **  (double precision)
 **
-**  References:
-**     Final report of the IAU working group on nutation,
-**        chairman P.K.Seidelmann, 1980.
-**     Kaplan, G.H., 1981, USNO circular no. 163, pA3-6.
+**  Reference:
+**     Shirai, T. & Fukushima, T., Astron.J. 121, 3270-3283 (2001).
 **
 **  Given:
 **     date   double        TDB (loosely ET) as Modified Julian Date
@@ -26,7 +25,7 @@ void slaNut ( double date, double rmatn[3][3] )
 **
 **  Called:   slaNutc, slaDeuler
 **
-**  Last revision:   11 April 1999
+**  Last revision:   17 September 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

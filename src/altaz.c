@@ -73,7 +73,7 @@ void slaAltaz ( double ha, double dec, double phi,
 **
 **  Defined in slamac.h:  DPI, D2PI
 **
-**  Last revision:   3 May 2000
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -100,22 +100,14 @@ void slaAltaz ( double ha, double dec, double phi,
    r = sqrt ( rsq );
 
 /* Azimuth and elevation */
-   if ( rsq == 0.0 ) {
-      a = 0.0;
-   } else {
-      a = atan2 ( y, x );
-   }
+   a = rsq != 0.0 ? atan2 ( y, x ) : 0.0;
    if ( a < 0.0 ) a += D2PI;
    e = atan2 ( z, r );
 
 /* Parallactic angle */
    c = cd * sp - ch * sdcp;
    s = sh * cp;
-   if ( c * c + s * s > 0.0 ) {
-      q = atan2 ( s, c );
-   } else {
-      q = DPI - ha;
-   }
+   q = ( s != 0.0 || c != 0.0 ) ? atan2 ( s, c ) : DPI - ha;
 
 /* Velocities and accelerations (clamped at zenith/nadir) */
    if ( rsq < TINY ) {

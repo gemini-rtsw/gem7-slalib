@@ -25,7 +25,7 @@ void slaCc2s ( float v[3], float *a, float *b )
 **  If v is null, zero a and b are returned.
 **  At either pole, zero a is returned.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -37,6 +37,6 @@ void slaCc2s ( float v[3], float *a, float *b )
    z = (double) v[2];
    r = sqrt ( x * x + y * y );
 
-   *a = ( r == 0.0 ) ? 0.0f : (float) atan2 ( y, x );
-   *b = ( z == 0.0 ) ? 0.0f : (float) atan2 ( z, r );
+   *a = ( r != 0.0 ) ? (float) atan2 ( y, x ) : 0.0f;
+   *b = ( z != 0.0 ) ? (float) atan2 ( z, r ) : 0.0f;
 }

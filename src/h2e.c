@@ -48,7 +48,7 @@ void slaH2e ( float az, float el, float phi, float *ha, float *dec )
 **      use inline code, having previously computed fixed terms such
 **      as sine and cosine of latitude.
 **
-**  Last revision:   21 February 1996
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -70,6 +70,6 @@ void slaH2e ( float az, float el, float phi, float *ha, float *dec )
 
 /* To spherical */
    r = (float) sqrt ( x * x + y * y );
-   *ha = ( r == 0.0f ) ? 0.0f : (float) atan2 ( y, x ) ;
+   *ha = ( r != 0.0f ) ? (float) atan2 ( y, x ) : 0.0f;
    *dec = (float) atan2 ( z, r );
 }

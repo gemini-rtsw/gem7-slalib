@@ -78,7 +78,7 @@ void slaPolmo ( double elongm, double phim, double xp, double yp,
 **               to the Astronomical Almanac", ISBN 0-935702-68-7,
 **               sections 3.27, 4.25, 4.52.
 **
-**  Last revision:   22 February 1996
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -121,13 +121,13 @@ void slaPolmo ( double elongm, double phim, double xp, double yp,
    cel = xt / cph;
 
 /* Return true longitude and true geodetic latitude of site. */
-   *elong = atan2 ( yt, xt );
+   *elong = ( xt != 0.0 || yt != 0.0 ) ? atan2 ( yt, xt ) : 0.0;
    *phi = atan2 ( zt, cph );
 
 /* Return current azimuth of terrestrial pole seen from site position. */
    xnt = ( xnm * cel + ynm * sel ) * zt - znm * cph;
    ynt = - xnm * sel + ynm * cel;
-   *daz = atan2 ( - ynt, - xnt );
+   *daz = ( xnt != 0.0 || ynt != 0.0 ) ? atan2 ( - ynt, - xnt ) : 0.0;
 
    return;
 }

@@ -53,20 +53,16 @@ void slaMap ( double rm, double dm, double pr, double pd,
 **      (which includes parallax and proper motion) or slaMapqkz (which
 **      assumes zero parallax and proper motion).
 **
-**  5)  The accuracy is limited by imperfections in the IAU 1976/1980
-**      models for precession and nutation.  Corrections are tabulated
-**      in IERS Bulletin B and at the present epoch are of order 50 mas.
-**      An improved precession-nutation model can be introduced by
-**      using slaMappa and slaMapqk (see the previous note) and
-**      replacing the precession-nutation matrix into the parameter
-**      array directly.
+**  5)  The accuracy is sub-milliarcsecond, limited by the
+**      precession-nutation model (IAU 1976 precession, Shirai &
+**      Fukushima 2001 forced nutation and precession corrections).
 **
 **  6)  The accuracy is further limited by the routine slaEvp, called
 **      by slaMappa, which computes the Earth position and velocity
 **      using the methods of Stumpff.  The maximum error is about
 **      0.3 mas.
 **
-**  Last revision:   8 May 2000
+**  Last revision:   17 September 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

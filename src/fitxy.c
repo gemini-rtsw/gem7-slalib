@@ -68,7 +68,7 @@ void slaFitxy ( int itype, int np,
 **
 **  Called:  slaDmat, slaDmxv
 **
-**  Last revision:   31 October 1993
+**  Last revision:   11 April 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -226,6 +226,8 @@ void slaFitxy ( int itype, int np,
             dm4[3][3] = p;
             slaDmat ( 4, dm4[0], v, &det, &jstat, iw );
             if ( jstat == 0 ) {
+
+            /* Non-singular */
                a = v[0];
                b = v[1];
                c = v[2];
@@ -240,19 +242,20 @@ void slaFitxy ( int itype, int np,
                   yr = d + c * xm + b * ym- xye[i][1];
                   sdr2 = sdr2 + xr * xr + yr * yr;
                }
+
+            /* If first pass, save variables */
+               if ( nsol == 1 ) {
+                  aold = a;
+                  bold = b;
+                  cold = c;
+                  dold = d;
+                  sold = sdr2;
+               }
+
             } else {
 
             /* Singular: set flag */
                sdr2 = -1.0;
-            }
-
-         /* If first pass and non-singular, save variables */
-            if ( nsol == 1 && jstat == 0 ) {
-               aold = a;
-               bold = b;
-               cold = c;
-               dold = d;
-               sold = sdr2;
             }
          }
 

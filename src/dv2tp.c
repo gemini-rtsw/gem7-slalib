@@ -32,7 +32,7 @@ void slaDv2tp ( double v[3], double v0[3], double *xi, double *eta, int *j )
 **
 **  3  This routine is the Cartesian equivalent of the routine slaDs2tp.
 **
-**  Last revision:   27 November 1996
+**  Last revision:   1 January 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -57,7 +57,7 @@ void slaDv2tp ( double v[3], double v0[3], double *xi, double *eta, int *j )
    d = w + z * z0;
    if ( d > TINY ) {
       *j = 0;
-   } else  if ( d >= 0.0 ) {
+   } else if ( d >= 0.0 ) {
       *j = 1;
       d = TINY;
    } else if ( d > -TINY ) {

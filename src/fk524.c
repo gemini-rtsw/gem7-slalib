@@ -77,7 +77,7 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   20 December 1993
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -225,12 +225,8 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
    rxysq = x * x + y * y;
    rxy = sqrt ( rxysq );
 
-   if ( ( x == 0.0 ) && ( y == 0.0 ) ) {
-      r = 0.0;
-   } else {
-      r = atan2 ( y, x );
-      if ( r < 0.0 ) r += D2PI;
-   }
+   r = ( x != 0.0 || y != 0.0 ) ? atan2 ( y, x ) : 0.0;
+   if ( r < 0.0 ) r += D2PI;
    d = atan2 ( z, rxy );
 
    if (rxy > tiny) {

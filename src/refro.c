@@ -122,10 +122,13 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 **
 **  Defined in slamac.h:  TRUE, FALSE
 **
-**  Last revision:   25 May 2000
+**  Last revision:   19 April 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
+
+#define ISMAX 16384  /* Numerical integration: maximum number of strips. */
+
 {
 /* Fixed parameters */
 
@@ -252,18 +255,13 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 ** troposphere (k=1), then in the stratosphere (k=2).
 */
 
-/* Initialize previous refraction to ensure at least two iterations. */
-   refold = 1e6;
-
-/*
-** Start off with 8 strips for the troposphere integration, and then
-** use the final troposphere value for the stratosphere integration,
-** which tends to need more strips.
-*/
-   is = 8;
-
-/* Troposphere then stratosphere. */
    for ( k = 1; k <= 2; k++ ) {
+
+   /* Initialize previous refraction to ensure at least two iterations. */
+      refold = 1.0;
+
+   /* Start off with 8 strips. */
+      is = 8;
 
    /* Start z, z range, and start and end values. */
       if ( k == 1 ) {
@@ -340,22 +338,18 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
       /* Evaluate the integrand using Simpson's Rule. */
          refp = h * ( fb + 4.0 * fo + 2.0 * fe + ff ) / 3.0;
 
-      /* Has the required precision been reached? */
-         if ( fabs ( refp - refold ) > tol ) {
+      /* Save troposphere component. */
+         if ( k == 1 ) reft = refp;
 
-         /* No: prepare for next iteration. */
-            refold = refp;   /* Save current value for convergence test */
-            is += is;        /* Double the number of strips */
-            fe += fo;        /* Sum of all = sum of evens next time */
-            fo = 0.0;        /* Reset odds accumulator */
-            n = 2;           /* Skip even values next time */
+      /* If requested precision reached (or can't be), terminate the loop. */
+         if ( fabs ( refp - refold ) <= tol || is >= ISMAX ) break;
 
-         } else {
-
-         /* Yes: save troposphere component and terminate loop. */
-            if ( k == 1 ) reft = refp;
-            break;
-         }
+      /* Not yet: prepare for the next iteration. */
+         refold = refp;   /* Save current value for convergence test */
+         is += is;        /* Double the number of strips */
+         fe += fo;        /* Sum of all = sum of evens next time */
+         fo = 0.0;        /* Reset odds accumulator */
+         n = 2;           /* Skip even values next time */
       }
    }
 

@@ -136,7 +136,7 @@ void slaPv2el ( double pv[], double date, double pmass, int jformr,
 **
 **  Called:  slaDranrm
 **
-**  Last revision:   21 February 1999
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -220,11 +220,7 @@ void slaPv2el ( double pv[], double date, double pmass, int jformr,
    oi = atan2 ( sqrt ( hx2py2 ), hz );
 
 /* Longitude of ascending node. */
-   if ( hx != 0.0 || hy != 0.0 ) {
-      bigom = atan2 ( hx, -hy );
-   } else {
-      bigom = 0.0;
-   }
+   bigom = ( hx != 0.0 || hy != 0.0 ) ? atan2 ( hx, -hy ) : 0.0;
 
 /* Reciprocal of mean distance etc. */
    ar = 2.0 / r - v2 / gmu;
@@ -236,11 +232,7 @@ void slaPv2el ( double pv[], double date, double pmass, int jformr,
 /* True anomaly. */
    s = h * rdv;
    c = h2 - r * gmu;
-   if ( s != 0.0 && c != 0.0 ) {
-      at = atan2 ( s, c );
-   } else {
-      at = 0.0;
-   }
+   at = ( s != 0.0 || c != 0.0 ) ? atan2 ( s, c ) : 0.0;
 
 /* Argument of the latitude. */
    s = sin ( bigom );

@@ -51,7 +51,7 @@ void slaDe2h ( double ha, double dec, double phi, double *az, double *el )
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   10 July 1994
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -73,7 +73,7 @@ void slaDe2h ( double ha, double dec, double phi, double *az, double *el )
 
 /* To spherical */
    r = sqrt ( x * x + y * y );
-   a = ( r == 0.0 ) ? 0.0 : atan2 ( y, x ) ;
+   a = ( r != 0.0 ) ? atan2 ( y, x ) : 0.0;
    *az = ( a < 0.0 ) ? a + D2PI : a;
    *el = atan2 ( z, r );
 }

@@ -78,7 +78,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   13 December 1999
+**  Last revision:   19 August 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -348,7 +348,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       {
          "MAUNAK88",
          "Mauna Kea 88 inch",
-         WEST(155,28,09.96),
+         WEST(155,28, 9.96),
          NORTH(19,49,22.77),
          4213.6
       },
@@ -562,7 +562,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       },
 
 /* Australia Telescope Parkes Observatory
-   (private comm. Peter te Lintel Hekkert) */
+   (Peter te Lintel Hekkert) */
       {
          "PARKES",
          "Parkes 64 metre",
@@ -645,7 +645,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       },
 
 /* W.M.Keck Observatory, Telescope 1 (site survey)
-   (private comm. William Lupton) */
+   (William Lupton) */
       {
          "KECK1",
          "Keck 10m Telescope #1",
@@ -676,7 +676,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       {
          "UKST",
          "UK 1.2 metre Schmidt, Siding Spring",
-         EAST(149,04,12.8),
+         EAST(149, 4,12.8),
          SOUTH(31,16,27.8),
          1145.0
       },
@@ -700,7 +700,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       },
 
 /* Australia Telescope Compact Array (WGS84 coordinates of Station 35,
-   private comm. Mark Calabretta) */
+   Mark Calabretta) */
       {
          "ATCA",
          "Australia Telescope Compact Array",
@@ -710,7 +710,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       },
 
 /* Australia Telescope Mopra Observatory
-   (private comm. Peter te Lintel Hekkert) */
+   (Peter te Lintel Hekkert) */
       {
          "MOPRA",
          "ATNF Mopra Observatory",
@@ -734,13 +734,13 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       {
          "CFHT",
          "Canada-France-Hawaii 3.6m Telescope",
-         WEST(155,28,07.95),
+         WEST(155,28, 7.95),
          NORTH(19,49,30.91),
          4204.1
       },
 
 /* W.M.Keck Observatory, Telescope 2
-   (William Lupton, private comm) */
+   (William Lupton) */
       {
          "KECK2",
          "Keck 10m Telescope #2",
@@ -754,13 +754,13 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       {
          "GEMININ",
          "Gemini North 8-m telescope",
-         WEST(155,28,08.57),
+         WEST(155,28, 8.57),
          NORTH(19,49,25.69),
          4213.4
       },
 
 /* Five College Radio Astronomy Observatory
-   (Tim Jenness, private comm) */
+   (Tim Jenness) */
       {
          "FCRAO",
          "Five College Radio Astronomy Obs",
@@ -814,7 +814,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       {
          "VLT3",
          "ESO VLT, Paranal, Chile: UT3",
-         WEST(70,24,09.896),
+         WEST(70,24, 9.896),
          SOUTH(24,37,30.300),
          2635.43
       },
@@ -824,9 +824,49 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       {
          "VLT4",
          "ESO VLT, Paranal, Chile: UT4",
-         WEST(70,24,08.000),
+         WEST(70,24, 8.000),
          SOUTH(24,37,31.000),
          2635.43
+      },
+
+/* Gemini South, Cerro Pachon
+   (GPS readings by Rolando Rogers) */
+      {
+         "GEMINIS",
+         "Gemini South 8-m telescope",
+         WEST(70,44,12.1),
+         SOUTH(30,14,26.7),
+         2722.0
+      },
+
+/* Cologne Observatory for Submillimeter Astronomy (KOSMA)
+   (Holger Jakob) */
+      {
+         "KOSMA3M",
+         "KOSMA 3m telescope, Gornergrat",
+         EAST(7,47,3.48),
+         NORTH(45,58,59.772),
+         3141.0
+      },
+
+/* Magellan 1, 6.5m telescope at Las Campanas
+   (Skip Schaller) */
+      {
+         "MAGELLAN1",
+         "Magellan 1, 6.5m, Las Campanas",
+         WEST(70,41,31.9),
+         SOUTH(29, 0,51.7),
+         2408.0
+      },
+
+/* Magellan 2, 6.5m telescope at Las Campanas
+   (Skip Schaller) */
+      {
+         "MAGELLAN2",
+         "Magellan 2, 6.5m, Las Campanas",
+         WEST(70,41,33.5),
+         SOUTH(29, 0,50.3),
+         2408.0
       }
    };
 

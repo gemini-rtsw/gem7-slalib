@@ -51,7 +51,7 @@ void slaE2h ( float ha, float dec, float phi, float *az, float *el )
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   10 July 1994
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -73,7 +73,7 @@ void slaE2h ( float ha, float dec, float phi, float *az, float *el )
 
 /* To spherical */
    r = (float) sqrt ( x * x + y * y );
-   a = ( r == 0.0f ) ? 0.0f : (float) atan2 ( y, x ) ;
+   a = ( r != 0.0f ) ? (float) atan2 ( y, x ) : 0.0f;
    *az = ( a < 0.0f ) ? (float) ( (double) a + D2PI ) : a;
    *el = (float) atan2 ( z, r );
 }

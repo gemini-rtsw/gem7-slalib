@@ -123,7 +123,7 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **
 **  Called:  slaDcs2c, slaRefz, slaRefro, slaDcc2s, slaDranrm
 **
-**  Last revision:   22 February 1996
+**  Last revision:   30 November 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -168,8 +168,7 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
    zaet = cphi * xhdt + sphi * zhdt;
 
 /* Azimuth (N=0,E=90) */
-   azobs = ( (xaet == 0.0) && (yaet == 0.0) ) ?
-                            0.0 : atan2 ( yaet, -xaet );
+   azobs = ( xaet != 0.0 || yaet != 0.0 ) ? atan2 ( yaet, -xaet ) : 0.0;
 
 /* Topocentric zenith distance */
    zdt = atan2 ( sqrt ( xaet * xaet + yaet * yaet ), zaet );
