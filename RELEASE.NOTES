@@ -5,3 +5,8 @@
 
 17 December 2003   V1-5
       Changes for the port to GEM8.5 (EPICS 3.13.9).
+
+06 July 2004       V1-6
+      Updated routines from PTW for better handling of asteroids/comets.
+      New files epv.c and plantu.c added plus upgrades to plantu.c and
+      pertue.c 
