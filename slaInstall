@@ -1,0 +1,6 @@
+#! /bin/sh -f
+#
+#  Install script for Gemini slalib library
+#
+
+applSetup -targets mv167 -include src -subdir_file Makefile.subdirs
