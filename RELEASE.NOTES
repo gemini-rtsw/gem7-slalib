@@ -2,3 +2,6 @@
       This new version has been updated to support orbit predictions 
       within the TCC. The calling interface is the same but the library
       includes one new routine - slaNutc80. 
+
+17 December 2003   V1-5
+      Changes for the port to GEM8.5 (EPICS 3.13.9).
