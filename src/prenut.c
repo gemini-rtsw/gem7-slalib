@@ -6,7 +6,7 @@ void slaPrenut ( double epoch, double date, double rmatpn[3][3] )
 **   s l a P r e n u t
 **  - - - - - - - - - -
 **
-**  Form the matrix of precession and nutation (IAU 1976 / FK5)
+**  Form the matrix of precession and nutation (IAU 1976/1980/FK5)
 **
 **  (double precision)
 **
@@ -27,7 +27,7 @@ void slaPrenut ( double epoch, double date, double rmatpn[3][3] )
 **
 **  2)  The matrix is in the sense   v(true)  =  rmatpn * v(mean) .
 **
-**  Last revision:   15 July 1993
+**  Last revision:   8 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

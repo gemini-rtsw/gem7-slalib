@@ -11,13 +11,15 @@ void slaDvxv ( double va[3], double vb[3], double vc[3] )
 **  (double precision)
 **
 **  Given:
-**      va      double[3]     first vector
-**      vb      double[3]     second vector
+**     va      double[3]     first vector
+**     vb      double[3]     second vector
 **
 **  Returned:
-**      vc      double[3]     vector result
+**     vc      double[3]     vector result
 **
-**  Last revision:   31 October 1993
+**  Note:  the same vector may be specified more than once.
+**
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -2,18 +2,7 @@
 #include "slamac.h"
 #include <string.h>
 
-static int idchf ( int, char*, int*, int*, double* );          /**/
-
-/* Definitions shared between slaDfltin and idchf */           /**/
-#define NUMBER 0                                               /**/
-#define SPACE  1                                               /**/
-#define EXPSYM 2                                               /**/
-#define PERIOD 3                                               /**/
-#define PLUS   4                                               /**/
-#define MINUS  5                                               /**/
-#define COMMA  6                                               /**/
-#define OTHER  7                                               /**/
-#define END    8                                               /**/
+static int idchf ( int, char*, int*, int*, double* );
 
 void slaDfltin ( char *string, int *nstrt, double *dreslt, int *jflag )
 /*
@@ -106,10 +95,22 @@ void slaDfltin ( char *string, int *nstrt, double *dreslt, int *jflag )
 **
 **     18    See also slaFlotin and slaIntin.
 **
-**  Last revision:   26 July 1996
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
+
+/* Definitions shared between slaDfltin and idchf */
+#define NUMBER 0
+#define SPACE  1
+#define EXPSYM 2
+#define PERIOD 3
+#define PLUS   4
+#define MINUS  5
+#define COMMA  6
+#define OTHER  7
+#define END    8
+
 {
    int l_string, nptr, ndigit;
    double digit;

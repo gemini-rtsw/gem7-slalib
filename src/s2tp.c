@@ -18,12 +18,12 @@ void slaS2tp ( float ra, float dec, float raz, float decz,
 **
 **  Returned:
 **     *xi,*eta   float  rectangular coordinates on tangent plane
-**     *j         long   status:   0 = OK, star on tangent plane
+**     *j         int    status:   0 = OK, star on tangent plane
 **                                 1 = error, star too far from axis
 **                                 2 = error, antistar on tangent plane
 **                                 3 = error, antistar too far from axis
 **
-**  Last revision:   18 July 1996
+**  Last revision:   17 August 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -29,7 +29,7 @@ void slaDm2av ( double rmat[3][3], double axvec[3] )
 **
 **  If rmat is null, so is the result.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   19 April 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -42,8 +42,8 @@ void slaDm2av ( double rmat[3][3], double axvec[3] )
    s2 = sqrt ( x * x + y * y + z * z );
    if ( s2 != 0.0 )
    {
-      c2 = ( rmat[0][0] + rmat[1][1] + rmat[2][2] - 1.0 );
-      phi = atan2 ( s2 / 2.0, c2 / 2.0 );
+      c2 = rmat[0][0] + rmat[1][1] + rmat[2][2] - 1.0;
+      phi = atan2 ( s2, c2 );
       f = phi / s2;
       axvec[0] = x * f;
       axvec[1] = y * f;

@@ -40,22 +40,29 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **      is always negligible.  Moreover, for all but the most
 **      critical applications UTC is adequate.
 **
-**  2)  The accuracy of the routines using the parameters amprms is
-**      limited by the routine slaEvp, used here to compute the
-**      Earth position and velocity by the methods of Stumpff.
-**      The maximum error in the resulting aberration corrections is
-**      about 0.3 milliarcsecond.
+**  2)  The vectors amprms(1-3) and amprms(4-6) are referred to the
+**      mean equinox and equator of epoch eq.
 **
-**  3)  The vectors amprms(1-3) and amprms(4-6) are referred to
-**      the mean equinox and equator of epoch eq.
+**  3)  The parameters AMPRMS produced by this routine are used by
+**      slaAmpqk, slaMapqk and slaMapqkz.
 **
-**  4)  The parameters amprms produced by this routine are used by
-**      slaMapqk and slaMapqkz.
+**  4)  The accuracy is limited by imperfections in the IAU 1976/1980
+**      models for precession and nutation.  Corrections are tabulated
+**      in IERS Bulletin B and at the present epoch are of order 50 mas.
+**      An improved precession-nutation model can be introduced by
+**      first calling the present routine and then replacing the
+**      precession-nutation matrix into the AMPRMS array directly.
+**
+**  5)  A further limit to the accuracy of routines using the parameter
+**      array AMPRMS is imposed by the routine slaEvp, used here to
+**      compute the Earth position and velocity by the methods of
+**      Stumpff.  The maximum error in the resulting aberration
+**      corrections is about 0.3 milliarcsecond.
 **
 **  Called:
 **     slaEpj, slaEvp, slaDvn, slaPrenut
 **
-**  Last revision:   26 September 1998
+**  Last revision:   8 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

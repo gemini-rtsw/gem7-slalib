@@ -1,6 +1,10 @@
 #ifndef SLAMACHDEF
 #define SLAMACHDEF
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 **  - - - - - - - - -
 **   s l a m a c . h
@@ -8,7 +12,7 @@
 **
 **  Macros used by slalib library.
 **
-**  Last revision:   5 June 1996
+**  Last revision:   27 January 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -96,5 +100,9 @@
 
 /* 15/(2pi):  hours to degrees x radians to turns */
 #define D15B2P 2.3873241463784300365332564505877154305168946861068
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

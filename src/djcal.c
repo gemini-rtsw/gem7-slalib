@@ -17,7 +17,7 @@ void slaDjcal ( int ndp, double djm, int iymdf[4], int *j )
 **
 **  Returned:
 **     iymdf    int[4]    year, month, day, fraction in Gregorian calendar
-**     *j       long      status:  nonzero = out of range
+**     *j       int       status:  nonzero = out of range
 **
 **  Any date after 4701BC March 1 is accepted.
 **
@@ -28,7 +28,7 @@ void slaDjcal ( int ndp, double djm, int iymdf[4], int *j )
 **
 **  Defined in slamac.h:  dmod
 **
-**  Last revision:   19 March 1996
+**  Last revision:   17 August 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

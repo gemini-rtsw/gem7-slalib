@@ -69,7 +69,7 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   21 July 1994
+**  Last revision:   15 January 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -80,7 +80,7 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
    int i;
    double pmt, gr2e, ab1, eb[3], ehn[3], abv[3],
           q[3], pxr, w, em[3], p[3], pn[3], pde, pdep1,
-          p1[3], p1dv, p1dvp1, p2[3], p3[3];
+          p1[3], p1dv, p2[3], p3[3];
 
 /* Unpack scalar and vector parameters */
    pmt = amprms[0];
@@ -117,12 +117,11 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
       p1[i] = pn[i] + ( w * ( ehn[i] - pde * pn[i] ) );
    }
 
-/* Aberration */
+/* Aberration (normalization omitted) */
    p1dv = slaDvdv ( p1, abv );
-   p1dvp1 = p1dv + 1.0;
    w = 1.0 + p1dv / ( ab1 + 1.0 );
    for ( i = 0; i < 3; i++ ) {
-      p2[i] = ( ab1 * p1[i] + w * abv[i] ) / p1dvp1;
+      p2[i] = ab1 * p1[i] + w * abv[i];
    }
 
 /* Precession and nutation */

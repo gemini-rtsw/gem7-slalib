@@ -70,14 +70,14 @@ void slaRefz ( double zu, double refa, double refb, double *zr )
 **
 **  Defined in slamac.h:  DR2D
 **
-**  Last revision:   4 June 1997
+**  Last revision:   21 July 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
    double zu1, zl, s, c, t, tsq, tcu, ref, e, e2;
 
-/* Coefficients for high ZD model (used beyond ZD 83 deg */
+/* Coefficients for high ZD model (used beyond ZD 83 deg) */
    const double c1 =  0.55445,
                 c2 = -0.01133,
                 c3 =  0.00202,

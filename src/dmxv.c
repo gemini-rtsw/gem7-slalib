@@ -18,7 +18,9 @@ void slaDmxv ( double dm[3][3], double va[3], double vb[3] )
 **  Returned:
 **     vb       double[3]       result vector
 **
-**  Last revision:   31 October 1993
+**  Note:  va and vb may be the same array.
+**
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -17,10 +17,12 @@ void slaDvn ( double v[3], double uv[3], double *vm )
 **     uv      double[3]      unit vector in direction of v
 **     *vm     double         modulus of v
 **
+**  Note:  v and uv may be the same array.
+**
 **
 **  If the modulus of v is zero, uv is set to zero as well.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

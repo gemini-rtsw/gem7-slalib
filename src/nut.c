@@ -3,7 +3,7 @@
 void slaNut ( double date, double rmatn[3][3] )
 /*
 **  - - - - - - -
-**  s l a N u t
+**   s l a N u t
 **  - - - - - - -
 **
 **  Form the matrix of nutation for a given date (IAU 1980 theory).
@@ -26,7 +26,7 @@ void slaNut ( double date, double rmatn[3][3] )
 **
 **  Called:   slaNutc, slaDeuler
 **
-**  Last revision:   14 July 1993
+**  Last revision:   11 April 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -139,7 +139,7 @@ void slaOap ( char *type, double ob1, double ob2, double date,
 **
 **      where tsl is the approximate sea-level air temperature
 **      in deg K (See Astrophysical Quantities, C.W.Allen,
-**      3rd edition, section 52.)  Similarly, if the pressure p
+**      3rd edition, section 52).  Similarly, if the pressure p
 **      is not known, it can be estimated from the height of the
 **      observing station, hm as follows:
 **
@@ -155,7 +155,7 @@ void slaOap ( char *type, double ob1, double ob2, double date,
 **
 **  Called:  slaAoppa, slaOapqk
 **
-**  Last revision:   23 April 1998
+**  Last revision:   6 September 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -24,7 +24,7 @@ void slaImxv ( float rm[3][3], float va[3], float vb[3] )
 **
 **  The same vector can be specified for both va and vb.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -24,6 +24,8 @@ void slaNutc ( double date, double *dpsi, double *deps, double *eps0 )
 **     *dpsi,*deps double    nutation in longitude,obliquity
 **     *eps0       double    mean obliquity
 **
+**  Called:  slaDrange
+**
 **  Defined in slamac.h:  DAS2R, dmod
 **
 **  Last revision:   19 March 1996
@@ -47,25 +49,25 @@ void slaNutc ( double date, double *dpsi, double *deps, double *eps0 )
 /* Fundamental arguments in the FK5 reference system */
 
 /* Mean longitude of the Moon minus mean longitude of the Moon's perigee */
-   el = DAS2R * dmod ( 485866.733 + ( 1325.0 * T2AS + 715922.633
-                   + ( 31.310 + 0.064 * t ) * t ) * t , T2AS );
+   el = slaDrange ( DAS2R * dmod ( 485866.733 + ( 1325.0 * T2AS + 715922.633
+                               + ( 31.310 + 0.064 * t ) * t ) * t , T2AS ) );
 
 /* Mean longitude of the Sun minus mean longitude of the Sun's perigee */
-   elp = DAS2R * dmod ( 1287099.804 + ( 99.0 * T2AS + 1292581.224
-                    + ( -0.577 - 0.012 * t ) * t ) * t, T2AS );
+   elp = slaDrange ( DAS2R * dmod ( 1287099.804 + ( 99.0 * T2AS + 1292581.224
+                                + ( -0.577 - 0.012 * t ) * t ) * t, T2AS ) );
 
 /* Mean longitude of the Moon minus mean longitude of the Moon's node */
-   f = DAS2R * dmod ( 335778.877 + ( 1342.0 * T2AS + 295263.137
-                  + ( -13.257 + 0.011 * t ) * t ) * t, T2AS );
+   f = slaDrange ( DAS2R * dmod ( 335778.877 + ( 1342.0 * T2AS + 295263.137
+                              + ( -13.257 + 0.011 * t ) * t ) * t, T2AS ) );
 
 /* Mean elongation of the Moon from the Sun */
-   d = DAS2R * dmod ( 1072261.307 + ( 1236.0 * T2AS + 1105601.328
-                  + ( -6.891 + 0.019 * t ) * t ) * t, T2AS );
+   d = slaDrange ( DAS2R * dmod ( 1072261.307 + ( 1236.0 * T2AS + 1105601.328
+                              + ( -6.891 + 0.019 * t ) * t ) * t, T2AS ) );
 
 /* Longitude of the mean ascending node of the lunar orbit on the
    ecliptic, measured from the mean equinox of date */
-   om = DAS2R * dmod ( 450160.280 + ( -5.0 * T2AS - 482890.539
-                   + ( 7.455 + 0.008 * t ) * t ) * t, T2AS );
+   om = slaDrange ( DAS2R * dmod ( 450160.280 + ( -5.0 * T2AS - 482890.539
+                               + ( 7.455 + 0.008 * t ) * t ) * t, T2AS ) );
 
 /* Multiples of arguments */
    el2 = el + el;

@@ -19,7 +19,9 @@ void slaMxv ( float rm[3][3], float va[3], float vb[3] )
 **  Returned:
 **     vb       float[3]      result vector
 **
-**  Last revision:   30 October 1993
+**  Note:  va and vb may be the same array.
+**
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

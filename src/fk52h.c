@@ -4,7 +4,7 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
                 double *rh, double *dh, double *drh, double *ddh )
 /*
 **  - - - - - - - - -
-**   t p t F k 5 2 h
+**   s l a F k 5 2 h
 **  - - - - - - - - -
 **
 **  Transform FK5 (J2000) star data into the Hipparcos frame.
@@ -26,7 +26,8 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
 **     drh     double    proper motion in RA (dRA/dt, rad/Jyear)
 **     ddh     double    proper motion in Dec (dDec/dt, rad/Jyear)
 **
-**  Called:  slaDs2c6, slaDav2m, slaDmxv, slaDvxv, slaDc62s
+**  Called:  slaDs2c6, slaDav2m, slaDmxv, slaDvxv, slaDc62s,
+**           slaDranrm
 **
 **  Notes:
 **
@@ -47,7 +48,7 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
 **
 **     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
 **
-**  Last revision:   8 October 1998
+**  Last revision:   22 June 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -63,7 +64,7 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
                               0.60e-3 * AS2R,
                               0.70e-3 * AS2R };
 
-   double pv5[6], r5h[3][3], vv[3], pvh[6], r, v;
+   double pv5[6], r5h[3][3], vv[3], pvh[6], w, r, v;
    int i;
 
 
@@ -82,5 +83,6 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
    slaDmxv ( r5h, vv, pvh + 3 );
 
 /* Hipparcos 6-vector to spherical. */
-   slaDc62s ( pvh, rh, dh, &r, drh, ddh, &v );
+   slaDc62s ( pvh, &w, dh, &r, drh, ddh, &v );
+   *rh = slaDranrm ( w );
 }

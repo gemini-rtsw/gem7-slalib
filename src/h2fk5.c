@@ -4,7 +4,7 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
                 double *r5, double *d5, double *dr5, double *dd5 )
 /*
 **  - - - - - - - - -
-**   t p t H 2 f k 5
+**   s l a H 2 f k 5
 **  - - - - - - - - -
 **
 **  Transform Hipparcos star data into the FK5 (J2000) system.
@@ -26,7 +26,8 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
 **     dr5     double    proper motion in RA (dRA/dt, rad/Jyear)
 **     dd5     double    proper motion in Dec (dDec/dt, rad/Jyear)
 **
-**  Called:  slaDs2c6, slaDav2m, slaDmxv, slaDimxv, slaDvxv, slaDc62s
+**  Called:  slaDs2c6, slaDav2m, slaDmxv, slaDimxv, slaDvxv,
+**           slaDc62s, slaDranrm
 **
 **  Notes:
 **
@@ -41,13 +42,13 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
 **      as "axial vectors".  An axial vector points at the pole of the
 **      rotation and its length is the amount of rotation in radians.
 **
-**  4)  See also sla_FK52H, sla_FK5HZ, sla_HFK5Z.
+**  4)  See also slaFk52h, slaFk5hz, slaHfk5z.
 **
 **  Reference:
 **
 **     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
 **
-**  Last revision:   8 October 1998
+**  Last revision:   22 June 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -63,7 +64,7 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
                               0.60e-3 * AS2R,
                               0.70e-3 * AS2R };
 
-   double pvh[6], r5h[3][3], sh[3], vv[3], pv5[6], r, v;
+   double pvh[6], r5h[3][3], sh[3], vv[3], pv5[6], w, r, v;
    int i;
 
 
@@ -85,5 +86,6 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
    slaDimxv ( r5h, vv, pv5 + 3 );
 
 /* FK5 6-vector to spherical. */
-   slaDc62s ( pv5, r5, d5, &r, dr5, dd5, &v );
+   slaDc62s ( pv5, &w, d5, &r, dr5, dd5, &v );
+   *r5 = slaDranrm ( w );
 }

@@ -58,7 +58,7 @@ void slaEvp ( double date, double deqx, double dvb[3], double dpb[3],
 **
 **  Defined in slamac.h:  D2PI, DS2R, dmod
 **
-**  Last revision:   22 September 1996
+**  Last revision:   21 March 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -425,13 +425,13 @@ void slaEvp ( double date, double deqx, double dvb[3], double dpb[3],
       a = dmod ( dcargs[0][k] + dt * dcargs[1][k] , D2PI );
       cosa = cos ( a );
       sina = sin ( a );
-      pertl = pertl + ccamps[0][k] * cosa + ccamps[1][k] * sina;
-      pertr = pertr + ccamps[2][k] * cosa + ccamps[3][k] * sina;
+      pertl += ccamps[0][k] * cosa + ccamps[1][k] * sina;
+      pertr += ccamps[2][k] * cosa + ccamps[3][k] * sina;
       if ( k < 10 ) {
-         pertld = pertld +
-               ( ccamps[1][k] * cosa - ccamps[0][k] * sina ) * ccamps[4][k];
-         pertrd = pertrd +
-               ( ccamps[3][k] * cosa - ccamps[2][k] * sina ) * ccamps[4][k];
+         pertld += ( ccamps[1][k] * cosa
+                   - ccamps[0][k] * sina ) * ccamps[4][k];
+         pertrd += ( ccamps[3][k] * cosa
+                   - ccamps[2][k] * sina ) * ccamps[4][k];
       }
    }
 
@@ -473,10 +473,10 @@ void slaEvp ( double date, double deqx, double dvb[3], double dpb[3],
       a = dmod ( dcargm[0][k] + dt * dcargm[1][k] , D2PI );
       sina = sin ( a );
       cosa = cos ( a );
-      pertl = pertl + ccampm[0][k] * sina;
-      pertld = pertld + ccampm[1][k] * cosa;
-      pertp = pertp + ccampm[2][k] * cosa;
-      pertpd = pertpd - ccampm[3][k] * sina;
+      pertl += ccampm[0][k] * sina;
+      pertld += ccampm[1][k] * cosa;
+      pertp += ccampm[2][k] * cosa;
+      pertpd += - ccampm[3][k] * sina;
    }
 
 /* Heliocentric motion of the Earth */
@@ -486,8 +486,8 @@ void slaEvp ( double date, double deqx, double dvb[3], double dpb[3],
    sigma = cckm / ( 1.0 + pertp );
    a = sigma * ( ccmld + pertld );
    b = sigma * pertpd;
-   dxhd  = dxhd + a * sinlm + b * coslm;
-   dyhd  = dyhd - a * coslm + b * sinlm;
+   dxhd  += a * sinlm + b * coslm;
+   dyhd  += - a * coslm + b * sinlm;
    dzhd  = - sigma * ccfdi * cos ( forbel[2] );
 
 /* Barycentric motion of the Earth */
@@ -501,9 +501,9 @@ void slaEvp ( double date, double deqx, double dvb[3], double dpb[3],
       tl = dmod( plon + 2.0 * pecc * sin ( plon - pomg ) , D2PI );
       sinlp[k] = sin ( tl );
       coslp[k] = cos ( tl );
-      dxbd = dxbd + ccpamv[k] * ( sinlp[k] + pecc * sin ( pomg ) );
-      dybd = dybd - ccpamv[k] * ( coslp[k] + pecc * cos ( pomg ) );
-      dzbd = dzbd - ccpamv[k] * sorbel[k+13] * cos ( plon - sorbel[k+5] );
+      dxbd += ccpamv[k] * ( sinlp[k] + pecc * sin ( pomg ) );
+      dybd += - ccpamv[k] * ( coslp[k] + pecc * cos ( pomg ) );
+      dzbd += - ccpamv[k] * sorbel[k+13] * cos ( plon - sorbel[k+5] );
    }
 
 /* Transition to mean equator of date */

@@ -77,7 +77,7 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **       use xp=yp=0.0.  See page B60 of the 1988 Astronomical Almanac
 **       for a definition of the two angles.
 **
-**   6)  The height above sea level of the observing station, HM,
+**   6)  The height above sea level of the observing station, hm,
 **       can be obtained from the Astronomical Almanac (Section J
 **       in the 1988 edition), or via the routine slaObs.  If p,
 **       the pressure in millibars, is available, an adequate
@@ -87,7 +87,7 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **
 **       where tsl is the approximate sea-level air temperature
 **       in deg K (See Astrophysical Quantities, C.W.Allen,
-**       3rd edition, section 52.)  Similarly, if the pressure p
+**       3rd edition, section 52).  Similarly, if the pressure p
 **       is not known, it can be estimated from the height of the
 **       observing station, hm as follows:
 **
@@ -108,7 +108,7 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **
 **  Called:  slaGeoc, slaRefco, slaEqeqx, slaAoppat
 **
-**  Last revision:   23 April 1998
+**  Last revision:   6 September 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

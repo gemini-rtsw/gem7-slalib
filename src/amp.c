@@ -28,30 +28,37 @@ void slaAmp ( double ra, double da, double date, double eq,
 **
 **  Notes:
 **
-**     1)  The distinction between the required TDB and the more
-**         accessible TT is always negligible.  Moreover, for all
-**         but the most critical applications UTC is adequate.
+**  1)  The distinction between the required TDB and TT is always
+**      negligible.  Moreover, for all but the most critical
+**      applications UTC is adequate.
 **
-**     2)  The accuracy is limited by the routine slaEvp, called
-**         by slaMappa, which computes the Earth positions and
-**         velocities using the methods of Stumpff.  The maximum
-**         error is about 0.3 milliarcsecond.
+**  2)  Iterative techniques are used for the aberration and light
+**      deflection corrections so that the routines slaAmp (or
+**      slaAmpqk) and slaMap (or slaMapqk) are accurate inverses;
+**      even at the edge of the Sun's disc the discrepancy is only
+**      about 1 nanoarcsecond.
 **
-**     3)  Iterative techniques are used for the aberration and
-**         light deflection corrections so that the routines
-**         slaAmp (or slaAmpqk) and slaMap (or slaMapqk) are
-**         accurate inverses;  even at the edge of the Sun's disc
-**         the discrepancy is only about 1 nanoarcsecond.
+**  3)  Where multiple apparent places are to be converted to mean
+**      places, for a fixed date and equinox, it is more efficient to
+**      use the slaMappa routine to compute the required parameters
+**      once, followed by one call to slaAmpqk per star.
 **
-**     4)  Where multiple apparent places are to be converted to
-**         mean places, for a fixed date and equinox, it is more
-**         efficient to use the slaMappa routine to compute the
-**         required parameters once, followed by one call to
-**         slaAmpqk per star.
+**  4)  The accuracy is limited by imperfections in the IAU 1976/1980
+**      models for precession and nutation.  Corrections are tabulated
+**      in IERS Bulletin B and at the present epoch are of order 50 mas.
+**      An improved precession-nutation model can be introduced by
+**      using slaMappa and slaAmpqk (see the previous note) and
+**      replacing the precession-nutation matrix into the parameter
+**      array directly.
+**
+**  5)  The accuracy is further limited by the routine slaEvp, called
+**      by slaMappa, which computes the Earth position and velocity
+**      using the methods of Stumpff.  The maximum error is about
+**      0.3 mas.
 **
 **  Called:  slaMappa, slaAmpqk
 **
-**  Last revision:   12 June 1996
+**  Last revision:   8 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 **

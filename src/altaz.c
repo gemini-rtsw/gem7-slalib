@@ -53,7 +53,7 @@ void slaAltaz ( double ha, double dec, double phi,
 **
 **  2)  Azimuth is returned in the range 0-2pi;  north is zero,
 **      and east is +pi/2.  Elevation and parallactic angle are
-**      returned in the range +/-pi/2.  Position angle is +ve
+**      returned in the range +/-pi.  Position angle is +ve
 **      for a star west of the meridian and is the angle NP-star-zenith.
 **
 **  3)  The latitude is geodetic as opposed to geocentric.  The
@@ -73,7 +73,7 @@ void slaAltaz ( double ha, double dec, double phi,
 **
 **  Defined in slamac.h:  DPI, D2PI
 **
-**  Last revision:   14 March 1997
+**  Last revision:   3 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -122,7 +122,7 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 **
 **  Defined in slamac.h:  TRUE, FALSE
 **
-**  Last revision:   3 June 1997
+**  Last revision:   25 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -164,7 +164,7 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
           fe, h, r, sz, rg, dr, tg, dn, rdndr, t, f, refp, reft;
 
 /* The refraction integrand */
-#define refi(R,DN,RDNDR) ((RDNDR)/(DN+RDNDR));
+#define refi(DN,RDNDR) ((RDNDR)/(DN+RDNDR));
 
 
 
@@ -200,14 +200,14 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
    gb = 9.784 * ( 1.0 - 0.0026 * cos ( 2.0 * phi ) - 2.8e-7 * hmok );
    a = ( optic ) ?
          ( ( 287.604 + 1.6288 / wlsq + 0.0136 / ( wlsq * wlsq ) )
-                 * 273.15 / 1013.25 ) * 1e-6
+                 * 273.155 / 1013.25 ) * 1e-6
        :
          77.624e-6;
    gamal = gb * dmd / gcr;
    gamma = gamal / alpha;
    gamm2 = gamma - 2.0;
    delm2 = delta - 2.0;
-   tdc = tdkok - 273.15;
+   tdc = tdkok - 273.155;
    psat = pow ( 10.0, ( 0.7859 + 0.03477 * tdc ) /
                          ( 1.0 + 0.00412 * tdc ) ) *
                 ( 1.0 + pmbok * ( 4.5e-6 + 6e-10 * tdc * tdc ) );
@@ -227,25 +227,25 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
    atmt ( robs, tdkok, alpha, gamm2, delm2, c1, c2, c3, c4, c5, c6, robs,
           &tempo, &dn0, &rdndr0 );
    sk0 = dn0 * robs * sin ( zobs2 );
-   f0 = refi ( robs, dn0, rdndr0 );
+   f0 = refi ( dn0, rdndr0 );
 
 /* Conditions at the tropopause in the troposphere. */
    rt = s + ht;
    atmt ( robs, tdkok, alpha, gamm2, delm2, c1, c2, c3, c4, c5, c6, rt,
           &tt, &dnt, &rdndrt );
    zt = asin ( sk0 / ( rt * dnt ) );
-   ft = refi ( rt, dnt, rdndrt );
+   ft = refi ( dnt, rdndrt );
 
 /* Conditions at the tropopause in the stratosphere. */
    atms ( rt, tt, dnt, gamal, rt, &dnts, &rdndrp );
    zts = asin ( sk0 / ( rt * dnts ) );
-   fts = refi ( rt, dnts, rdndrp );
+   fts = refi ( dnts, rdndrp );
 
 /* Conditions at the stratosphere limit. */
    rs = s + hs;
    atms ( rt, tt, dnt, gamal, rs, &dns, &rdndrs );
    zs = asin ( sk0 / ( rs * dns ) );
-   fs = refi ( rs, dns, rdndrs );
+   fs = refi ( dns, rdndrs );
 
 /*
 ** Integrate the refraction integral in two parts;  first in the
@@ -327,7 +327,7 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
             } else {
                atms ( rt, tt, dnt, gamal, r, &dn, &rdndr );
             }
-            f = refi ( r, dn, rdndr );
+            f = refi ( dn, rdndr );
 
          /* Accumulate odd and (first time only) even values. */
             if ( n == 1 && i % 2 == 0 ) {

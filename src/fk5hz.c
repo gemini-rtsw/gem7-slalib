@@ -3,7 +3,7 @@
 void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
 /*
 **  - - - - - - - - -
-**   t p t F k 5 h z
+**   s l a F k 5 h z
 **  - - - - - - - - -
 **
 **  Transform an FK5 (J2000) star position into the frame of the
@@ -26,7 +26,7 @@ void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
 **     rh      double    RA (radians)
 **     dh      double    Dec (radians)
 **
-**  Called:  slaDcs2c, slaDav2m, slaDimxv, slaDmxv, slaDcc2s
+**  Called:  slaDcs2c, slaDav2m, slaDimxv, slaDmxv, slaDcc2s, slaDranrm
 **
 **  Notes:
 **
@@ -38,15 +38,15 @@ void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
 **      as "axial vectors".  An axial vector points at the pole of the
 **      rotation and its length is the amount of rotation in radians.
 **
-**  3)  See also sla_FK52H, sla_H2FK5, sla_HFK5Z.
+**  3)  See also slaFk52h, slaH2fk5, slaHfk5z.
 **
 **  Reference:
 **
 **     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
 **
-**  P.T.Wallace   Starlink   8 October 1998
+**  Last revision:   22 June 1999
 **
-**  Copyright (C) 1998 Rutherford Appleton Laboratory
+**  Copyright P.T.Wallace.  All rights reserved.
 */
 
 #define AS2R 0.484813681109535994e-5    /* arcseconds to radians */
@@ -60,7 +60,7 @@ void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
                               0.60e-3 * AS2R,
                               0.70e-3 * AS2R };
 
-   double p5e[3], r5h[3][3], t, vst[3], rst[3][3], p5[3], ph[3];
+   double p5e[3], r5h[3][3], t, vst[3], rst[3][3], p5[3], ph[3], w;
    int i;
 
 
@@ -88,5 +88,6 @@ void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
    slaDmxv ( r5h, p5, ph );
 
 /* Hipparcos vector to spherical. */
-   slaDcc2s ( ph, rh, dh );
+   slaDcc2s ( ph, &w, dh );
+   *rh = slaDranrm ( w );
 }

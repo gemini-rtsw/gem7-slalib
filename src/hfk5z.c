@@ -4,7 +4,7 @@ void slaHfk5z ( double rh, double dh, double epoch,
                 double *r5, double *d5, double *dr5, double *dd5 )
 /*
 **  - - - - - - - - -
-**   t p t H f k 5 z
+**   s l a H f k 5 z
 **  - - - - - - - - -
 **
 **  Transform a Hipparcos star position into FK5 J2000, assuming
@@ -22,7 +22,7 @@ void slaHfk5z ( double rh, double dh, double epoch,
 **     d5      double    Dec (radians)
 **
 **  Called:  slaDcs2c, slaDav2m, slaDmxv, slaDav2m, slaDmxm,
-**           slaDimxv, slaDvxv, slaDc62s
+**           slaDimxv, slaDvxv, slaDc62s, slaDranrm
 **
 **  Notes:
 **
@@ -51,11 +51,9 @@ void slaHfk5z ( double rh, double dh, double epoch,
 **
 **     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
 **
-**  Last revision:   8 October 1998
+**  Last revision:   30 December 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
-**
-**  Copyright (C) 1998 Rutherford Appleton Laboratory
 */
 
 #define AS2R 0.484813681109535994e-5    /* arcseconds to radians */
@@ -69,8 +67,8 @@ void slaHfk5z ( double rh, double dh, double epoch,
                               0.60e-3 * AS2R,
                               0.70e-3 * AS2R };
 
-   double ph[6], r5h[3][3], sh[3], t, vst[3], rst[3][3], r5ht[3][3],
-          pv5e[6], vv[3], r, v;
+   double ph[3], r5h[3][3], sh[3], t, vst[3], rst[3][3], r5ht[3][3],
+          pv5e[6], vv[3], w, r, v;
    int i;
 
 
@@ -103,5 +101,6 @@ void slaHfk5z ( double rh, double dh, double epoch,
    slaDimxv ( r5ht, vv, pv5e + 3 );
 
 /* FK5 position/velocity 6-vector to spherical. */
-   slaDc62s( pv5e, r5, d5, &r, dr5, dd5, &v );
+   slaDc62s( pv5e, &w, d5, &r, dr5, dd5, &v );
+   *r5 = slaDranrm ( w );
 }

@@ -64,12 +64,12 @@ void slaMapqkz ( double rm, double dm, double amprms[21],
 **     slaDcc2s       Cartesian to spherical
 **     slaDranrm      normalize angle 0-2pi
 **
-**  Last revision:   12 June 1996
+**  Last revision:   17 August 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
-   long i;
+   int i;
    double gr2e, ab1, ehn[3], abv[3], p[3], pde, pdep1,
           w, p1[3], p1dv, p1dvp1, p2[3], p3[3];
 

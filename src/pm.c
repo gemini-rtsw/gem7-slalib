@@ -27,21 +27,28 @@ void slaPm ( double r0, double d0, double pr, double pd,
 **  Returned:
 **     *r1,*d1  double     RA,Dec at epoch ep1 (rad)
 **
-**  Note:  The proper motions in RA are dRA/dt rather than
-**         cos(dec)*dra/dt, and are in the same coordinate
-**         system as r0,d0.
+**  Notes:
+**
+**  1  The proper motions in RA are dRA/dt rather than cos(Dec)*dRA/dt,
+**     and are in the same coordinate system as R0,D0.
+**
+**  2  If the available proper motions are pre-FK5 they will be per
+**     tropical year rather than per Julian year, and so the epochs
+**     must both be Besselian rather than Julian.  In such cases, a
+**     scaling factor of 365.2422D0/365.25D0 should be applied to the
+**     radial velocity before use.
 **
 **  Called:  slaDcs2c, slaDcc2s, slaDranrm
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   12 June 1996
+**  Last revision:   19 January 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
 /* Km/s to AU/year multiplied by arc seconds to radians */
-   static double vfr = 0.21094502 * DAS2R;
+   static double vfr = ( 365.25 * 86400.0 / 149597870.0 ) * DAS2R;
 
    int i;
    double w, em[3], t, p[3];

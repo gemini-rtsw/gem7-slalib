@@ -47,9 +47,9 @@ double slaDat ( double utc )
 **     :                                         :
 **     :-----------------------------------------:
 **
-**  Last revision:   18 July 1998
+**  Last revision:   31 May 1999
 **
-**  Copyright 1998 P.T.Wallace.  All rights reserved.
+**  Copyright 1999 P.T.Wallace.  All rights reserved.
 */
 {
 
@@ -126,7 +126,7 @@ double slaDat ( double utc )
    if ( utc >= 41499.0 ) return 11.0;
 
 /* 1972 January 1 */
-   if ( utc >= 41371.0 ) return 10.0;
+   if ( utc >= 41317.0 ) return 10.0;
 
 /* 1968 February 1 */
    if ( utc >= 39887.0 ) return 4.2131700 + ( utc - 39126.0 ) * 0.002592;

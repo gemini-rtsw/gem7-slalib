@@ -39,23 +39,18 @@ void slaAmpqk ( double ra, double da, double amprms[21],
 **     1984 Astronomical Almanac, pp B39-B41.
 **     (also Lederle & Schwan, Astron. Astrophys. 134, 1-6, 1984)
 **
-**  Notes:
+**  Note:
 **
-**  1)  The accuracy is limited by the routine slaEvp, called
-**      by slaMappa, which computes the Earth position and
-**      velocity using the methods of Stumpff.  The maximum
-**      error is about 0.3 milliarcsecond.
-**
-**  2)  Iterative techniques are used for the aberration and
-**      light deflection corrections so that the routines
-**      slaAmp (or slaAmpqk) and slaMap (or slaMapqk) are
-**      accurate inverses;  even at the edge of the Sun's disc
-**      the discrepancy is only about 1 nanoarcsecond.
+**     Iterative techniques are used for the aberration and
+**     light deflection corrections so that the routines
+**     slaAmp (or slaAmpqk) and slaMap (or slaMapqk) are
+**     accurate inverses;  even at the edge of the Sun's disc
+**     the discrepancy is only about 1 nanoarcsecond.
 **
 **  Called:  slaDcs2c, slaDimxv, slaDvdv, slaDvn, slaDcc2s,
 **           slaDranrm
 **
-**  Last revision:   31 October 1993
+**  Last revision:   7 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -78,7 +78,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   2 September 1997
+**  Last revision:   13 December 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -145,11 +145,11 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
          1290.0
       },
 
-/* MMT (1984 Almanac) */
+/* MMT 6.5m conversion (MMT Observatory website) */
       {
          "MMT",
-         "MMT, Mt Hopkins",
-         WEST(110,53, 4.3),
+         "MMT 6.5m, Mt Hopkins",
+         WEST(110,53, 4.4),
          NORTH(31,41,19.6),
          2608.0
       },
@@ -343,22 +343,24 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
          2428.0
       },
 
-/* Mauna Kea 88 inch (1981 Almanac) */
+/* Mauna Kea 88 inch
+   (IfA website, Richard Wainscoat) */
       {
          "MAUNAK88",
          "Mauna Kea 88 inch",
-         WEST(155,28,20.),
-         NORTH(19,49,34.),
-         4215.0
+         WEST(155,28,09.96),
+         NORTH(19,49,22.77),
+         4213.6
       },
 
-/* UKIRT (1981 Almanac) */
+/* UKIRT
+   (Ifa website, Richard Wainscoat) */
       {
          "UKIRT",
          "UK Infra Red Telescope",
-         WEST(155,28,18.),
-         NORTH(19,49,35.),
-         4200.0
+         WEST(155,28,13.18),
+         NORTH(19,49,20.75),
+         4198.5
       },
 
 /* Quebec 1.6m (1981 Almanac) */
@@ -605,12 +607,13 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
          1350.0
       },
 
-/* James Clerk Maxwell 15 metre mm telescope, Mauna Kea (I.Coulson) */
+/* James Clerk Maxwell 15 metre mm telescope, Mauna Kea
+   (IfA website, Richard Wainscoat, height from I.Coulson) */
       {
          "JCMT",
          "JCMT 15 metre",
-         WEST(155,28,47.),
-         NORTH(19,49,33.),
+         WEST(155,28,37.20),
+         NORTH(19,49,22.11),
          4111.0
       },
 
@@ -641,12 +644,13 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
          2809.0
       },
 
-/* W.M.Keck Observatory, Telescope 1 (site survey) */
+/* W.M.Keck Observatory, Telescope 1 (site survey)
+   (private comm. William Lupton) */
       {
          "KECK1",
          "Keck 10m Telescope #1",
-         WEST(155,28,39.0),
-         NORTH(19,49,44.4),
+         WEST(155,28,28.99),
+         NORTH(19,49,33.41),
          4160.0
       },
 
@@ -716,13 +720,113 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       },
 
 /* Subaru telescope, Mauna Kea
-   (poster display, 1997 IAU General Assembly) */
+   (IfA website, Richard Wainscoat) */
       {
          "SUBARU",
-         "Subaru 8 metre",
-         WEST(155,28,50.0),
-         NORTH(19,49,43.0),
-         4139.0
+         "Subaru 8m telescope",
+         WEST(155,28,33.67),
+         NORTH(19,49,31.81),
+         4163.0
+      },
+
+/* Canada-France-Hawaii Telescope, Mauna Kea
+   (IfA website, Richard Wainscoat) */
+      {
+         "CFHT",
+         "Canada-France-Hawaii 3.6m Telescope",
+         WEST(155,28,07.95),
+         NORTH(19,49,30.91),
+         4204.1
+      },
+
+/* W.M.Keck Observatory, Telescope 2
+   (William Lupton, private comm) */
+      {
+         "KECK2",
+         "Keck 10m Telescope #2",
+         WEST(155,28,27.24),
+         NORTH(19,49,35.62),
+         4159.6
+      },
+
+/* Gemini North, Mauna Kea
+   (IfA website, Richard Wainscoat) */
+      {
+         "GEMININ",
+         "Gemini North 8-m telescope",
+         WEST(155,28,08.57),
+         NORTH(19,49,25.69),
+         4213.4
+      },
+
+/* Five College Radio Astronomy Observatory
+   (Tim Jenness, private comm) */
+      {
+         "FCRAO",
+         "Five College Radio Astronomy Obs",
+         WEST(72,20,42.0),
+         NORTH(42,23,30.0),
+         314.0
+      },
+
+/* NASA Infra Red Telescope Facility
+   (IfA website, Richard Wainscoat) */
+      {
+         "IRTF",
+         "NASA IR Telescope Facility, Mauna Kea",
+         WEST(155,28,19.20),
+         NORTH(19,49,34.39),
+         4168.1
+      },
+
+/* Caltech Submillimeter Observatory
+   (IfA website, Richard Wainscoat; height estimated) */
+      {
+         "CSO",
+         "Caltech Sub-mm Observatory, Mauna Kea",
+         WEST(155,28,31.79),
+         NORTH(19,49,20.78),
+         4080.0
+      },
+
+/* ESO VLT, UT1
+   (ESO website, VLT Whitebook Chapter 2) */
+      {
+         "VLT1",
+         "ESO VLT, Paranal, Chile: UT1",
+         WEST(70,24,11.642),
+         SOUTH(24,37,33.117),
+         2635.43
+      },
+
+/* ESO VLT, UT2
+   (ESO website, VLT Whitebook Chapter 2) */
+      {
+         "VLT2",
+         "ESO VLT, Paranal, Chile: UT2",
+         WEST(70,24,10.855),
+         SOUTH(24,37,31.465),
+         2635.43
+      },
+
+/* ESO VLT, UT3
+   (ESO website, VLT Whitebook Chapter 2) */
+      {
+         "VLT3",
+         "ESO VLT, Paranal, Chile: UT3",
+         WEST(70,24,09.896),
+         SOUTH(24,37,30.300),
+         2635.43
+      },
+
+/* ESO VLT, UT4
+   (ESO website, VLT Whitebook Chapter 2) */
+      {
+         "VLT4",
+         "ESO VLT, Paranal, Chile: UT4",
+         WEST(70,24,08.000),
+         SOUTH(24,37,31.000),
+         2635.43
       }
    };
 

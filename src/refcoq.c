@@ -158,11 +158,9 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **
 **     Green, R.M., "Spherical Astronomy", Cambridge University Press, 1987.
 **
-**  Last revision:   4 June 1997
+**  Last revision:   29 May 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
-**
-**  Copyright (C) 1997 Rutherford Appleton Laboratory
 */
 {
    int optic;
@@ -184,7 +182,7 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 
 /* Water vapour pressure at the observer. */
    if ( p > 0.0 ) {
-      tdc = t - 273.15;
+      tdc = t - 273.155;
       ps = pow ( 10.0, ( 0.7859 + 0.03477 * tdc ) /
                           ( 1.0 + 0.00412 * tdc ) ) *
                  ( 1.0 + p * ( 4.5e-6 + 6e-10 * tdc * tdc )  );
@@ -195,7 +193,7 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 
 /* Refractive index minus 1 at the observer. */
    if ( optic ) {
-      wlsq = wl * wl;
+      wlsq = w * w;
       gamma = ( ( 77.532e-6 + ( 4.391e-7 + 3.57e-9 / wlsq ) / wlsq ) * p
                 - 11.2684e-6 * pw ) / t;
    } else {

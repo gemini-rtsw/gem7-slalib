@@ -1,5 +1,10 @@
 #ifndef SLALIBHDEF
 #define SLALIBHDEF
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <math.h>
 
 /*
@@ -9,7 +14,7 @@
 **
 **  Prototype function declarations for slalib library.
 **
-**  Last revision:   26 September 1998
+**  Last revision:   16 June 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -71,6 +76,8 @@ void slaCd2tf ( int ndp, float days, char *sign, int ihmsf[4] );
 void slaCldj ( int iy, int im, int id, double *djm, int *j );
 
 void slaClyd ( int iy, int im, int id, int *ny, int *nd, int *jstat );
+
+void slaCombn ( int nsel, int ncand, int list[], int *j );
 
 void slaCr2af ( int ndp, float angle, char *sign, int idmsf[4] );
 
@@ -154,6 +161,8 @@ void slaDs2tp ( double ra, double dec, double raz, double decz,
 
 double slaDsep ( double a1, double b1, double a2, double b2 );
 
+double slaDsepv ( double v1[3], double v2[3] );
+
 double slaDt ( double epoch );
 
 void slaDtf2d ( int ihour, int imin, double sec, double *days, int *j );
@@ -194,6 +203,10 @@ void slaEcor ( float rm, float dm, int iy, int id, float fd,
                float *rv, float *tl );
 
 void slaEg50 ( double dr, double dd, double *dl, double *db );
+
+void slaEl2ue ( double date, int jform, double epoch, double orbinc,
+                double anode, double perih, double aorq, double e,
+                double aorl, double dm, double u[], int *jstat );
 
 double slaEpb ( double date );
 
@@ -324,6 +337,17 @@ void slaPda2h ( double p, double d, double a,
 void slaPdq2h ( double p, double d, double q,
                 double *h1, int *j1, double *h2, int *j2 );
 
+void slaPermut ( int n, int istate[], int iorder[], int *j );
+
+void slaPertel (int jform, double date0, double date1,
+                double epoch0, double orbi0, double anode0,
+                double perih0, double aorq0, double e0, double am0,
+                double *epoch1, double *orbi1, double *anode1,
+                double *perih1, double *aorq1, double *e1, double *am1,
+                int *jstat );
+
+void slaPertue ( double date, double u[], int *jstat );
+
 void slaPlanel ( double date, int jform, double epoch, double orbinc,
                  double anode, double perih, double aorq,  double e,
                  double aorl, double dm, double pv[6], int *jstat );
@@ -333,7 +357,7 @@ void slaPlanet ( double date, int np, double pv[6], int *j );
 void slaPlante ( double date, double elong, double phi, int jform,
                  double epoch, double orbinc, double anode, double perih,
                  double aorq, double e, double aorl, double dm,
-                 double* ra, double *dec, double *r, int *jstat );
+                 double *ra, double *dec, double *r, int *jstat );
 
 void slaPm ( double r0, double d0, double pr, double pd,
              double px, double rv, double ep0, double ep1,
@@ -353,9 +377,13 @@ void slaPreces ( char sys[3], double ep0, double ep1,
 
 void slaPrenut ( double epoch, double date, double rmatpn[3][3] );
 
-void slaPv2el  ( double[6], double, double, int,
-                 int*, double*, double*, double*, double*,
-                 double*, double*, double*, double*, int* );
+void slaPv2el ( double pv[], double date, double pmass, int jformr,
+                int *jform, double *epoch, double *orbinc,
+                double *anode, double *perih, double *aorq, double *e,
+                double *aorl, double *dm, int *jstat );
+
+void slaPv2ue ( double pv[], double date, double pmass,
+                double u[], int *jstat );
 
 void slaPvobs ( double p, double h, double stl, double pv[6] );
 
@@ -402,6 +430,8 @@ void slaS2tp ( float ra, float dec, float raz, float decz,
 
 float slaSep ( float a1, float b1, float a2, float b2 );
 
+float slaSepv ( float v1[3], float v2[3] );
+
 void slaSmat ( int n, float *a, float *y, float *d, int *jf, int *iw );
 
 void slaSubet ( double rc, double dc, double eq,
@@ -432,6 +462,13 @@ void slaTps2c ( float xi, float eta, float ra, float dec,
 void slaTpv2c ( float xi, float eta, float v[3],
                 float v01[3], float v02[3], int *n );
 
+void slaUe2el ( double u[], int jformr,
+                int *jform, double *epoch, double *orbinc,
+                double *anode, double *perih, double *aorq, double *e,
+                double *aorl, double *dm, int *jstat );
+
+void slaUe2pv ( double date, double u[], double pv[], int *jstat );
+
 void slaUnpcd ( double disco, double *x, double *y );
 
 void slaV2tp ( float v[3], float v0[3], float *xi, float *eta, int *j );
@@ -446,5 +483,9 @@ void slaXy2xy ( double x1, double y1, double coeffs[6],
                 double *x2, double *y2 );
 
 double slaZd ( double ha, double dec, double phi );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

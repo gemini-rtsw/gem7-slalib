@@ -7,18 +7,20 @@ void slaDmxm ( double a[3][3], double b[3][3], double c[3][3] )
 **  - - - - - - - -
 **
 **  Product of two 3x3 matrices:
-**     matrix c  =  matrix a  x  matrix b
+**    matrix c  =  matrix a  x  matrix b
 **
 **  (double precision)
 **
 **  Given:
-**      a      double[3][3]        matrix
-**      b      double[3][3]        matrix
+**     a      double[3][3]        matrix
+**     b      double[3][3]        matrix
 **
 **  Returned:
-**      c      double[3][3]        matrix result
+**     c      double[3][3]        matrix result
 **
-**  Last revision:   31 October 1993
+**  Note:  the same array may be nominated more than once.
+**
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

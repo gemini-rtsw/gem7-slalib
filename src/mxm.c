@@ -8,18 +8,20 @@ void slaMxm ( float a[3][3], float b[3][3], float c[3][3] )
 **
 **  Product of two 3x3 matrices:
 **
-**      matrix c  =  matrix a  x  matrix b
+**     matrix c  =  matrix a  x  matrix b
 **
 **  (single precision)
 **
 **  Given:
-**      a      float[3][3]        matrix
-**      b      float[3][3]        matrix
+**     a      float[3][3]        matrix
+**     b      float[3][3]        matrix
 **
 **  Returned:
-**      c      float[3][3]        matrix result
+**     c      float[3][3]        matrix result
 **
-**  Last revision:   31 October 1993
+**  Note:  the same array may be nominated more than once.
+**
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

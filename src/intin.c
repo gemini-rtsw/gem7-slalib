@@ -3,16 +3,7 @@
 #include <string.h>
 #include <limits.h>
 
-static int idchi ( int, char*, int*, double* );                    /**/
-
-/* Definitions shared between slaIntin and idchi */                /**/
-#define NUMBER 0                                                   /**/
-#define SPACE  1                                                   /**/
-#define PLUS   2                                                   /**/
-#define MINUS  3                                                   /**/
-#define COMMA  4                                                   /**/
-#define OTHER  5                                                   /**/
-#define END    6                                                   /**/
+static int idchi ( int, char*, int*, double* );
 
 void slaIntin ( char *string, int *nstrt, long *ireslt, int *jflag )
 /*
@@ -94,10 +85,20 @@ void slaIntin ( char *string, int *nstrt, long *ireslt, int *jflag )
 **
 **     12    See also slaFlotin and slaDfltin.
 **
-**  Last revision:   26 July 1996
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
+
+/* Definitions shared between slaIntin and idchi */
+#define NUMBER 0
+#define SPACE  1
+#define PLUS   2
+#define MINUS  3
+#define COMMA  4
+#define OTHER  5
+#define END    6
+
 {
    int l_string, nptr;
    double digit;

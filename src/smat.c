@@ -27,12 +27,12 @@ void slaSmat ( int n, float *a, float *y, float *d, int *jf, int *iw )
 **
 **     symbol  type dimension           before              after
 **
-**       n      long                 no. of unknowns       unchanged
+**       n      int                  no. of unknowns       unchanged
 **       *a     float  [n][n]            matrix             inverse
 **       *y     float   [n]              vector            solution
 **       *d     float                      -              determinant
-**    >  *jf    long                       -            singularity flag
-**       *iw    long    [n]                -               workspace
+**    >  *jf    int                        -            singularity flag
+**       *iw    int     [n]                -               workspace
 **
 **
 **    > jf is the singularity flag.  If the matrix is non-singular,
@@ -57,7 +57,7 @@ void slaSmat ( int n, float *a, float *y, float *d, int *jf, int *iw )
 **      :
 **     slaSmat ( n, (float *) a, v, &d, &j, iw );
 **
-**  Last revision:   20 February 1995
+**  Last revision:   17 August 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

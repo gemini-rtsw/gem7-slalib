@@ -20,7 +20,7 @@ void slaGalsup ( double dl, double db, double *dsl, double *dsb )
 **  (all arguments are radians)
 **
 **  Called:
-**     slaDcs2c, slaDimxv, slaDcc2s, slaDranrm, slaDrange
+**     slaDcs2c, slaDmxv, slaDcc2s, slaDranrm, slaDrange
 **
 **  References:
 **
@@ -35,7 +35,7 @@ void slaGalsup ( double dl, double db, double *dsl, double *dsb )
 **     longitude of the Supergalactic origin.  Both are wrong;  the
 **     correct value is l2 = 137.37.)
 **
-**  Last revision:   8 December 1993
+**  Last revision:   25 January 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

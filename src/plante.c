@@ -16,7 +16,7 @@ void slaPlante ( double date, double elong, double phi, int jform,
 **     date    double   MJD of observation (JD - 2400000.5)
 **     elong   double   observer's east longitude (radians)
 **     phi     double   observer's geodetic latitude (radians)
-**     jform   int      choice of element set (1-3, see Note 2, below)
+**     jform   int      choice of element set (1-3; Note 2)
 **     epoch   double   epoch of elements (TT MJD)
 **     orbinc  double   inclination (radians)
 **     anode   double   longitude of the ascending node (radians)
@@ -34,7 +34,7 @@ void slaPlante ( double date, double elong, double phi, int jform,
 **                              -2 = illegal e
 **                              -3 = illegal aorq
 **                              -4 = illegal dm
-**                              -5 = failed to converge
+**                              -5 = numerical error
 **
 **  Notes:
 **
@@ -88,7 +88,7 @@ void slaPlante ( double date, double elong, double phi, int jform,
 **  Called: slaGmst,  slaDt,  slaEpj,  slaPvobs,  slaPrenut,
 **          slaPlanel,  slaDmxv,  slaDcc2s,  slaDranrm
 **
-**  Last revision:   25 June 1997
+**  Last revision:   17 March 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

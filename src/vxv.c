@@ -11,13 +11,15 @@ void slaVxv ( float va[3], float vb[3], float vc[3] )
 **  (single precision)
 **
 **  Given:
-**      va      float[3]     first vector
-**      vb      float[3]     second vector
+**     va      float[3]     first vector
+**     vb      float[3]     second vector
 **
 **  Returned:
-**      vc      float[3]     vector result
+**     vc      float[3]     vector result
 **
-**  Last revision:   22 February 1995
+**  Note:  the same vector may be specified more than once.
+**
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

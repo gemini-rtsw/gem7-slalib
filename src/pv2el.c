@@ -1,9 +1,9 @@
 #include "slalib.h"
 #include "slamac.h"
-void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
-                 int *jform, double *epoch, double *orbinc,
-                 double *anode, double *perih, double *aorq,
-                 double *e, double *aorl, double *dm, int *jstat )
+void slaPv2el ( double pv[], double date, double pmass, int jformr,
+                int *jform, double *epoch, double *orbinc,
+                double *anode, double *perih, double *aorq, double *e,
+                double *aorl, double *dm, int *jstat )
 /*
 **  - - - - - - - - -
 **   s l a P v 2 e l
@@ -15,42 +15,38 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **  Given:
 **     pv      double[6]  heliocentric x,y,z,xdot,ydot,zdot of date,
 **                         J2000 equatorial triad (AU,AU/s; Note 1)
-**     date    double     date (Modified Julian Date; Note 2)
-**     pmass   double     mass of the planet (Sun=1; Note 3)
-**     jformr  int        requested element set (1-3; Note 4)
+**     date    double     date (TT Modified Julian Date = JD-2400000.5)
+**     pmass   double     mass of the planet (Sun=1; Note 2)
+**     jformr  int        requested element set (1-3; Note 3)
 **
 **  Returned:
-**     jform   double     element set actually returned (1-3; Note 5)
-**     epoch   double     epoch of elements (TT MJD)
-**     orbinc  double     inclination (radians)
-**     anode   double     longitude of the ascending node (radians)
-**     perih   double     longitude or argument of perihelion (radians)
-**     aorq    double     mean distance or perihelion distance (AU)
-**     e       double     eccentricity
-**     aorl    double     mean anomaly or longitude (radians, JFORM=1,2 only)
-**     dm      double     daily motion (radians, JFORM=1 only)
-**     jstat   int        status:  0 = OK
+**     jform   double*    element set actually returned (1-3; Note 4)
+**     epoch   double*    epoch of elements (TT MJD)
+**     orbinc  double*    inclination (radians)
+**     anode   double*    longitude of the ascending node (radians)
+**     perih   double*    longitude or argument of perihelion (radians)
+**     aorq    double*    mean distance or perihelion distance (AU)
+**     e       double*    eccentricity
+**     aorl    double*    mean anomaly or longitude (radians, jform=1,2 only)
+**     dm      double*    daily motion (radians, jform=1 only)
+**     jstat   int*       status:  0 = OK
 **                                -1 = illegal pmass
 **                                -2 = illegal jformr
 **                                -3 = position/velocity out of range
 **
 **  Notes
 **
-**  1  date is the instant for which the prediction is required.  It is
-**     in the TT timescale (formerly Ephemeris Time, ET) and is a
-**     Modified Julian Date (JD-2400000.5).
+**  1  The pv 6-vector is with respect to the mean equator and equinox of
+**     epoch J2000.  The orbital elements produced are with respect to
+**     the J2000 ecliptic and mean equinox.
 **
-**  2  The reference frame for the pv 6-vector is with respect to the
-**     mean equator and ecliptic of epoch J2000.  The orbital elements
-**     produced are with respect to the J2000 ecliptic and equinox.
-**
-**  3  The mass, pmass, is important only for the larger planets.  For
+**  2  The mass, pmass, is important only for the larger planets.  For
 **     most purposes (e.g. asteroids) use 0.0.  Values less than zero
 **     are illegal.
 **
-**  4  Three different element-format options are supported:
+**  3  Three different element-format options are supported:
 **
-**     Option jform=1, suitable for the major planets:
+**     Option jformr=1, suitable for the major planets:
 **
 **     epoch  = epoch of elements (TT MJD)
 **     orbinc = inclination i (radians)
@@ -61,7 +57,7 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **     aorl   = mean longitude L (radians)
 **     dm     = daily motion (radians)
 **
-**     Option jform=2, suitable for minor planets:
+**     Option jformr=2, suitable for minor planets:
 **
 **     epoch  = epoch of elements (TT MJD)
 **     orbinc = inclination i (radians)
@@ -71,7 +67,7 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **     e      = eccentricity, e
 **     aorl   = mean anomaly M (radians)
 **
-**     Option jform=3, suitable for comets:
+**     Option jformr=3, suitable for comets:
 **
 **     epoch  = epoch of perihelion (TT MJD)
 **     orbinc = inclination i (radians)
@@ -80,7 +76,7 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **     aorq   = perihelion distance, q (AU)
 **     e      = eccentricity, e
 **
-**  5  It may not be possible to generate elements in the form
+**  4  It may not be possible to generate elements in the form
 **     requested through jformr.  The caller is notified of the form
 **     of elements actually returned by means of the jform argument:
 **
@@ -98,7 +94,7 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **        3        2       never happens
 **        3        3       OK - elements are in the requested format
 **
-**  6  The arguments returned for each value of jform (cf Note 5: jform
+**  5  The arguments returned for each value of jform (cf Note 5: jform
 **     may not be the same as jformr) are as follows:
 **
 **         jform         1              2              3
@@ -127,7 +123,7 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **         n              "    daily motion (radians)
 **         -             means no value is set
 **
-**  7  At very small inclinations, the longitude of the ascending node
+**  6  At very small inclinations, the longitude of the ascending node
 **     anode becomes indeterminate and under some circumstances may be
 **     set arbitrarily to zero.  Similarly, if the orbit is close to
 **     circular, the true anomaly becomes indeterminate and under some
@@ -140,7 +136,7 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
 **
 **  Called:  slaDranrm
 **
-**  Last revision:   28 May 1998
+**  Last revision:   21 February 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -343,5 +339,5 @@ void slaPv2el  ( double pv[6], double date, double pmass, int jformr,
       *aorq = q;
    }
    *jstat = 0;
-   return;
+
 }

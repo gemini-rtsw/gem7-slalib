@@ -104,7 +104,7 @@ void slaOapqk ( char *type, double ob1, double ob2,
 **
 **  Called:  slaDcs2c, slaDcc2s, slaRefro, slaDranrm
 **
-**  Last revision:   23 September 1997
+**  Last revision:   3 February 2000
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -121,6 +121,7 @@ void slaOapqk ( char *type, double ob1, double ob2,
    double c1, c2, sphi, cphi, st, ce, xaeo, yaeo, zaeo, v[3],
           xmhdo, ymhdo, zmhdo, az, sz, zdo, tz, dref, zdt,
           xaet, yaet, zaet, xmhda, ymhda, zmhda, diurab, f, hma;
+
 
 /* Coordinate type */
    c = *type;
@@ -178,10 +179,11 @@ void slaOapqk ( char *type, double ob1, double ob2,
    zdo = atan2 ( sz, zaeo );
 
 /*
-   Refraction
-   ----------
+** Refraction
+** ----------
+*/
 
-   Large zenith distance? */
+/* Large zenith distance? */
    if ( zaeo >= zbreak ) {
 
    /* Fast algorithm using two constant model */

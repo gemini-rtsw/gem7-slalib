@@ -17,9 +17,11 @@ void slaVn ( float v[3], float uv[3], float *vm )
 **     uv      float[3]      unit vector in direction of v
 **     *vm     float         modulus of v
 **
+**  Note:  v and uv may be the same array.
+**
 **  If the modulus of v is zero, uv is set to zero as well.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   6 November 1999
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
