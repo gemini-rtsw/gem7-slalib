@@ -40,7 +40,7 @@ void slaPertel (int jform, double date0, double date1,
 **  Returned (status flag):
 **     jstat   int*     status: +102 = warning, distant epoch
 **                              +101 = warning, large timespan ( > 100 years)
-**                          +1 to +8 = coincident with major planet (Note 6)
+**                         +1 to +10 = coincident with planet (Note 6)
 **                                 0 = OK
 **                                -1 = illegal jform
 **                                -2 = illegal e0
@@ -104,18 +104,19 @@ void slaPertel (int jform, double date0, double date1,
 **     suspiciously small value (1E-3 AU) as an attempt to apply it to
 **     the planet concerned.  If this condition is detected, the
 **     contribution from that planet is ignored, and the status is set to
-**     the planet number (Mercury=1,...,Neptune=8) as a warning.
+**     the planet number (1-10 = Mercury, Venus, EMB, Mars, Jupiter,
+**     Saturn, Uranus, Neptune, Earth, Moon) as a warning.
 **
 **  Reference:
 **
 **     Sterne, Theodore E., "An Introduction to Celestial Mechanics",
 **     Interscience Publishers Inc., 1960.  Section 6.7, p199.
 **
-**  Called:  slaEl2ue,  slaPertue,  slaUe2el
+**  Called:  slaEl2ue, slaPertue, slaUe2el
 **
-**  Last revision:   23 May 2001
+**  Last revision:   19 June 2004
 **
-**  Copyright 2001 P.T.Wallace.  All rights reserved.
+**  Copyright 2002 P.T.Wallace.  All rights reserved.
 */
 {
    double u[13], dm;
@@ -126,6 +127,10 @@ void slaPertel (int jform, double date0, double date1,
    if ( jform < 2 || jform > 3 ) {
       *jstat = -1;
       return;
+   } else {
+
+   /* Provisionally set the status to OK. */
+      *jstat = 0;
    }
 
 /* Transform the elements from conventional to universal form. */
