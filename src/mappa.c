@@ -55,12 +55,12 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **  Called:
 **     slaEpj, slaEvp, slaDvn, slaPrenut
 **
-**  Last revision:   12 June 1996
+**  Last revision:   26 September 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 
-#define CR 499.004782     /* Light time for 1 au (sec) */
+#define CR 499.004782     /* Light time for 1 AU (sec) */
 #define GR2 1.974126e-8   /* Gravitational radius of the Sun x 2:
                                                   (2*mu/c**2, au) */
 {

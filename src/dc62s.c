@@ -23,7 +23,7 @@ void slaDc62s ( double v[6], double *a, double *b, double *r,
 **     *bd   double     latitude derivative (radians per unit time)
 **     *rd   double     radial derivative
 **
-**  Last revision:   28 April 1996
+**  Last revision:   11 June 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -65,5 +65,5 @@ void slaDc62s ( double v[6], double *a, double *b, double *r,
       *ad = 0.0;
       *bd = 0.0;
    }
-   *rd = ( ( *r = sqrt ( r2 ) ) != 0.0 ) ? ( xyp + z * zd ) / *r : 0.0;
+   *rd = ( ( *r = sqrt ( r2 ) ) != 0.0 ) ? ( xyp + z * zd ) / ( *r ) : 0.0;
 }

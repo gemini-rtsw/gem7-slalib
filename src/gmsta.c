@@ -1,29 +1,40 @@
 #include "slalib.h"
 #include "slamac.h"
-double slaGmsta ( double date, double ut1 )
+double slaGmsta ( double date, double ut )
 /*
 **  - - - - - - - - -
 **   s l a G m s t a
 **  - - - - - - - - -
 **
-**  Conversion from Universal Time to Sidereal Time with
-**  rounding errors minimized.
+**  Conversion from Universal Time to Greenwich mean sidereal time,
+**  with rounding errors minimized.
 **
 **  (double precision)
 **
 **  Given:
 *     date   double     UT1 date (MJD: integer part of JD-2400000.5))
-**    ut1    double     UT1 time (fraction of a day)
+**    ut     double     UT1 time (fraction of a day)
 **
-**  The result is the Greenwich Mean Sidereal Time (double
-**  precision, radians).
+**  The result is the Greenwich Mean Sidereal Time (double precision,
+**  radians, in the range 0 to 2pi).
 **
 **  There is no restriction on how the UT is apportioned between the
 **  date and ut1 arguments.  Either of the two arguments could, for
 **  example, be zero and the entire date+time supplied in the other.
 **  However, the routine is designed to deliver maximum accuracy when
-**  the date argument is a whole number and ut1 lies in the range
-**  0 to 1.
+**  the date argument is a whole number and the ut argument lies in
+**  the range 0 to 1, or vice versa.
+**
+**  The algorithm is based on the IAU 1982 expression (see page S15 of
+**  the 1984 Astronomical Almanac).  This is always described as giving
+**  the GMST at 0 hours UT1.  In fact, it gives the difference between
+**  the GMST and the UT, the steady 4-minutes-per-day drawing-ahead of
+**  ST with respect to UT.  When whole days are ignored, the expression
+**  happens to equal the GMST at 0 hours UT1 each day.
+**
+**  In this routine, the entire UT1 (the sum of the two arguments date
+**  and ut) is used directly as the argument for the standard formula.
+**  The UT1 is then added, but omitting whole days to conserve accuracy.
 **
 **  See also the routine slaGmst, which accepts the UT1 as a single
 **  argument.  Compared with slaGmst, the extra numerical precision
@@ -36,26 +47,28 @@ double slaGmsta ( double date, double ut1 )
 **
 **  Defined in slamac.h:  DS2R, dmod
 **
-**  Last revision:   19 March 1996
+**  Last revision:   13 April 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
-   double f, d, t;
+   double d1, d2, t;
 
-/* Fractional part of date (if any) */
-   f = dmod ( date, 1.0 );
+/* Julian centuries since J2000. */
+   if ( date < ut ) {
+      d1 = date;
+      d2 = ut;
+   } else {
+      d1 = ut;
+      d2 = date;
+   }
+   t = ( d1 + ( d2 - 51544.5 ) ) / 36525.0;
 
-/* Days from fundamental epoch J2000 to 0h UT on this date */
-   d = date - 51544.5;
-
-/* Julian centuries from fundamental epoch J2000 to this UT */
-   t = ( d + ut1 ) / 36525.0;
-
-/* GMST at this UT */
+/* GMST at this UT1. */
    return slaDranrm ( DS2R * ( 24110.54841
-                             + 86636.555367909 * ut1
-                             + 236.555367909 * d
-                             + 86400 * f
-                             + ( 0.093104 - 6.2e-6 * t ) * t * t ) );
+                           + ( 8640184.812866
+                           + ( 0.093104
+                             - 6.2e-6 * t ) * t ) * t
+                             + 86400.0 * ( dmod ( d1, 1.0 ) +
+                                           dmod ( d2, 1.0 ) ) ) );
 }

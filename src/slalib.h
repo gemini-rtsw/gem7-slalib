@@ -9,7 +9,7 @@
 **
 **  Prototype function declarations for slalib library.
 **
-**  Last revision:   4 June 1997
+**  Last revision:   26 September 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -236,9 +236,15 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
                 double *r1950, double *d1950, double *dr1950,
                 double *dd1950, double *p1950, double *v1950 );
 
+void slaFk52h ( double r5, double d5, double dr5, double dd5,
+                double *dr, double *dh, double *drh, double *ddh );
+
 void slaFk54z ( double r2000, double d2000, double bepoch,
                 double *r1950, double *d1950,
                 double *dr1950, double *dd1950 );
+
+void slaFk5hz ( double r5, double d5, double epoch,
+                double *rh, double *dh );
 
 void slaFlotin ( char *string, int *nstrt, float *reslt, int *jflag );
 
@@ -255,6 +261,12 @@ double slaGmst ( double ut1 );
 double slaGmsta ( double date, double ut1 );
 
 void slaH2e ( float az, float el, float phi, float *ha, float *dec );
+
+void slaH2fk5 ( double dr, double dh, double drh, double ddh,
+                double *r5, double *d5, double *dr5, double *dd5 );
+
+void slaHfk5z ( double rh, double dh, double epoch,
+                double *r5, double *d5, double *dr5, double *dd5 );
 
 void slaImxv ( float rm[3][3], float va[3], float vb[3] );
 
@@ -340,6 +352,10 @@ void slaPreces ( char sys[3], double ep0, double ep1,
                  double *ra, double *dc );
 
 void slaPrenut ( double epoch, double date, double rmatpn[3][3] );
+
+void slaPv2el  ( double[6], double, double, int,
+                 int*, double*, double*, double*, double*,
+                 double*, double*, double*, double*, int* );
 
 void slaPvobs ( double p, double h, double stl, double pv[6] );
 

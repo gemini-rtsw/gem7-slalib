@@ -8,7 +8,7 @@ void slaFk45z ( double r1950, double d1950, double bepoch,
 **  - - - - - - - - -
 **
 **  Convert B1950.0 FK4 star data to J2000.0 FK5 assuming zero
-**  proper motion in an inertial frame (double precision)
+**  proper motion in the FK5 frame (double precision)
 **
 **  This routine converts stars from the old, Bessel-Newcomb, FK4
 **  system to the new, IAU 1976, FK5, Fricke system, in such a
@@ -76,7 +76,7 @@ void slaFk45z ( double r1950, double d1950, double bepoch,
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   8 November 1996
+**  Last revision:   21 September 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

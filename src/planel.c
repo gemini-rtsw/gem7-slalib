@@ -50,7 +50,7 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 **     anode  = longitude of the ascending node, big omega (radians)
 **     perih  = longitude of perihelion, curly pi (radians)
 **     aorq   = mean distance, a (AU)
-**     e      = eccentricity, e
+**     e      = eccentricity, e (range 0 to <1)
 **     aorl   = mean longitude L (radians)
 **     dm     = daily motion (radians)
 **
@@ -61,7 +61,7 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 **     anode  = longitude of the ascending node, big omega (radians)
 **     perih  = argument of perihelion, little omega (radians)
 **     aorq   = mean distance, a (AU)
-**     e      = eccentricity, e
+**     e      = eccentricity, e (range 0 to <1)
 **     aorl   = mean anomaly M (radians)
 **
 **     Option jform=3, suitable for comets:
@@ -71,20 +71,20 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 **     anode  = longitude of the ascending node, big omega (radians)
 **     perih  = argument of perihelion, little omega (radians)
 **     aorq   = perihelion distance, q (AU)
-**     e      = eccentricity, e
+**     e      = eccentricity, e (range 0 to 10)
 **
 **  4  Unused elements (dm for jform=2, aorl and dm for jform=3) are
 **     not accessed.
 **
-**  5  The reference frame for the result is equatorial and is with
-**     respect to the mean equinox and ecliptic of epoch J2000.
+**  5  The reference frame for the result is with respect to the mean
+**     equator and equinox of epoch J2000.
 **
 **  6  The algorithm is adapted from the EPHSLA program of
 **     D.H.P.Jones (private communication, 1996).  The method is
 **     based on Stumpff's Universal Variables;  see Everhart and
 **     Pitkin (1983, Am.J.Phys.51,712).
 **
-**  Last revision:   26 June 1997
+**  Last revision:   29 May 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -105,10 +105,10 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 
 {
    int nit, n;
-   double am, w, pht, argph, q, tf, alpha, aba, sqa,
-          dt, fc, fp, psi, psj, beta, bs0, bs1, bs2, bs3,
+   double pht, argph, q, w, cm, alpha,
+          dt, fc, fp, psi, psj, beta, s0, s1, s2, s3,
           ff, fdot, phs, sw, cw, si, ci, so, co,
-          x, y, z, xdot, ydot, zdot, vf;
+          x, y, z, xdot, ydot, zdot;
 
 
 /* Validate arguments. */
@@ -116,7 +116,7 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
       *jstat = -1;
       return;
    }
-   if ( e < 0.0 || ( e >= 1.0 && jform != 3 ) ) {
+   if ( e < 0.0 || e > 10.0 || ( e >= 1.0 && jform != 3 ) ) {
       *jstat = -2;
       return;
    }
@@ -132,40 +132,35 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 /*
 ** Transform elements into standard form:
 **
-** AM    = mean anomaly (M)
 ** PHT   = epoch of perihelion passage
 ** ARGPH = argument of perihelion (little omega)
 ** Q     = perihelion distance (q)
 **
-** Also computed is TF, the ratio of the daily motion to
-** the "theoretical" value.
+**  Also computed is the combined mass CM = (M+m).
 */
 
    switch ( jform ) {
 
    case 1:
-      am = aorl - perih;
-      w = sqrt ( aorq * aorq * aorq ) / GCON;
-      pht = epoch - am * w;
+      pht = epoch - ( aorl - perih ) / dm;
       argph = perih - anode;
       q = aorq * ( 1.0 - e );
-      tf = dm * w;
+      w = dm / GCON;
+      cm = w * w * aorq * aorq * aorq;
       break;
 
    case 2:
-      am = aorl;
-      pht = epoch - am * sqrt ( aorq * aorq * aorq ) / GCON;
+      pht = epoch - aorl * sqrt ( aorq * aorq * aorq ) / GCON;
       argph = perih;
       q = aorq * ( 1.0 - e );
-      tf = 1.0;
+      cm = 1.0;
       break;
 
    case 3:
-      am = aorl;
       pht = epoch;
       argph = perih;
       q = aorq;
-      tf = 1.0;
+      cm = 1.0;
 
    }
 
@@ -173,18 +168,14 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 /* energy of the orbit:  -ve for an ellipse, zero for a parabola,   */
 /* +ve for a hyperbola.                                             */
 
-   alpha = ( e - 1.0 ) / q;
-   aba = fabs ( alpha );
-   sqa = sqrt ( aba );
+   alpha = cm * ( e - 1.0 ) / q;
 
 /* Time from perihelion to date (in Canonical Days:  a canonical day */
-/* is 58.1324409... days, defined as 1/GCON).  The portion of the    */
-/* time from the epoch to date is adjusted to take account of any    */
-/* difference between the supplied and theoretical daily motion.     */
+/* is 58.1324409... days, defined as 1/GCON).                        */
 
-   dt = ( ( date - epoch ) * tf + epoch - pht ) * GCON;
+   dt = ( date - pht ) * GCON;
 
-/* First Approximation to the Universal Eccentric Anomaly, psi, */
+/* First approximation to the Universal Eccentric Anomaly, psi, */
 /* based on the circle (fc) and parabola (fp) values.           */
 
    fc = dt / q;
@@ -199,8 +190,6 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
    w = 1.0;
    while ( fabs ( w ) >= TEST ) {
 
-   /* Compute the Universal Variables bs0, bs1, bs2, bs3. */
-
    /* Form half angles until beta below maximum (0.7). */
       n = 0;
       psj = psi;
@@ -211,35 +200,35 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
          psj /= 2.0;
       }
 
-   /* Calculate Universal Variables by nested series. */
-      bs3 = psj * psj * psj * ( ( ( ( ( ( beta / 210.0 + 1.0 )
+   /* Calculate Universal Variables s0, s1, s2, s3 by nested series. */
+      s3 = psj * psj * psj * ( ( ( ( ( ( beta / 210.0 + 1.0 )
                                         * beta / 156.0 + 1.0 )
                                         * beta / 110.0 + 1.0 )
                                         * beta / 72.0 + 1.0 )
                                         * beta / 42.0 + 1.0 )
                                         * beta / 20.0 + 1.0 ) / 6.0;
-      bs2 = psj * psj * ( ( ( ( ( ( beta / 182.0 + 1.0 )
+      s2 = psj * psj * ( ( ( ( ( ( beta / 182.0 + 1.0 )
                                   * beta / 132.0 + 1.0 )
                                   * beta / 90.0 + 1.0 )
                                   * beta / 56.0 + 1.0 )
                                   * beta / 30.0 + 1.0 )
                                   * beta / 12.0 + 1.0 ) / 2.0;
-      bs1 = psj + alpha * bs3;
-      bs0 = 1.0 + alpha * bs2;
+      s1 = psj + alpha * s3;
+      s0 = 1.0 + alpha * s2;
 
    /* Double angles until n vanishes. */
       while ( n > 0 ) {
-         bs3 = 2.0 * ( bs0 * bs3 + psj * bs2 );
-         bs2 = 2.0 * bs1 * bs1;
-         bs1 = 2.0 * bs0 * bs1;
-         bs0 = 2.0 * bs0 * bs0 - 1.0;
+         s3 = 2.0 * ( s0 * s3 + psj * s2 );
+         s2 = 2.0 * s1 * s1;
+         s1 = 2.0 * s0 * s1;
+         s0 = 2.0 * s0 * s0 - 1.0;
          n--;
          psj *= 2.0;
       }
 
    /* Improve the approximation. */
-      ff = q * bs1 + bs3 - dt;
-      fdot = q * bs0 + bs2;
+      ff = q * s1 + cm * s3 - dt;
+      fdot = q * s0 + cm * s2;
       w = ff / fdot;
       psi -= w;
       if ( nit < NITMAX ) {
@@ -252,7 +241,7 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 
 /* Speed at perihelion. */
 
-   phs = sqrt ( alpha + 2.0 / q );
+   phs = sqrt ( alpha + 2.0 * cm / q );
 
 /*
 ** In a Cartesian coordinate system which has the x-axis pointing
@@ -267,10 +256,10 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 ** given date:
 */
 
-   x = q - bs2;
-   y = phs * q * bs1;
-   xdot =  - bs1 / fdot;
-   ydot = phs * ( 1.0 - bs2 / fdot );
+   x = q - cm * s2;
+   y = phs * q * s1;
+   xdot =  - cm * s1 / fdot;
+   ydot = phs * ( 1.0 - cm * s2 / fdot );
 
 /*
 ** To express the results in J2000 equatorial coordinates we make a
@@ -315,10 +304,9 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
    ydot = ydot * ci;
    w = xdot * co - ydot * so;
    ydot = xdot * so + ydot * co;
-   vf = tf * CD2S;
-   pv [ 3 ] = vf * w;
-   pv [ 4 ] = vf * ( ydot * CE - zdot * SE );
-   pv [ 5 ] = vf * ( ydot * SE + zdot * CE );
+   pv [ 3 ] = CD2S * w;
+   pv [ 4 ] = CD2S * ( ydot * CE - zdot * SE );
+   pv [ 5 ] = CD2S * ( ydot * SE + zdot * CE );
 
 /* Finished. */
    *jstat = 0;

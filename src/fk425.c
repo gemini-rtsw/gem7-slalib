@@ -79,7 +79,7 @@ void slaFk425 ( double r1950, double d1950, double dr1950,
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   20 December 1993
+**  Last revision:   26 September 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -106,7 +106,7 @@ void slaFk425 ( double r1950, double d1950, double dr1950,
 */
 
 /*
-** km per sec to au per tropical century
+** Km per sec to AU per tropical century
 ** = 86400 * 36524.2198782 / 1.49597870e8
 */
    double vf = 21.095;

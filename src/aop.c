@@ -140,14 +140,15 @@ void slaAop ( double rap, double dap, double date, double dut,
 **       the pressure in millibars, is available, an adequate
 **       estimate of hm can be obtained from the expression
 **
-**             hm = -8149.9415 * log(p/1013.25);
+**             hm = -29.3 * tsl * log ( p / 1013.25 );
 **
-**       (See Astrophysical Quantities, C.W.Allen, 3rd edition,
-**       section 52.)  Similarly, if the pressure p is not known,
-**       it can be estimated from the height of the observing
-**       station, hm as follows:
+**       where tsl is the approximate sea-level air temperature
+**       in deg K (See Astrophysical Quantities, C.W.Allen,
+**       3rd edition, section 52.)  Similarly, if the pressure p
+**       is not known, it can be estimated from the height of the
+**       observing station, hm as follows:
 **
-**             p = 1013.25 * exp(-hm/8149.9415);
+**             p = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );
 **
 **       Note, however, that the refraction is proportional to the
 **       pressure and that an accurate p value is important for
@@ -159,7 +160,7 @@ void slaAop ( double rap, double dap, double date, double dut,
 **
 **  Called:  slaAoppa, slaAopqk
 **
-**  Last revision:   22 February 1995
+**  Last revision:   23 April 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

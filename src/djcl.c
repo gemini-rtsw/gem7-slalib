@@ -24,7 +24,7 @@ void slaDjcl ( double djm, int *iy, int *im, int *id, double *fd, int *j)
 **
 **  Defined in slamac.h:  dmod
 **
-**  Last revision:   20 April 1996
+**  Last revision:   12 March 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -33,7 +33,7 @@ void slaDjcl ( double djm, int *iy, int *im, int *id, double *fd, int *j)
   long jd, n4, nd10;
 
 /* Check if date is acceptable */
-   if ( ( djm <= -2395522.0 ) || ( djm >= 1e9 ) ) {
+   if ( ( djm <= -2395520.0 ) || ( djm >= 1e9 ) ) {
       *j = -1;
       return;
    } else {

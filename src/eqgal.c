@@ -30,7 +30,7 @@ void slaEqgal ( double dr, double dd, double *dl, double *db )
 **  Reference:
 **     Blaauw et al, Mon.Not.R.astron.Soc.,121,123 (1960)
 **
-**  Last revision:   31 October 1993
+**  Last revision:   21 September 1998
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -47,8 +47,8 @@ void slaEqgal ( double dr, double dd, double *dl, double *db )
 **  p,q,r are degrees
 **
 **  Equatorial to Galactic rotation matrix (J2000.0), obtained by
-**  applying the standard FK4 to FK5 transformation, for inertially
-**  zero proper motion, to the columns of the B1950 equatorial to
+**  applying the standard FK4 to FK5 transformation, for zero proper
+**  motion in FK5, to the columns of the B1950 equatorial to
 **  Galactic rotation matrix:
 */
    static double rmat[3][3];
