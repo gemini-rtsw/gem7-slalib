@@ -1,6 +1,0 @@
-#! /bin/sh -f
-#
-#  Install script for Gemini slalib library
-#
-
-applSetup.pl -T mv167 -T ppc604 -I src
