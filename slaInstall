@@ -3,4 +3,4 @@
 #  Install script for Gemini slalib library
 #
 
-applSetup -targets mv167 -include src -subdir_file Makefile.Dirs
+applSetup.pl -T mv167 -T ppc604 -I src
