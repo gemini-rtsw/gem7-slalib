@@ -43,7 +43,7 @@ double slaDat ( double utc )
 **     :     occasion that a leap second is      :
 **     :                announced                :
 **     :                                         :
-**     :  Latest leap second:  1999 January 1    :
+**     :  Latest leap second:  2006 January 1    :
 **     :                                         :
 **     :-----------------------------------------:
 **
@@ -58,6 +58,9 @@ double slaDat ( double utc )
 /* leap second is announced, and also update */
 /* the preamble comments appropriately.      */
 /* - - - - - - - - - - - - - - - - - - - - - */
+
+/* 2006 January 1 */
+   if ( utc >= 53736.0 ) return 33.0;
 
 /* 1999 January 1 */
    if ( utc >= 51179.0 ) return 32.0;
