@@ -13,3 +13,7 @@
 
 03 January 2006   V1-6-1
       Modified dat.c to account for leap second 
+
+11 January 2006   V1-6-2
+      Modified slalibInstall to allow compiling for EPICS releases other
+      than GEM8.5

@@ -3,7 +3,13 @@
 #  Install script for Gemini slalib library
 #
 
-applSetup.pl -T mv167 -T ppc604_long -I src -I startup $1 > $2 2>&1
+if [ "`echo $EPICS | egrep 'GEM8\.5|GEM8\.6'`" != "" ]; then
+    ppc=ppc604_long;
+else
+    ppc=ppc604;
+fi
+
+applSetup.pl -T mv167 -T $ppc -I src -I startup $1 > $2 2>&1
 
 gmake >> $2 2>&1
 
