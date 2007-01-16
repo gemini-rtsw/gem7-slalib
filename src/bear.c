@@ -26,13 +26,13 @@ float slaBear ( float a1, float b1, float a2, float b2 )
 **  If either b-coordinate is outside the range +/- pi/2, the
 **  result may correspond to "the long way round".
 **
-**  The routine slaPav performs an equivalent function except
+**  The function slaPav performs an equivalent function except
 **  that the points are specified in the form of Cartesian unit
 **  vectors.
 **
 **  Called:  slaDbear
 **
-**  Last revision:   8 December 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

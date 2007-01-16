@@ -11,7 +11,7 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
 **
 **  (double precision)
 **
-**  This routine transforms FK5 star positions and proper motions
+**  This function transforms FK5 star positions and proper motions
 **  into the frame of the Hipparcos catalogue.
 **
 **  Given (all FK5, equinox J2000, epoch J2000):
@@ -46,9 +46,9 @@ void slaFk52h ( double r5, double d5, double dr5, double dd5,
 **
 **  Reference:
 **
-**     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
+**     M.Feissel & F.Mignard, 1998, Astron. Astrophys. 331, L33-L36
 **
-**  Last revision:   22 June 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

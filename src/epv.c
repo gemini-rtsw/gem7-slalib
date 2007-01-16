@@ -22,8 +22,8 @@ void slaEpv ( double tdb,
 **
 **  Notes:
 **
-**  1) The date is TDB as an MJD (=JD-2400000.5).  TT can be used instead
-**     of TDB in most applications.
+**  1) The date is TDB as an MJD (=JD-2400000.5).  TT can be used
+**     instead of TDB in most applications.
 **
 **  2) On return, the arrays ph, vh, pv, pb contain the following:
 **
@@ -35,18 +35,18 @@ void slaEpv ( double tdb,
 **        vh(2)    ydot    } heliocentric velocity, AU/d
 **        vh(3)    zdot    }
 **
-**        Pb(1)    x       }
-**        Pb(2)    y       } barycentric position, AU
-**        Pb(3)    z       }
+**        pb(1)    x       }
+**        pb(2)    y       } barycentric position, AU
+**        pb(3)    z       }
 **
 **        vb(1)    xdot    }
 **        vb(2)    ydot    } barycentric velocity, AU/d
 **        vb(3)    zdot    }
 **
 **     The vectors are with respect to the Barycentric Celestial
-**     Reference System.  The time unit is one day in TDB.
+**     Reference System (BCRS); velocities are in AU per TDB day.
 **
-**  3) The routine is a SIMPLIFIED SOLUTION from the planetary theory
+**  3) The function is a SIMPLIFIED SOLUTION from the planetary theory
 **     VSOP2000 (X. Moisson, P. Bretagnon, "Analytical Planetary
 **     solution VSOP2000", Celestial Mechanics and Dynamical Astronomy,
 **     vol. 80, Issue 3/4, pp 205-213, 2001) and is an adaptation of
@@ -67,10 +67,12 @@ void slaEpv ( double tdb,
 **
 **     The results deteriorate outside this time span.
 **
-**  These results are about two orders of magnitude better than the
-**  (smaller, faster) routine slaEvp.
+**  5) The function slaEvp is faster but less accurate.  The present
+**     function targets the case where high accuracy is more important
+**     than CPU time, yet the extra complication of reading a pre-
+**     computed ephemeris is not justified.
 **
-**  Last revision:   13 March 2004
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 **
@@ -2479,7 +2481,7 @@ void slaEpv ( double tdb,
    /* Next Cartesian component. */
    }
 
-/* Rotate from ecliptic to BCRF coordinates. */
+/* Rotate from ecliptic to ICRS coordinates. */
 
    x = ph[0];
    y = ph[1];

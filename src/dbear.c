@@ -26,11 +26,11 @@ double slaDbear ( double a1, double b1, double a2, double b2 )
 **  If either b-coordinate is outside the range +/- pi/2, the
 **  result may correspond to "the long way round".
 **
-**  The routine slaDpav performs an equivalent function except
+**  The function slaDpav performs an equivalent function except
 **  that the points are specified in the form of Cartesian unit
 **  vectors.
 **
-**  Last revision:   8 December 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -14,16 +14,16 @@ void slaTps2c ( float xi, float eta, float ra, float dec,
 **  (single precision)
 **
 **  Given:
-**     xi,eta        float   tangent plane rectangular coordinates
-**     ra,dec        float   spherical coordinates
+**     xi,eta       float tangent plane rectangular coordinates
+**     ra,dec       float spherical coordinates
 **
 **  Returned:
-**     *raz1,*decz1  float   spherical coordinates of TP, solution 1
-**     *raz2,*decz2  float   spherical coordinates of TP, solution 2
-**     *n            int     number of solutions:
-**                            0 = no solutions returned (note 2)
-**                            1 = only the first solution is useful (note 3)
-**                            2 = both solutions are useful (note 3)
+**     *raz1,*decz1 float spherical coordinates of TP, solution 1
+**     *raz2,*decz2 float spherical coordinates of TP, solution 2
+**     *n           int   number of solutions:
+**                         0 = no solutions returned (note 2)
+**                         1 = only the first solution is useful (note 3)
+**                         2 = both solutions are useful (note 3)
 **
 **  Notes:
 **
@@ -39,17 +39,18 @@ void slaTps2c ( float xi, float eta, float ra, float dec,
 **     solutions.  The argument n indicates whether the second of the
 **     two solutions returned is useful;  n=1 indicates only one useful
 **     solution, the usual case;  under these circumstances, the second
-**     solution corresponds to the "over-the-pole" case, and this is
+**     solution corresponds to the "beyond the pole" case, and this is
 **     reflected in the values of raz2 and decz2 which are returned.
 **
 **  4  The decz1 and decz2 values are returned in the range +/-pi, but
 **     in the usual, non-pole-crossing, case, the range is +/-pi/2.
 **
-**  5  This routine is the spherical equivalent of the routine slaTpv2c.
+**  5  This function is the spherical equivalent of the function
+**     slaTpv2c.
 **
 **  Called:  slaRanorm
 **
-**  Last revision:   5 June 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

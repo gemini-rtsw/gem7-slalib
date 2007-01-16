@@ -20,19 +20,21 @@ void slaGeoc ( double p, double h, double *r, double *z )
 **
 **  Notes:
 **
-**     1)  Geocentric latitude can be obtained by evaluating atan2(z,r).
+**  1  Geocentric latitude can be obtained by evaluating atan2(z,r).
 **
-**     2)  IAU 1976 constants are used.
+**  2  IAU 1976 constants are used.
 **
 **  Reference:
+**
 **     Green,R.M., Spherical Astronomy, CUP 1985, p98.
 **
-**  Last revision:   25 July 1993
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
    double sp, cp, c, s;
+
 
 /* Earth equatorial radius (metres) */
    static double a0 = 6378140.0;

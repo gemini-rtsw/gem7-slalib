@@ -13,7 +13,7 @@ void slaCombn  ( int nsel, int ncand, int list[], int* j )
 **     nsel    int        number of items (subset size)
 **     ncand   int        number of candidates (set size)
 **
-**  Given and Returned:
+**  Given and returned:
 **     list    int[nsel]  latest combination, list[0]=0 to initialize
 **
 **  Returned:
@@ -26,11 +26,11 @@ void slaCombn  ( int nsel, int ncand, int list[], int* j )
 **  1) nsel and ncand must both be at least 1, and nsel must be less
 **     than or equal to ncand.
 **
-**  2) This routine returns, in the list array, a subset of nsel integers
-**     chosen from the range 1 to ncand inclusive, in ascending order.
-**     Before calling the routine for the first time, the caller must set
-**     the first element of the list array to zero (any value less than 1
-**     will do) to cause initialization.
+**  2) This function returns, in the list array, a subset of nsel
+**     integers chosen from the range 1 to ncand inclusive, in ascending
+**     order.  Before calling the function for the first time, the
+**     caller must set the first element of the list array to zero (any
+**     value less than 1 will do) to cause initialization.
 **
 **  2) The first combination to be generated is:
 **
@@ -43,13 +43,13 @@ void slaCombn  ( int nsel, int ncand, int list[], int* j )
 **
 **        list[0]=ncand, list[1]=ncand-1, ..., list[nsel-1]=ncand-nsel+1
 **
-**  3) If the "finished" (j=1) status is ignored, the routine
+**  3) If the "finished" (j=1) status is ignored, the function
 **     continues to deliver combinations, the pattern repeating
 **     every ncand!/(nsel!*(ncand-nsel)!) calls.
 **
 **  4) The algorithm is by R.F.Warren-Smith (private communication).
 **
-**  Last revision:   25 August 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

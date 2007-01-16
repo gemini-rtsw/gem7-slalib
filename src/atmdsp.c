@@ -10,7 +10,7 @@ void slaAtmdsp ( double tdk, double pmb, double rh, double wl1,
 **  Apply atmospheric-dispersion adjustments to refraction coefficients.
 **
 **  Given:
-**     tdk   double   ambient temperature, degrees K
+**     tdk   double   ambient temperature, K
 **     pmb   double   ambient pressure, millibars
 **     rh    double   ambient relative humidity, 0-1
 **     wl1   double   reference wavelength, micrometre (0.4 recommended)
@@ -24,7 +24,7 @@ void slaAtmdsp ( double tdk, double pmb, double rh, double wl1,
 **
 **  Notes:
 **
-**  1  To use this routine, first call slaRefco specifying wl1 as the
+**  1  To use this function, first call slaRefco specifying wl1 as the
 **     wavelength.  This yields refraction coefficients a1,b1, correct
 **     for that wavelength.  Subsequently, calls to slaAtmdsp specifying
 **     different wavelengths will produce new, slightly adjusted
@@ -39,7 +39,7 @@ void slaAtmdsp ( double tdk, double pmb, double rh, double wl1,
 **
 **        height above sea level    2000 m
 **                      latitude    29 deg
-**                      pressure    793 mB
+**                      pressure    793 mb
 **                   temperature    17 degC
 **                      humidity    50%
 **                    lapse rate    0.0065 degC/m
@@ -56,17 +56,19 @@ void slaAtmdsp ( double tdk, double pmb, double rh, double wl1,
 **
 **  4  If either wavelength exceeds 100 micrometres, the radio case
 **     is assumed and the returned refraction coefficients are the
-**     same as the given ones.
+**     same as the given ones.  Note that radio refraction coefficients
+**     cannot be turned into optical values using this function, nor
+**     vice versa.
 **
 **  5  The algorithm consists of calculation of the refractivity of the
 **     air at the observer for the two wavelengths, using the methods
-**     of the slaRefro routine, and then scaling of the two refraction
+**     of the slaRefro function, and then scaling of the two refraction
 **     coefficients according to classical refraction theory.  This
 **     amounts to scaling the A coefficient in proportion to (n-1) and
 **     the B coefficient almost in the same ratio (see R.M.Green,
 **     "Spherical Astronomy", Cambridge University Press, 1985).
 **
-**  Last revision:   25 June 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

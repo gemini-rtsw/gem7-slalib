@@ -40,17 +40,18 @@ void slaDtps2c ( double xi, double eta, double ra, double dec,
 **     solutions.  The argument n indicates whether the second of the
 **     two solutions returned is useful;  n=1 indicates only one useful
 **     solution, the usual case;  under these circumstances, the second
-**     solution corresponds to the "over-the-pole" case, and this is
+**     solution corresponds to the "beyond the pole" case, and this is
 **     reflected in the values of raz2 and decz2 which are returned.
 **
 **  4  The decz1 and decz2 values are returned in the range +/-pi, but
 **     in the usual, non-pole-crossing, case, the range is +/-pi/2.
 **
-**  5  This routine is the spherical equivalent of the routine slaDtpv2c.
+**  5  This function is the spherical equivalent of the function
+**     slaDtpv2c.
 **
 **  Called:  slaDranrm
 **
-**  Last revision:   30 November 2000
+**  Last revision:   6 December 2005
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

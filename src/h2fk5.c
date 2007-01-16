@@ -11,7 +11,7 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
 **
 **  (double precision)
 **
-**  This routine transforms Hipparcos star positions and proper
+**  This function transforms Hipparcos star positions and proper
 **  motions into FK5 J2000.
 **
 **  Given (all Hipparcos, epoch J2000):
@@ -48,7 +48,7 @@ void slaH2fk5 ( double rh, double dh, double drh, double ddh,
 **
 **     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
 **
-**  Last revision:   22 June 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

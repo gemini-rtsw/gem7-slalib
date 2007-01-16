@@ -12,10 +12,10 @@ void slaAmpqk ( double ra, double da, double amprms[21],
 **  The mean coordinate system is the post IAU 1976 system,
 **  loosely called FK5.
 **
-**  Use of this routine is appropriate when efficiency is important
+**  Use of this function is appropriate when efficiency is important
 **  and where many star positions are all to be transformed for
 **  one epoch and equinox.  The star-independent parameters can be
-**  obtained by calling the slaMappa routine.
+**  obtained by calling the slaMappa function.
 **
 **  Given:
 **     ra       double      apparent RA (radians)
@@ -42,7 +42,7 @@ void slaAmpqk ( double ra, double da, double amprms[21],
 **  Note:
 **
 **     Iterative techniques are used for the aberration and
-**     light deflection corrections so that the routines
+**     light deflection corrections so that the functions
 **     slaAmp (or slaAmpqk) and slaMap (or slaMapqk) are
 **     accurate inverses;  even at the edge of the Sun's disc
 **     the discrepancy is only about 1 nanoarcsecond.
@@ -50,7 +50,7 @@ void slaAmpqk ( double ra, double da, double amprms[21],
 **  Called:  slaDcs2c, slaDimxv, slaDvdv, slaDvn, slaDcc2s,
 **           slaDranrm
 **
-**  Last revision:   7 May 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

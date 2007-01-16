@@ -24,13 +24,13 @@ void slaEg50 ( double dr, double dd, double *dl, double *db )
 **
 **  Note:
 **     The equatorial coordinates are B1950.0 'FK4'.  Use the
-**     routine slaEqgal if conversion from J2000.0 coordinates
+**     function slaEqgal if conversion from J2000.0 coordinates
 **     is required.
 **
 **  Reference:
-**     Blaauw et al, Mon.Not.R.astron.Soc.,121,123 (1960)
+**     Blaauw et al., 1960, Mon.Not.R.astron.Soc., 121, 123
 **
-**  Last revision:   16 November 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

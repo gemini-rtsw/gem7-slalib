@@ -35,12 +35,12 @@ double slaZd ( double ha, double dec, double phi )
 **  3)  No range checking of arguments is done.
 **
 **  4)  In applications which involve many zenith distance calculations,
-**      rather than calling the present routine it will be more efficient
-**      to use inline code, having previously computed fixed terms such
-**      as sine and cosine of latitude, and perhaps sine and cosine of
-**      declination.
+**      rather than calling the present function it will be more
+**      efficient to use inline code, having previously computed fixed
+**      terms such as sine and cosine of latitude, and perhaps sine and
+**      cosine of declination.
 **
-**  Last revision:   4 April 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

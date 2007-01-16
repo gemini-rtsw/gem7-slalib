@@ -38,20 +38,20 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **
 **  Notes:
 **
-**   1)  This routine returns zenith distance rather than elevation
+**   1)  This function returns zenith distance rather than elevation
 **       in order to reflect the fact that no allowance is made for
 **       depression of the horizon.
 **
 **   2)  The accuracy of the result is limited by the corrections for
 **       refraction.  Providing the meteorological parameters are
 **       known accurately and there are no gross local effects, the
-**       observed RA,Dec predicted by this routine should be within
+**       observed RA,Dec predicted by this function should be within
 **       about 0.1 arcsec for a zenith distance of less than 70 degrees.
 **       Even at a topocentric zenith distance of 90 degrees, the
 **       accuracy in elevation should be better than 1 arcmin;  useful
 **       results are available for a further 3 degrees, beyond which
-**       the slaRefro routine returns a fixed value of the refraction.
-**       The complementary routines slaAop (or slaAopqk) and slaOap
+**       the slaRefro function returns a fixed value of the refraction.
+**       The complementary functions slaAop (or slaAopqk) and slaOap
 **       (or slaOapqk) are self-consistent to better than 1 micro-
 **       arcsecond all over the celestial sphere.
 **
@@ -61,14 +61,14 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **
 **   4)  "Apparent" place means the geocentric apparent right ascension
 **       and declination, which is obtained from a catalogue mean place
-**       by allowing for space motion, parallax, precession, nutation,
-**       annual aberration, and the Sun's gravitational lens effect.  For
-**       star positions in the FK5 system (i.e. J2000), these effects can
-**       be applied by means of the slaMap etc routines.  Starting from
-**       other mean place systems, additional transformations will be
-**       needed;  for example, FK4 (i.e. B1950) mean places would first
-**       have to be converted to FK5, which can be done with the
-**       slaFk425 etc routines.
+**       by allowing for space motion, parallax, the Sun's gravitational
+**       lens effect, annual aberration and precession-nutation.  For
+**       star positions in the FK5 system (i.e. J2000), these effects
+**       can be applied by means of the slaMap etc. functions.  Starting
+**       from other mean place systems, additional transformations will
+**       be needed;  for example, FK4 (i.e. B1950) mean places would
+**       first have to be converted to FK5, which can be done with the
+**       slaFk425 etc. functions.
 **
 **   5)  "Observed" Az,El means the position that would be seen by a
 **       perfect theodolite located at the observer.  This is obtained
@@ -84,7 +84,7 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **       the HA from the local apparent ST.
 **
 **   6)  To predict the required setting of a real telescope, the
-**       observed place produced by this routine would have to be
+**       observed place produced by this function would have to be
 **       adjusted for the tilt of the azimuth or polar axis of the
 **       mounting (with appropriate corrections for mount flexures),
 **       for non-perpendicularity between the mounting axes, for the
@@ -95,9 +95,9 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **       accounted for at the appropriate point in the sequence.
 **
 **   7)  The star-independent apparent-to-observed-place parameters
-**       in aoprms may be computed by means of the slaAoppa routine.
+**       in aoprms may be computed by means of the slaAoppa function.
 **       If nothing has changed significantly except the time, the
-**       slaAoppat routine may be used to perform the requisite
+**       slaAoppat function may be used to perform the requisite
 **       partial recomputation of aoprms.
 **
 **   8)  At zenith distances beyond about 76 degrees, the need for
@@ -108,7 +108,7 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **       problem to be reduced.  Prepare an alternative aoprms array,
 **       computed for zero air-pressure;  this will disable the
 **       refraction corrections and cause rapid execution.  Using
-**       this aoprms array, a preliminary call to the present routine
+**       this aoprms array, a preliminary call to the present function
 **       will, depending on the application, produce a rough position
 **       which may be enough to establish whether the full, slow
 **       calculation (using the real aoprms array) is worthwhile.
@@ -117,20 +117,20 @@ void slaAopqk ( double rap, double dap, double aoprms[14],
 **       source was well below the elevation limits for a particular
 **       telescope.
 **
-**   9)  The azimuths etc produced by the present routine are with
+**   9)  The azimuths etc produced by the present function are with
 **       respect to the celestial pole.  Corrections to the terrestrial
 **       pole can be computed using slaPolmo.
 **
 **  Called:  slaDcs2c, slaRefz, slaRefro, slaDcc2s, slaDranrm
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
 /*
 ** Breakpoint for fast/slow refraction algorithm:
-** ZD greater than arctan(4), (see slaRefco routine)
+** ZD greater than arctan(4), (see slaRefco function)
 ** or vector z less than cosine(arctan(z)) = 1/sqrt(17)
 */
    static double zbreak = 0.242535625;

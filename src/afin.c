@@ -41,7 +41,7 @@ void slaAfin ( char *string, int *iptr, float *a, int *j )
 **     1)  The first three "fields" in string are degrees, arcminutes,
 **         arcseconds, separated by spaces or commas.  The degrees field
 **         may be signed, but not the others.  The decoding is carried
-**         out by the dfltin routine and is free-format.
+**         out by the slaDfltin function and is free-format.
 **
 **     2)  Successive fields may be absent, defaulting to zero.  For
 **         zero status, the only combinations allowed are degrees alone,
@@ -51,11 +51,12 @@ void slaAfin ( char *string, int *iptr, float *a, int *j )
 **
 **     3)  Range checking:
 **           The degrees field is not range checked.  However, it is
-**           expected to be integral unless the other two fields are absent.
-**           The arcminutes field is expected to be 0-59, and integral if
-**           the arcseconds field is present.  If the arcseconds field
-**           is absent, the arcminutes is expected to be 0-59.9999...
-**           The arcseconds field is expected to be 0-59.9999...
+**           expected to be integral unless the other two fields are
+**           absent.  The arcminutes field is expected to be 0-59, and
+**           integral if the arcseconds field is present.  If the
+**           arcseconds field is absent, the arcminutes is expected to
+**           be 0-59.9999...  The arcseconds field is expected to be
+**           0-59.9999...
 **
 **     4)  Decoding continues even when a check has failed.  Under these
 **         circumstances the field takes the supplied value, defaulting
@@ -63,8 +64,8 @@ void slaAfin ( char *string, int *iptr, float *a, int *j )
 **
 **     5)  Further fields after the three expected ones are not treated
 **         as an error.  The pointer iptr is left in the correct state
-**         for further decoding with the present routine or with slaDfltin
-**         etc.  See the example, above.
+**         for further decoding with the present function or with
+**         slaDfltin etc.  See the example, above.
 **
 **     6)  If string contains hours, minutes, seconds instead of degrees
 **         etc, or if the required units are turns (or days) instead of
@@ -78,7 +79,7 @@ void slaAfin ( char *string, int *iptr, float *a, int *j )
 **
 **  Called:  slaDfltin
 **
-**  Last revision:   16 November 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

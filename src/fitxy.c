@@ -21,7 +21,7 @@ void slaFitxy ( int itype, int np,
 **     *j       int            status:  0 = OK
 **                                     -1 = illegal itype
 **                                     -2 = insufficient data
-**                                     -3 = singular solution
+**                                     -3 = no solution
 **
 **  Notes:
 **
@@ -68,7 +68,7 @@ void slaFitxy ( int itype, int np,
 **
 **  Called:  slaDmat, slaDmxv
 **
-**  Last revision:   11 April 2001
+**  Last revision:   7 September 2005
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -76,14 +76,17 @@ void slaFitxy ( int itype, int np,
    int i, jstat;
    int iw[4];
    int nsol;
-   double p, sxe, sxexm, sxeym, sye, syeym, syexm, sxm,
+   double a, b, c, d, aold, bold, cold, dold, sold,
+          p, sxe, sxexm, sxeym, sye, syeym, syexm, sxm,
           sym, sxmxm, sxmym, symym, xe, ye,
           xm, ym, v[4], dm3[3][3], dm4[4][4], det,
-          sgn, sxxyy, sxyyx, sx2y2, a, b, c, d,
-          sdr2, xr, yr, aold, bold, cold, dold, sold;
+          sgn, sxxyy, sxyyx, sx2y2, sdr2, xr, yr;
 
 /* Preset the status */
    *j = 0;
+
+/* Variable initializations to avoid compiler warnings. */
+   a = b = c = d = aold = bold = cold = dold = sold = 0.0;
 
 /* Float the number of samples */
    p = (double) np;

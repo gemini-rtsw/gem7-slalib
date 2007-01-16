@@ -47,19 +47,19 @@ void slaUe2pv ( double date, double u[], double pv[], int *jstat )
 **     estimate of psi, the "universal eccentric anomaly" at a given
 **     date and (v) that date.
 **
-**  2  The companion routine is slaEl2ue.  This takes the conventional
+**  2  The companion function is slaEl2ue.  This takes the conventional
 **     orbital elements and transforms them into the set of numbers
-**     needed by the present routine.  A single prediction requires one
-**     one call to slaEl2ue followed by one call to the present routine;
-**     for convenience, the two calls are packaged as the routine
-**     slaPlanel.   Multiple predictions may be made by again calling
-**     slaEl2ue once, but then calling the present routine multiple times,
-**     which is faster than multiple calls to slaPlanel.
+**     needed by the present function.  A single prediction requires one
+**     one call to slaEl2ue followed by one call to the present
+**     function; for convenience, the two calls are packaged as the
+**     function slaPlanel.   Multiple predictions may be made by again
+**     calling slaEl2ue once, but then calling the present function
+**     multiple times, which is faster than multiple calls to slaPlanel.
 **
 **     It is not obligatory to use slaEl2ue to obtain the parameters.
 **     However, it should be noted that because slaEl2ue performs its
 **     own validation, no checks on the contents of the array U are made
-**     by the present routine.
+**     by the present function.
 **
 **  3  date is the instant for which the prediction is required.  It is
 **     in the TT timescale (formerly Ephemeris Time, ET) and is a
@@ -68,8 +68,8 @@ void slaUe2pv ( double date, double u[], double pv[], int *jstat )
 **  4  The universal elements supplied in the array u are in canonical
 **     units (solar masses, AU and canonical days).  The position and
 **     velocity are not sensitive to the choice of reference frame.  The
-**     slaEl2ue routine in fact produces coordinates with respect to the
-**     J2000 equator and equinox.
+**     slaEl2ue function in fact produces coordinates with respect to
+**     the J2000 equator and equinox.
 **
 **  5  The algorithm was originally adapted from the EPHSLA program of
 **     D.H.P.Jones (private communication, 1996).  The method is based
@@ -77,7 +77,7 @@ void slaUe2pv ( double date, double u[], double pv[], int *jstat )
 **
 **  Reference:  Everhart, E. & Pitkin, E.T., Am.J.Phys. 51, 712, 1983.
 **
-**  Last revision:   19 March 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -90,12 +90,13 @@ void slaUe2pv ( double date, double u[], double pv[], int *jstat )
 
 /* Test value for solution and maximum number of iterations */
 #define TEST 1e-13
-#define NITMAX 20
+#define NITMAX 25
 
 {
    int i, nit, n;
    double cm, alpha, t0, p0[3], v0[3], r0, sigma0, t, psi, dt, w,
-          tol, psj, psj2, beta, s0, s1, s2, s3, ff, r, f, g, fd, gd;
+          tol, psj, psj2, beta, s0, s1, s2, s3, ff, r,
+          flast=0.0, plast=0.0, f, g, fd, gd;
 
 
 
@@ -119,7 +120,7 @@ void slaUe2pv ( double date, double u[], double pv[], int *jstat )
 /* day is 58.1324409... days, defined as 1/GCON).                    */
    dt = ( date - t0 ) * GCON;
 
-/* Refine the universal eccentric anomaly. */
+/* Refine the universal eccentric anomaly, psi. */
    nit = 1;
    w = 1.0;
    tol = 0.0;
@@ -165,18 +166,38 @@ void slaUe2pv ( double date, double u[], double pv[], int *jstat )
          n--;
       }
 
-   /* Improve the approximation to psi. */
+   /* Values of F and F' corresponding to the current value of psi. */
       ff = r0 * s1 + sigma0 * s2 + cm * s3 - dt;
       r = r0 * s0 + sigma0 * s1 + cm * s2;
-      if ( r == 0.0 ) {
-         *jstat = -1;
-         return;
+
+   /* If first iteration, create dummy "last F". */
+      if ( nit == 1 ) flast = ff;
+
+   /* Check for sign change. */
+      if ( ff * flast < 0.0 ) {
+
+      /* Sign change:  get psi adjustment using secant method. */
+         w = ff * ( plast - psi ) / ( flast - ff );
+
+      } else {
+
+   /* No sign change:  use Newton-Raphson method instead. */
+         if ( r == 0.0 ) {
+            *jstat = -1;
+            return;
+         }
+         w = ff / r;
       }
-      w = ff / r;
+
+   /* Save the last psi and F values. */
+      plast = psi;
+      flast = ff;
+
+   /* Apply the Newton-Raphson or secant adjustment to psi. */
       psi -= w;
 
    /* Next iteration, unless too many already. */
-      if ( nit >= NITMAX ) {
+      if ( nit > NITMAX ) {
          *jstat = -2;
          return;
       }

@@ -47,8 +47,8 @@ void slaDmat ( int n, double *a, double *y, double *d, int *jf, int *iw)
 **     Very fast.
 **
 **  Accuracy:
-**     Fairly accurate - errors 1 to 4 times those of routines optimized
-**     for accuracy.
+**     Fairly accurate - errors 1 to 4 times those of functions
+**     optimized for accuracy.
 **
 **  Example call (note handling of "adjustable dimension" 2D array):
 **
@@ -57,7 +57,7 @@ void slaDmat ( int n, double *a, double *y, double *d, int *jf, int *iw)
 **      :
 **     slaDmat ( n, (double *) a, v, &d, &j, iw );
 **
-**  Last revision:   20 February 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

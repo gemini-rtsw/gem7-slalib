@@ -43,11 +43,11 @@ void slaEcor ( float rm, float dm, int iy, int id, float fd,
 **     correct value and is never in error by more than 0.007 km/s.
 **     The error in light time correction is about 0.03s at worst,
 **     but is usually better than 0.01s. For applications requiring
-**     higher accuracy, see the slaEvp routine.
+**     higher accuracy, see the slaEvp and slaEpv functions.
 **
 **  Called:  slaEarth, slaCs2c, slaVdv
 **
-**  Last revision:   24 November 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -20,12 +20,12 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 **  Given:
 **    zobs    double  observed zenith distance of the source (radian)
 **    hm      double  height of the observer above sea level (metre)
-**    tdk     double  ambient temperature at the observer (deg K)
+**    tdk     double  ambient temperature at the observer (K)
 **    pmb     double  pressure at the observer (millibar)
 **    rh      double  relative humidity at the observer (range 0-1)
 **    wl      double  effective wavelength of the source (micrometre)
 **    phi     double  latitude of the observer (radian, astronomical)
-**    tlr     double  tropospheric lapse rate (degK/metre)
+**    tlr     double  tropospheric lapse rate (K/metre)
 **    eps     double  precision required to terminate iteration (radian)
 **
 **  Returned:
@@ -36,13 +36,14 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 **  1  A suggested value for the tlr argument is 0.0065.  The
 **     refraction is significantly affected by tlr, and if studies
 **     of the local atmosphere have been carried out a better tlr
-**     value may be available.
+**     value may be available.  The sign of the supplied TLR value
+**     is ignored.
 **
 **  2  A suggested value for the eps argument is 1e-8.  The result is
 **     usually at least two orders of magnitude more computationally
 **     precise than the supplied eps value.
 **
-**  3  The routine computes the refraction for zenith distances up
+**  3  The function computes the refraction for zenith distances up
 **     to and a little beyond 90 deg using the method of Hohenkerk
 **     and Sinclair (NAO Technical Notes 59 and 63, subsequently adopted
 **     in the Explanatory Supplement, 1992 edition - see section 3.281).
@@ -70,24 +71,24 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 **     .  More accurate expressions for Pwo have been adopted
 **        (again from Gill 1982).
 **
+**     .  The formula for the water vapour pressure, given the
+**        saturation pressure and the relative humidity, is from
+**        Crane (1976), expression 2.5.5.
+**
 **     .  Provision for radio wavelengths has been added using
 **        expressions devised by A.T.Sinclair, RGO (private
-**        communication 1989), based on the Essen & Froome
-**        refractivity formula adopted in Resolution 1 of the
-**        13th International Geodesy Association General Assembly
-**        (Bulletin Geodesique 70 p390, 1963).
+**        communication 1989).  The refractivity model currently
+**        used is from J.M.Rueger, "Refractive Index Formulae for
+**        Electronic Distance Measurement with Radio and Millimetre
+**        Waves", in Unisurv Report S-68 (2002), School of Surveying
+**        and Spatial Information Systems, University of New South
+**        Wales, Sydney, Australia.
+**
+**     .  The optical refractivity for dry air is from Resolution 3 of
+**        the International Association of Geodesy adopted at the XXIIth
+**        General Assembly in Birmingham, UK, 1999.
 **
 **     .  Various small changes have been made to gain speed.
-**
-**     None of the changes significantly affects the optical/IR results
-**     with respect to the algorithm given in the 1992 Explanatory
-**     Supplement.  For example, at 70 deg zenith distance the present
-**     routine agrees with the ES algorithm to better than 0.05 arcsec
-**     for any reasonable combination of parameters.  However, the
-**     improved water-vapour expressions do make a significant difference
-**     in the radio band, at 70 deg zenith distance reaching almost
-**     4 arcsec for a hot, humid, low-altitude site during a period of
-**     low pressure.
 **
 **  5  The radio refraction is chosen by specifying wl > 100 micrometres.
 **     Because the algorithm takes no account of the ionosphere, the
@@ -118,11 +119,19 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 **     mass of dry air divided by that for saturated air at the same
 **     temperature and pressure (see Gill 1982).
 **
+**  10 The algorithm is designed for observers in the troposphere.  The
+**     supplied temperature, pressure and lapse rate are assumed to be
+**     for a point in the troposphere and are used to define a model
+**     atmosphere with the tropopause at 11km altitude and a constant
+**     temperature above that.  However, in practice, the refraction
+**     values returned for stratospheric observers, at altitudes up to
+**     25km, are quite usable.
+**
 **  Called:  slaDrange, atmt, atms
 **
 **  Defined in slamac.h:  TRUE, FALSE
 **
-**  Last revision:   19 April 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -145,17 +154,17 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
    static double hs = 80000.0;      /* Upper limit for refractive
                                                     effects (metre) */
 
-/* Variables used when calling the internal routine atmt */
+/* Variables used when calling the internal function atmt */
    double robs;   /* height of observer from centre of Earth (metre) */
-   double tdkok;  /* temperature at the observer (deg K) */
+   double tdkok;  /* temperature at the observer (K) */
    double alpha;  /* alpha          |        */
    double gamm2;  /* gamma minus 2  | see ES */
    double delm2;  /* delta minus 2  |        */
    double c1,c2,c3,c4,c5,c6;  /* various */
 
-/* Variables used when calling the internal routine atms */
+/* Variables used when calling the internal function atms */
    double rt;     /* height of tropopause from centre of Earth (metre) */
-   double tt;     /* temperature at the tropopause (deg k) */
+   double tt;     /* temperature at the tropopause (K) */
    double dnt;    /* refractive index at the tropopause */
    double gamal;  /* constant of the atmospheric model = g*md/r */
 
@@ -178,7 +187,7 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
 
 /* Keep other arguments within safe bounds. */
    hmok = gmax ( hm, -1000.0 );
-   hmok = gmin ( hmok, 10000.0 );
+   hmok = gmin ( hmok, hs );
    tdkok = gmax ( tdk, 100.0 );
    tdkok = gmin ( tdkok, 500.0 );
    pmbok = gmax ( pmb, 0.0 );
@@ -202,15 +211,15 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
    wlsq = wlok * wlok;
    gb = 9.784 * ( 1.0 - 0.0026 * cos ( 2.0 * phi ) - 2.8e-7 * hmok );
    a = ( optic ) ?
-         ( ( 287.604 + 1.6288 / wlsq + 0.0136 / ( wlsq * wlsq ) )
-                 * 273.155 / 1013.25 ) * 1e-6
+         ( ( 287.6155 + 1.62887 / wlsq + 0.01360 / ( wlsq * wlsq ) )
+                 * 273.15 / 1013.25 ) * 1e-6
        :
-         77.624e-6;
+         77.6890e-6;
    gamal = gb * dmd / gcr;
    gamma = gamal / alpha;
    gamm2 = gamma - 2.0;
    delm2 = delta - 2.0;
-   tdc = tdkok - 273.155;
+   tdc = tdkok - 273.15;
    psat = pow ( 10.0, ( 0.7859 + 0.03477 * tdc ) /
                          ( 1.0 + 0.00412 * tdc ) ) *
                 ( 1.0 + pmbok * ( 4.5e-6 + 6e-10 * tdc * tdc ) );
@@ -219,10 +228,10 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
          0.0;
    w = pwo * ( 1.0 - dmw / dmd ) * gamma / ( delta - gamma );
    c1 = a * ( pmbok + w ) / tdkok;
-   c2 = ( a * w + ( optic ? 11.2684e-6 : 12.92e-6 ) * pwo ) / tdkok;
+   c2 = ( a * w + ( optic ? 11.2684e-6 : 6.3938e-6 ) * pwo ) / tdkok;
    c3 = ( gamma - 1.0 ) * alpha * c1 / tdkok;
    c4 = ( delta - 1.0 ) * alpha * c2 / tdkok;
-   c5 = optic ? 0.0 : 371897e-6 * pwo / tdkok;
+   c5 = optic ? 0.0 : 375463e-6 * pwo / tdkok;
    c6 = c5 * delm2 * alpha / ( tdkok * tdkok );
 
 /* Conditions at the observer. */
@@ -233,7 +242,7 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
    f0 = refi ( dn0, rdndr0 );
 
 /* Conditions at the tropopause in the troposphere. */
-   rt = s + ht;
+   rt = s + gmax ( ht, hmok );
    atmt ( robs, tdkok, alpha, gamm2, delm2, c1, c2, c3, c4, c5, c6, rt,
           &tt, &dnt, &rdndrt );
    zt = asin ( sk0 / ( rt * dnt ) );
@@ -249,6 +258,9 @@ void slaRefro ( double zobs, double hm, double tdk, double pmb,
    atms ( rt, tt, dnt, gamal, rs, &dns, &rdndrs );
    zs = asin ( sk0 / ( rs * dns ) );
    fs = refi ( dns, rdndrs );
+
+/* Variable initialization to avoid compiler warning. */
+   reft = 0.0;
 
 /*
 ** Integrate the refraction integral in two parts;  first in the
@@ -369,33 +381,29 @@ static void atmt ( double robs, double tdkok, double alpha, double gamm2,
 **   a t m t
 **  - - - - -
 **
-**  Internal routine used by slaRefro:
+**  Internal function used by slaRefro:
 **
 **    refractive index and derivative with respect to height for the
 **    troposphere.
 **
 **  Given:
 **    robs    double   height of observer from centre of the Earth (metre)
-**    tdkok   double   temperature at the observer (deg K)
+**    tdkok   double   temperature at the observer (K)
 **    alpha   double   alpha          )
 **    gamm2   double   gamma minus 2  ) see ES
 **    delm2   double   delta minus 2  )
 **    c1      double   useful term  )
 **    c2      double   useful term  )
 **    c3      double   useful term  ) see source of
-**    c4      double   useful term  ) slaRefro main routine
+**    c4      double   useful term  ) slaRefro main function
 **    c5      double   useful term  )
 **    c6      double   useful term  )
 **    r       double   current distance from the centre of the Earth (metre)
 **
 **  Returned:
-**    *t      double   temperature at r (deg K)
+**    *t      double   temperature at r (K)
 **    *dn     double   refractive index at r
 **    *rdndr  double   r * rate the refractive index is changing at r
-**
-**  This routine is derived from the ATMOSTRO routine (C.Hohenkerk,
-**  HMNAO), with enhancements specified by A.T.Sinclair (RGO) to
-**  handle the radio case.
 **
 **  Note that in the optical case c5 and c6 are zero.
 */
@@ -422,14 +430,14 @@ static void atms ( double rt, double tt, double dnt, double gamal, double r,
 **   a t m s
 **  - - - - -
 **
-**  Internal routine used by slaRefro:
+**  Internal function used by slaRefro:
 **
 **   refractive index and derivative with respect to height for the
 **   stratosphere.
 **
 **  Given:
 **    rt      double   height of tropopause from centre of the Earth (metre)
-**    tt      double   temperature at the tropopause (deg k)
+**    tt      double   temperature at the tropopause (k)
 **    dnt     double   refractive index at the tropopause
 **    gamal   double   constant of the atmospheric model = g*md/r
 **    r       double   current distance from the centre of the Earth (metre)
@@ -438,7 +446,6 @@ static void atms ( double rt, double tt, double dnt, double gamal, double r,
 **    *dn     double   refractive index at r
 **    *rdndr  double   r * rate the refractive index is changing at r
 **
-**  This routine is derived from the ATMOSSTR routine (C.Hohenkerk, HMNAO).
 */
 {
    double b, w;

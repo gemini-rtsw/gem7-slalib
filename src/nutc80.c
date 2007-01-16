@@ -15,8 +15,8 @@ void slaNutc80 ( double date, double *dpsi, double *deps, double *eps0 )
 **     date        double    TDB (loosely ET) as Modified Julian Date
 **                                            (JD-2400000.5)
 **  Returned:
-**     *dpsi,*deps double    nutation in longitude,obliquity
-**     *eps0       double    mean obliquity
+**     dpsi,deps   double*   nutation in longitude,obliquity
+**     eps0        double*   mean obliquity
 **
 **  Notes:
 **
@@ -25,7 +25,7 @@ void slaNutc80 ( double date, double *dpsi, double *deps, double *eps0 )
 **     the interval 1900-2100.  (The accuracy is much better near the
 **     middle of the interval.)
 **
-**  2  The slaNutc routine is the equivalent of the present routine
+**  2  The slaNutc function is the equivalent of the present function
 **     but using the Shirai & Fukushima 2001 forced nutation theory
 **     (SF2001).  The newer theory is more accurate than IAU 1980,
 **     within 1 mas (with respect to the ICRF) for a few decades around
@@ -41,7 +41,7 @@ void slaNutc80 ( double date, double *dpsi, double *deps, double *eps0 )
 **
 **  Defined in slamac.h:  DAS2R, dmod
 **
-**  Last revision:   7 October 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

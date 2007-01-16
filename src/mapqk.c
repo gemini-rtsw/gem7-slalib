@@ -12,14 +12,14 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
 **  mean place to geocentric apparent place, given the
 **  star-independent parameters.
 **
-**  Use of this routine is appropriate when efficiency is important
+**  Use of this function is appropriate when efficiency is important
 **  and where many star positions, all referred to the same equator
 **  and equinox, are to be transformed for one epoch.  The
 **  star-independent parameters can be obtained by calling the
-**  slaMappa routine.
+**  slaMappa function.
 **
 **  If the parallax and proper motions are zero the slaMapqkz
-**  routine can be used instead.
+**  function can be used instead.
 **
 **  The reference frames and timescales used are post IAU 1976.
 **
@@ -51,7 +51,7 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
 **    1)  The vectors amprms(1-3) and amprms(4-6) are referred to
 **        the mean equinox and equator of epoch eq.
 **
-**    2)  Strictly speaking, the routine is not valid for solar-system
+**    2)  Strictly speaking, the function is not valid for solar-system
 **        sources, though the error will usually be extremely small.
 **        However, to prevent gross errors in the case where the
 **        position of the Sun is specified, the gravitational
@@ -59,6 +59,8 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
 **        centre of the Sun's disc.  The term has a maximum value of
 **        about 1.85 arcsec at this radius, and decreases to zero as
 **        the centre of the disc is approached.
+**
+**    3)  See the slaMap function for further information.
 **
 **  Called:
 **     slaDcs2c       spherical to Cartesian
@@ -69,7 +71,7 @@ void slaMapqk ( double rm, double dm, double pr, double pd,
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   15 January 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

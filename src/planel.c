@@ -37,46 +37,96 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 **
 **  Notes
 **
-**  1  DATE is the instant for which the prediction is required.  It is
-**     in the TT timescale (formerly Ephemeris Time, ET) and is a
-**     Modified Julian Date (JD-2400000.5).
+**  1  The argument "date" is the instant for which the prediction is
+**     required.  It is in the TT timescale (formerly Ephemeris Time,
+**     ET) and is a Modified Julian Date (JD-2400000.5).
 **
 **  2  The elements are with respect to the J2000 ecliptic and equinox.
 **
-**  3  Three different element-format options are available:
+**  3  A choice of three different element-set options is available:
 **
-**     Option jform=1, suitable for the major planets:
+**     Option jform = 1, suitable for the major planets:
 **
-**     epoch  = epoch of elements (TT MJD)
-**     orbinc = inclination i (radians)
-**     anode  = longitude of the ascending node, big omega (radians)
-**     perih  = longitude of perihelion, curly pi (radians)
-**     aorq   = mean distance, a (AU)
-**     e      = eccentricity, e (range 0 to <1)
-**     aorl   = mean longitude L (radians)
-**     dm     = daily motion (radians)
+**       epoch  = epoch of elements (TT MJD)
+**       orbinc = inclination i (radians)
+**       anode  = longitude of the ascending node, big omega (radians)
+**       perih  = longitude of perihelion, curly pi (radians)
+**       aorq   = mean distance, a (AU)
+**       e      = eccentricity, e (range 0 to <1)
+**       aorl   = mean longitude L (radians)
+**       dm     = daily motion (radians)
 **
-**     Option jform=2, suitable for minor planets:
+**     Option jform = 2, suitable for minor planets:
 **
-**     epoch  = epoch of elements (TT MJD)
-**     orbinc = inclination i (radians)
-**     anode  = longitude of the ascending node, big omega (radians)
-**     perih  = argument of perihelion, little omega (radians)
-**     aorq   = mean distance, a (AU)
-**     e      = eccentricity, e (range 0 to <1)
-**     aorl   = mean anomaly M (radians)
+**       epoch  = epoch of elements (TT MJD)
+**       orbinc = inclination i (radians)
+**       anode  = longitude of the ascending node, big omega (radians)
+**       perih  = argument of perihelion, little omega (radians)
+**       aorq   = mean distance, a (AU)
+**       e      = eccentricity, e (range 0 to <1)
+**       aorl   = mean anomaly M (radians)
 **
-**     Option jform=3, suitable for comets:
+**     Option jform = 3, suitable for comets:
 **
-**     epoch  = epoch of perihelion (TT MJD)
-**     orbinc = inclination i (radians)
-**     anode  = longitude of the ascending node, big omega (radians)
-**     perih  = argument of perihelion, little omega (radians)
-**     aorq   = perihelion distance, q (AU)
-**     e      = eccentricity, e (range 0 to 10)
+**       epoch  = epoch of elements and perihelion (TT MJD)
+**       orbinc = inclination i (radians)
+**       anode  = longitude of the ascending node, big omega (radians)
+**       perih  = argument of perihelion, little omega (radians)
+**       aorq   = perihelion distance, q (AU)
+**       e      = eccentricity, e (range 0 to 10)
 **
-**  4  Unused elements (DM for jform=2, aorl and dm for jform=3) are
+**     Unused arguments (dm for jform=2, aorl and dm for jform=3) are
 **     not accessed.
+**
+**  4  Each of the three element sets defines an unperturbed
+**     heliocentric orbit.  For a given epoch of observation, the
+**     position of the body in its orbit can be predicted from these
+**     elements, which are called "osculating elements", using standard
+**     two-body analytical solutions.  However, due to planetary
+**     perturbations, a given set of osculating elements remains usable
+**     for only as long as the unperturbed orbit that it describes is an
+**     adequate approximation to reality.  Attached to such a set of
+**     elements is a date called the "osculating epoch", at which the
+**     elements are, momentarily, a perfect representation of the
+**     instantaneous position and velocity of the body.
+**
+**     Therefore, for any given problem there are up to three different
+**     epochs in play, and it is vital to distinguish clearly between
+**     them:
+**
+**     . The epoch of observation:  the moment in time for which the
+**       position of the body is to be predicted.
+**
+**     . The epoch defining the position of the body:  the moment in
+**       time at which, in the absence of purturbations, the specified
+**       position (mean longitude, mean anomaly, or perihelion) is
+**       reached.
+**
+**     . The osculating epoch:  the moment in time at which the given
+**       elements are correct.
+**
+**     For the major-planet and minor-planet cases it is usual to make
+**     the epoch that defines the position of the body the same as the
+**     epoch of osculation.  Thus, only two different epochs are
+**     involved:  the epoch of the elements and the epoch of
+**     observation.
+**
+**     For comets, the epoch of perihelion fixes the position in the
+**     orbit and in general a different epoch of osculation will be
+**     chosen.  Thus, all three types of epoch are involved.
+**
+**     For the present function:
+**
+**     . The epoch of observation is the argument date.
+**
+**     . The epoch defining the position of the body is the argument
+**       epoch.
+**
+**     . The osculating epoch is not used and is assumed to be close
+**       enough to the epoch of observation to deliver adequate
+**       accuracy.  If not, a preliminary call to slaPertel may be
+**       used to update the element-set (and its associated osculating
+**       epoch) by applying planetary perturbations.
 **
 **  5  The reference frame for the result is with respect to the mean
 **     equator and equinox of epoch J2000.
@@ -87,7 +137,7 @@ void slaPlanel ( double date, int jform, double epoch, double orbinc,
 **
 **  Reference:  Everhart, E. & Pitkin, E.T., Am.J.Phys. 51, 712, 1983.
 **
-**  Last revision:   18 March 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

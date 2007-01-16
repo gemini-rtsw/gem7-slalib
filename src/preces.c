@@ -29,7 +29,7 @@ void slaPreces ( char sys[3], double ep0, double ep1,
 **      equinox 1900.0 to 1950.0 the call would be:
 **          slaPreces ( "FK4", 1900.0, 1950.0, &ra, &dc )
 **
-**  2)  This routine will not correctly convert between the old and
+**  2)  This function will not correctly convert between the old and
 **      the new systems - for example conversion from B1950 to J2000.
 **      For these purposes see slaFk425, slaFk524, slaFk45z and
 **      slaFk54z.
@@ -37,7 +37,7 @@ void slaPreces ( char sys[3], double ep0, double ep1,
 **  3)  If an invalid sys is supplied, values of -99.0,-99.0 will
 **      be returned for both ra and dc.
 **
-**  Last revision:   15 June 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

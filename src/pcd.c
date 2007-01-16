@@ -38,10 +38,10 @@ void slaPcd ( double disco, double *x, double *y )
 **           AAT f/8          +21.20
 **           JKT f/8          +13.32
 **
-**    4)  There is a companion routine, slaUnpcd, which performs the
+**    4)  There is a companion function, slaUnpcd, which performs the
 **        inverse operation.
 **
-**  Last revision:   3 September 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

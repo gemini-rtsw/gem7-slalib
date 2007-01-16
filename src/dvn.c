@@ -19,10 +19,9 @@ void slaDvn ( double v[3], double uv[3], double *vm )
 **
 **  Note:  v and uv may be the same array.
 **
-**
 **  If the modulus of v is zero, uv is set to zero as well.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   6 December 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

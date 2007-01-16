@@ -39,10 +39,10 @@ void slaHfk5z ( double rh, double dh, double epoch,
 **  4)  It was the intention that Hipparcos should be a close
 **      approximation to an inertial frame, so that distant objects
 **      have zero proper motion;  such objects have (in general)
-**      non-zero proper motion in FK5, and this routine returns those
+**      non-zero proper motion in FK5, and this function returns those
 **      fictitious proper motions.
 **
-**  5)  The position returned by this routine is in the FK5 J2000
+**  5)  The position returned by this function is in the FK5 J2000
 **      reference frame but at the specified epoch.
 **
 **  6)  See also slaFk52h, slaH2fk5, slaFk5zhz.
@@ -51,7 +51,7 @@ void slaHfk5z ( double rh, double dh, double epoch,
 **
 **     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
 **
-**  Last revision:   30 December 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

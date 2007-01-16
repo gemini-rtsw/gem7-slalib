@@ -12,8 +12,8 @@ void slaAop ( double rap, double dap, double date, double dut,
 **   s l a A o p
 **  - - - - - - -
 **
-**  Apparent to observed place, for optical sources distant from
-**  the solar system.
+**  Apparent to observed place, for sources distant from the solar
+**  system.
 **
 **  Given:
 **     rap     double  geocentric apparent right ascension
@@ -25,11 +25,11 @@ void slaAop ( double rap, double dap, double date, double dut,
 **     hm      double  observer's height above sea level (metres)
 **     xp      double  polar motion x-coordinate (radians)
 **     yp      double  polar motion y-coordinate (radians)
-**     tdk     double  local ambient temperature (DegK; std=273.155)
-**     pmb     double  local atmospheric pressure (mB; std=1013.25)
+**     tdk     double  local ambient temperature (K; std=273.15)
+**     pmb     double  local atmospheric pressure (mb; std=1013.25)
 **     rh      double  local relative humidity (in the range 0.0-1.0)
 **     wl      double  effective wavelength (micron, e.g. 0.55)
-**     tlr     double  tropospheric lapse rate (DegK/metre, e.g. 0.0065)
+**     tlr     double  tropospheric lapse rate (K/metre, e.g. 0.0065)
 **
 **  Returned:
 **     aob     double  observed azimuth (radians: N=0,E=90)
@@ -40,20 +40,20 @@ void slaAop ( double rap, double dap, double date, double dut,
 **
 **  Notes:
 **
-**   1)  This routine returns zenith distance rather than elevation
+**   1)  This function returns zenith distance rather than elevation
 **       in order to reflect the fact that no allowance is made for
 **       depression of the horizon.
 **
 **   2)  The accuracy of the result is limited by the corrections for
 **       refraction.  Providing the meteorological parameters are
 **       known accurately and there are no gross local effects, the
-**       predicted apparent RA,Dec should be within about 0.1 arcsec
+**       predicted observed RA,Dec should be within about 0.1 arcsec
 **       for a zenith distance of less than 70 degrees.  Even at a
 **       topocentric zenith distance of 90 degrees, the accuracy in
 **       elevation should be better than 1 arcmin;  useful results
 **       are available for a further 3 degrees, beyond which the
-**       slaRefro routine returns a fixed value of the refraction.
-**       The complementary routines slaAop (or slaAopqk) and slaOap
+**       slaRefro function returns a fixed value of the refraction.
+**       The complementary functions slaAop (or slaAopqk) and slaOap
 **       (or slaOapqk) are self-consistent to better than 1 micro-
 **       arcsecond all over the celestial sphere.
 **
@@ -63,14 +63,14 @@ void slaAop ( double rap, double dap, double date, double dut,
 **
 **   4)  "Apparent" place means the geocentric apparent right ascension
 **       and declination, which is obtained from a catalogue mean place
-**       by allowing for space motion, parallax, precession, nutation,
-**       annual aberration, and the Sun's gravitational lens effect.  For
-**       star positions in the FK5 system (i.e. J2000), these effects can
-**       be applied by means of the slaMap etc routines.  Starting from
-**       other mean place systems, additional transformations will be
-**       needed;  for example, FK4 (i.e. B1950) mean places would first
-**       have to be converted to FK5, which can be done with the
-**       slaFk425 etc routines.
+**       by allowing for space motion, parallax, the Sun's gravitational
+**       lens effect, annual aberration and precession-nutation.  For
+**       star positions in the FK5 system (i.e. J2000), these effects
+**       can be applied by means of the slaMap etc. functions.  Starting
+**       from other mean place systems, additional transformations will
+**       be needed;  for example, FK4 (i.e. B1950) mean places would
+**       first have to be converted to FK5, which can be done with the
+**       slaFk425 etc. functions.
 **
 **   5)  "Observed" Az,El means the position that would be seen by a
 **       perfect theodolite located at the observer.  This is obtained
@@ -86,7 +86,7 @@ void slaAop ( double rap, double dap, double date, double dut,
 **       the HA from the local apparent ST.
 **
 **   6)  To predict the required setting of a real telescope, the
-**       observed place produced by this routine would have to be
+**       observed place produced by this function would have to be
 **       adjusted for the tilt of the azimuth or polar axis of the
 **       mounting (with appropriate corrections for mount flexures),
 **       for non-perpendicularity between the mounting axes, for the
@@ -96,7 +96,7 @@ void slaAop ( double rap, double dap, double date, double dut,
 **       course, exhibit other properties which would need to be
 **       accounted for at the appropriate point in the sequence.
 **
-**   7)  This routine takes time to execute, due mainly to the
+**   7)  This function takes time to execute, due mainly to the
 **       rigorous integration used to evaluate the refraction.
 **       For processing multiple stars for one location and time,
 **       call slaAoppa once followed by one call per star to slaAopqk.
@@ -121,12 +121,12 @@ void slaAop ( double rap, double dap, double date, double dut,
 **       within +/- 0.9 seconds.
 **
 **  10)  IMPORTANT -- TAKE CARE WITH THE LONGITUDE SIGN CONVENTION.
-**       The longitude required by the present routine is east-positive,
-**       in accordance with geographical convention (and right-handed).
-**       In particular, note that the longitudes returned by the
-**       slaObs routine are west-positive, following astronomical
-**       usage, and must be reversed in sign before use in the present
-**       routine.
+**       The longitude required by the present function is east-
+**       positive, in accordance with geographical convention (and
+**       right-handed).  In particular, note that the longitudes
+**       returned by the slaObs function are west-positive, following
+**       astronomical usage, and must be reversed in sign before use in
+**       the present function.
 **
 **  11)  The polar coordinates xp,yp can be obtained from IERS
 **       circulars and equivalent publications.  The maximum amplitude
@@ -136,31 +136,31 @@ void slaAop ( double rap, double dap, double date, double dut,
 **
 **  12)  The height above sea level of the observing station, hm,
 **       can be obtained from the Astronomical Almanac (Section J
-**       in the 1988 edition), or via the routine slaObs.  If p,
+**       in the 1988 edition), or via the function slaObs.  If p,
 **       the pressure in millibars, is available, an adequate
 **       estimate of hm can be obtained from the expression
 **
 **             hm = -29.3 * tsl * log ( p / 1013.25 );
 **
-**       where tsl is the approximate sea-level air temperature
-**       in deg K (See Astrophysical Quantities, C.W.Allen,
-**       3rd edition, section 52).  Similarly, if the pressure p
-**       is not known, it can be estimated from the height of the
-**       observing station, hm as follows:
+**       where tsl is the approximate sea-level air temperature in K
+**       (See Astrophysical Quantities, C.W.Allen, 3rd edition, section
+**       52).  Similarly, if the pressure p is not known, it can be
+**       estimated from the height of the observing station, hm, as
+**       follows:
 **
 **             p = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );
 **
-**       Note, however, that the refraction is proportional to the
-**       pressure and that an accurate p value is important for
+**       Note, however, that the refraction is nearly proportional to
+**       the pressure and that an accurate p value is important for
 **       precise work.
 **
-**  13)  The azimuths etc produced by the present routine are with
+**  13)  The azimuths etc produced by the present function are with
 **       respect to the celestial pole.  Corrections to the terrestrial
 **       pole can be computed using slaPolmo.
 **
 **  Called:  slaAoppa, slaAopqk
 **
-**  Last revision:   6 September 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

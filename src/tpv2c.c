@@ -13,16 +13,16 @@ void slaTpv2c ( float xi, float eta, float v[3], float v01[3],
 **  (single precision)
 **
 **  Given:
-**     xi,eta    float        tangent plane coordinates of star
-**     v         float[3]     direction cosines of star
+**     xi,eta  float     tangent plane coordinates of star
+**     v       float[3]  direction cosines of star
 **
 **  Returned:
-**     v01       float[3]     direction cosines of TP, solution 1
-**     v02       float[3]     direction cosines of TP, solution 2
-**     *n        int          number of solutions:
-**                             0 = no solutions returned (note 2)
-**                             1 = only the first solution is useful (note 3)
-**                             2 = both solutions are useful (note 3)
+**     v01     float[3]  direction cosines of TP, solution 1
+**     v02     float[3]  direction cosines of TP, solution 2
+**     *n      int       number of solutions:
+**                        0 = no solutions returned (note 2)
+**                        1 = only the first solution is useful (note 3)
+**                        2 = both solutions are useful (note 3)
 **
 **  Notes:
 **
@@ -37,12 +37,13 @@ void slaTpv2c ( float xi, float eta, float v[3], float v01[3],
 **     solutions.  The argument n indicates whether the second of the
 **     two solutions returned is useful;  n=1 indicates only one useful
 **     solution, the usual case.  Under these circumstances, the second
-**     solution can be regarded as valid if the vector v02 is interpreted
-**     as the "over-the-pole" case.
+**     solution can be regarded as valid if the vector v02 is
+**     interpreted as the "beyond the pole" case.
 **
-**  4  This routine is the Cartesian equivalent of the routine slaTps2c.
+**  4  This function is the Cartesian equivalent of the function
+**     slaTps2c.
 **
-**  Last revision:   5 June 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

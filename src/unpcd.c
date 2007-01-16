@@ -42,8 +42,8 @@ void slaUnpcd ( double disco, double *x, double *y )
 **           AAT f/8          +21.20
 **           JKT f/8          +13.32
 **
-**   4)  The present routine is a rigorous inverse of the companion
-**       routine sla_PCD.  The expression for RP in Note 1 is rewritten
+**   4)  The present function is a rigorous inverse of the companion
+**       function slaPcd.  The expression for RP in Note 1 is rewritten
 **       in the form x^3+a*x+b=0 and solved by standard techniques.
 **
 **   5)  Cases where the cubic has multiple real roots can sometimes
@@ -52,12 +52,13 @@ void slaUnpcd ( double disco, double *x, double *y )
 **       same distorted [X,Y].  However, only one solution is returned,
 **       the one that produces the smallest change in [X,Y].
 **
-**  Last revision:   3 September 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 
 #define THIRD 1.0/3.0
+
 {
    double rp, q, r, d, w, s, t, f, c, c2, t3, f1, f2, f3, w1, w2, w3;
 

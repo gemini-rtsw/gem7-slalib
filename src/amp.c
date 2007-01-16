@@ -13,14 +13,12 @@ void slaAmp ( double ra, double da, double date, double eq,
 **  loosely called FK5.
 **
 **  Given:
-**     ra       double      apparent RA (radians)
-**     da       double      apparent Dec (radians)
-**     date     double      TDB for apparent place (JD-2400000.5)
-**     eq       double      equinox:  Julian epoch of mean place
+**     ra,da     double    apparent RA,Dec (radians)
+**     date      double    TDB for apparent place (JD-2400000.5)
+**     eq        double    equinox:  Julian epoch of mean place
 **
 **  Returned:
-**     *rm      double      mean RA (radians)
-**     *dm      double      mean Dec (radians)
+**     rm,dm     double*   mean RA,Dec (radians)
 **
 **  References:
 **     1984 Astronomical Almanac, pp B39-B41.
@@ -33,28 +31,28 @@ void slaAmp ( double ra, double da, double date, double eq,
 **      applications UTC is adequate.
 **
 **  2)  Iterative techniques are used for the aberration and light
-**      deflection corrections so that the routines slaAmp (or
+**      deflection corrections so that the functions slaAmp (or
 **      slaAmpqk) and slaMap (or slaMapqk) are accurate inverses;
 **      even at the edge of the Sun's disc the discrepancy is only
 **      about 1 nanoarcsecond.
 **
 **  3)  Where multiple apparent places are to be converted to mean
 **      places, for a fixed date and equinox, it is more efficient to
-**      use the slaMappa routine to compute the required parameters
+**      use the slaMappa function to compute the required parameters
 **      once, followed by one call to slaAmpqk per star.
 **
 **  4)  The accuracy is sub-milliarcsecond, limited by the
 **      precession-nutation model (IAU 1976 precession, Shirai &
 **      Fukushima 2001 forced nutation and precession corrections).
 **
-**  5)  The accuracy is further limited by the routine slaEvp, called
+**  5)  The accuracy is further limited by the function slaEvp, called
 **      by slaMappa, which computes the Earth position and velocity
 **      using the methods of Stumpff.  The maximum error is about
 **      0.3 mas.
 **
 **  Called:  slaMappa, slaAmpqk
 **
-**  Last revision:   17 September 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 **

@@ -47,8 +47,8 @@ void slaSmat ( int n, float *a, float *y, float *d, int *jf, int *iw )
 **     Very fast.
 **
 **  Accuracy:
-**     Fairly accurate - errors 1 to 4 times those of routines optimized
-**     for accuracy.
+**     Fairly accurate - errors 1 to 4 times those of functions
+**     optimized for accuracy.
 **
 **  Example call (note handling of "adjustable dimension" 2D array):
 **
@@ -57,7 +57,7 @@ void slaSmat ( int n, float *a, float *y, float *d, int *jf, int *iw )
 **      :
 **     slaSmat ( n, (float *) a, v, &d, &j, iw );
 **
-**  Last revision:   17 August 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -20,7 +20,7 @@ void slaRefv ( double vu[3], double refa, double refb, double vr[3] )
 **
 **  Notes:
 **
-**  1  This routine applies the adjustment for refraction in the
+**  1  This function applies the adjustment for refraction in the
 **     opposite sense to the usual one - it takes an unrefracted
 **     (in vacuo) position and produces an observed (refracted)
 **     position, whereas the A tan Z + B tan^3 Z model strictly
@@ -32,7 +32,7 @@ void slaRefv ( double vu[3], double refa, double refb, double vr[3] )
 **     formula.
 **
 **  2  Though optimized for speed rather than precision, the present
-**     routine achieves consistency with the refracted-to-unrefracted
+**     function achieves consistency with the refracted-to-unrefracted
 **     A tan Z + B tan^3 Z model at better than 1 microarcsecond within
 **     30 degrees of the zenith and remains within 1 milliarcsecond to
 **     beyond ZD 70 degrees.  The inherent accuracy of the model is, of
@@ -41,35 +41,40 @@ void slaRefv ( double vu[3], double refa, double refb, double vr[3] )
 **
 **  3  At low elevations (below about 3 degrees) the refraction
 **     correction is held back to prevent arithmetic problems and
-**     wildly wrong results.  Over a wide range of observer heights
-**     and corresponding temperatures and pressures, the following
-**     levels of accuracy (arcsec) are achieved, relative to numerical
-**     integration through a model atmosphere:
+**     wildly wrong results.  For optical/IR wavelengths, over a wide
+**     range of observer heights and corresponding temperatures and
+**     pressures, the following levels of accuracy (arcsec, worst case)
+**     are achieved, relative to numerical integration through a model
+**     atmosphere:
 **
 **              ZD    error
 **
-**              80      0.4
-**              81      0.8
-**              82      1.6
-**              83      3
-**              84      7
-**              85     17
-**              86     45
-**              87    150
-**              88    340
-**              89    620
+**              80      0.7
+**              81      1.3
+**              82      2.5
+**              83      5
+**              84     10
+**              85     20
+**              86     55
+**              87    160
+**              88    360
+**              89    640
 **              90   1100
-**              91   1900         } relevant only to
-**              92   3200         } high-elevation sites
+**              91   1700         } relevant only to
+**              92   2600         } high-elevation sites
 **
-**  4  See also the routine slaRefz, which performs the adjustment to
+**     The results for radio are slightly worse over most of the range,
+**     becoming significantly worse below ZD=88 and unusable beyond
+**     ZD=90.
+**
+**  4  See also the function slaRefz, which performs the adjustment to
 **     the zenith distance rather than in Cartesian Az/El coordinates.
-**     The present routine is faster than slaRefz and, except very low down,
-**     is equally accurate for all practical purposes.  However, beyond
-**     about ZD 84 degrees slaRefz should be used, and for the utmost
-**     accuracy iterative use of slaRefro should be considered.
+**     The present function is faster than slaRefz and, except very low
+**     down, is equally accurate for all practical purposes.  However,
+**     beyond about ZD 84 degrees slaRefz should be used, and for the
+**     utmost accuracy iterative use of slaRefro should be considered.
 **
-**  Last revision:   4 June 1997
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

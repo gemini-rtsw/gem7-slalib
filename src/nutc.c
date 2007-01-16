@@ -18,37 +18,36 @@ void slaNutc ( double date, double *dpsi, double *deps, double *eps0 )
 **
 **  Notes:
 **
-**  1  The routine predicts forced nutation (but not free core nutation)
-**     plus corrections to the IAU 1976 precession model.
+**  1  The function predicts forced nutation (but not free core
+**     nutation) plus corrections to the IAU 1976 precession model.
 **
 **  2  Earth attitude predictions made by combining the present nutation
-**     model with IAU 1976 precession are accurate to 1 mas (with respect
-**     to the ICRF) for a few decades around 2000.
+**     model with IAU 1976 precession are accurate to 1 mas (with
+**     respect to the ICRS) for a few decades around 2000.
 **
-**  3  The slaNutc80 routine is the equivalent of the present routine
+**  3  The slaNutc80 function is the equivalent of the present function
 **     but using the IAU 1980 nutation theory.  The older theory is less
 **     accurate, leading to errors as large as 350 mas over the interval
-**     1900-2100, mainly because of the error in the IAU 1976 precession.
+**     1900-2100, mainly because of the error in the IAU 1976
+**     precession.
 **
 **  References:
 **
-**     Shirai, T. & Fukushima, T., Astron.J. 121, 3270-3283 (2001).
+**     Shirai, T. & Fukushima, T., 2001, Astron.J. 121, 3270-3283
 **
-**     Fukushima, T., 1991, Astron.Astrophys. 244, L11 (1991).
+**     Fukushima, T., 1991, Astron.Astrophys. 244, L11
 **
 **     Simon, J. L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,
-**     Francou, G. & Laskar, J., Astron.Astrophys. 282, 663 (1994).
+**     Francou, G. & Laskar, J., 1994, Astron.Astrophys. 282, 663
 **
-**  Called:  slaDeuler, slaPrec, slaEpj, slaDmxm
-**
-**  Last revision:   7 October 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 
-#define TURNAS 1296000.0          /* Arc seconds in a full circle */
-#define DJM0 51544.5              /* Reference epoch (J2000), MJD */
-#define DJC 36525.0               /* Days per Julian century */
+#define TURNAS 1296000.0          /* arc seconds in a full circle */
+#define DJM0 51544.5              /* reference epoch (J2000), MJD */
+#define DJC 36525.0               /* days per Julian century */
 
 {
 

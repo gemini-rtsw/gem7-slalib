@@ -6,7 +6,7 @@ void slaPrenut ( double epoch, double date, double rmatpn[3][3] )
 **   s l a P r e n u t
 **  - - - - - - - - - -
 **
-**  Form the matrix of precession and nutation (IAU 1976/1980/FK5)
+**  Form the matrix of precession and nutation (SF2001)
 **
 **  (double precision)
 **
@@ -23,11 +23,12 @@ void slaPrenut ( double epoch, double date, double rmatpn[3][3] )
 **
 **  Notes:
 **
-**  1)  The epoch and date are TDB (loosely ET).
+**  1)  The epoch and date are TDB (loosely ET).  TT (or even UTC) will
+**      do.
 **
 **  2)  The matrix is in the sense   v(true)  =  rmatpn * v(mean) .
 **
-**  Last revision:   8 May 2000
+**  Last revision:   3 December 2005
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

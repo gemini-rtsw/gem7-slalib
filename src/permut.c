@@ -3,7 +3,7 @@
 void slaPermut ( int n, int istate[], int iorder[], int* j )
 /*
 **  - - - - - - - - - -
-**   s l a  P e r m u t
+**   s l a P e r m u t
 **  - - - - - - - - - -
 **
 **  Generate the next permutation of a specified number of items.
@@ -11,7 +11,7 @@ void slaPermut ( int n, int istate[], int iorder[], int* j )
 **  Given:
 **     n        int      number of items:  there will be n! permutations
 **
-**  Given and Returned:
+**  Given and returned:
 **     istate   int[n]   state, istate[0]=-1 to initialize
 **
 **  Returned:
@@ -23,9 +23,9 @@ void slaPermut ( int n, int istate[], int iorder[], int* j )
 **
 **  Notes:
 **
-**  1) This routine returns, in the iorder array, the integers 1 to n
+**  1) This function returns, in the iorder array, the integers 1 to n
 **     inclusive, in an order that depends on the current contents of
-**     the istate array.  Before calling the routine for the first
+**     the istate array.  Before calling the function for the first
 **     time, the caller must set the first element of the istate array
 **     to -1 (any negative number will do) to cause the istate array
 **     to be fully initialized.
@@ -41,10 +41,10 @@ void slaPermut ( int n, int istate[], int iorder[], int* j )
 **
 **          iorder[0]=1, iorder[1]=2, ..., iorder[n-1]=n
 **
-**  3) If the "finished" (j=1) status is ignored, the routine continues
+**  3) If the "finished" (j=1) status is ignored, the function continues
 **     to deliver permutations, the pattern repeating every n! calls.
 **
-**  Last revision:   14 July 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

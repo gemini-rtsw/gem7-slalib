@@ -25,34 +25,29 @@ void slaDaf2r ( int ideg, int iamin, double asec, double *rad, int *j )
 **  Notes:
 **     1)  The result is computed even if any of the range checks fail.
 **
-**     2)  The sign must be dealt with outside this routine.
+**     2)  The sign must be dealt with outside this function.
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   31 October 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
+   int jstat;
+
+
 /* Preset status */
-   *j = 0;
+   jstat = 0;
 
 /* Validate arcsec, arcmin, deg */
-   if ( ( asec < 0.0 ) || ( asec >= 60.0 ) ) {
-      *j = 3;
-      return;
-   }
-   if ( ( iamin < 0 ) || ( iamin > 59 ) ) {
-      *j = 2;
-      return;
-   }
-   if ( ( ideg < 0 ) || ( ideg > 359 ) ) {
-      *j = 1;
-      return;
-   }
+   if ( ( asec < 0.0 ) || ( asec >= 60.0 ) ) jstat = 3;
+   if ( ( iamin < 0 ) || ( iamin > 59 ) ) jstat = 2;
+   if ( ( ideg < 0 ) || ( ideg > 359 ) ) jstat = 1;
 
-/* Compute angle */
+/* Compute angle (irrespective of validation) and return status. */
    *rad = DAS2R * ( 60.0 * ( 60.0 * (double) ideg
                                   + (double) iamin )
                                            + asec );
+   *j = jstat;
 }

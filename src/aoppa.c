@@ -20,11 +20,11 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **     hm     d      observer's height above sea level (metres)
 **     xp     d      polar motion x-coordinate (radians)
 **     yp     d      polar motion y-coordinate (radians)
-**     tdk    d      local ambient temperature (DegK; std=273.155)
-**     pmb    d      local atmospheric pressure (mB; std=1013.25)
+**     tdk    d      local ambient temperature (K; std=273.15)
+**     pmb    d      local atmospheric pressure (mb; std=1013.25)
 **     rh     d      local relative humidity (in the range 0.0-1.0)
 **     wl     d      effective wavelength (micron, e.g. 0.55)
-**     tlr    d      tropospheric lapse rate (DegK/metre, e.g. 0.0065)
+**     tlr    d      tropospheric lapse rate (K/metre, e.g. 0.0065)
 **
 **  Returned:
 **     aoprms d[14]  star-independent apparent-to-observed parameters:
@@ -64,12 +64,12 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **       within +/- 0.9 seconds.
 **
 **   4)  IMPORTANT -- TAKE CARE WITH THE LONGITUDE SIGN CONVENTION.
-**       The longitude required by the present routine is east-positive,
-**       in accordance with geographical convention (and right-handed).
-**       In particular, note that the longitudes returned by the
-**       slaObs routine are west-positive, following astronomical
-**       usage, and must be reversed in sign before use in the present
-**       routine.
+**       The longitude required by the present function is
+**       east-positive in accordance with geographical convention (and
+**       right-handed).  In particular, note that the longitudes
+**       returned by the slaObs function are west-positive, following
+**       astronomical usage, and must be reversed in sign before use in
+**       the present function.
 **
 **   5)  The polar coordinates xp,yp can be obtained from IERS
 **       circulars and equivalent publications.  The maximum amplitude
@@ -79,36 +79,37 @@ void slaAoppa ( double date, double dut, double elongm, double phim,
 **
 **   6)  The height above sea level of the observing station, hm,
 **       can be obtained from the Astronomical Almanac (Section J
-**       in the 1988 edition), or via the routine slaObs.  If p,
+**       in the 1988 edition), or via the function slaObs.  If p,
 **       the pressure in millibars, is available, an adequate
 **       estimate of hm can be obtained from the expression
 **
 **             hm = -29.3 * tsl * log ( p / 1013.25 );
 **
-**       where tsl is the approximate sea-level air temperature
-**       in deg K (See Astrophysical Quantities, C.W.Allen,
-**       3rd edition, section 52).  Similarly, if the pressure p
-**       is not known, it can be estimated from the height of the
-**       observing station, hm as follows:
+**       where tsl is the approximate sea-level air temperature in K
+**       (See Astrophysical Quantities, C.W.Allen, 3rd edition, section
+**       52).  Similarly, if the pressure p is not known, it can be
+**       estimated from the height of the observing station, hm, as
+**       follows:
 **
 **             p = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );
 **
-**       Note, however, that the refraction is proportional to the
-**       pressure and that an accurate p value is important for
+**       Note, however, that the refraction is nearly proportional to
+**       the pressure and that an accurate p value is important for
 **       precise work.
 **
 **   7)  Repeated, computationally-expensive, calls to slaAoppa for
 **       times that are very close together can be avoided by calling
 **       slaAoppa just once and then using slaAoppat for the subsequent
-**       times.  Fresh calls to slaAoppa will be needed only when changes
-**       in the precession have grown to unacceptable levels or when
-**       anything affecting the refraction has changed.
+**       times.  Fresh calls to slaAoppa will be needed only when
+**       changes in the equation of the equinoxes or the polar motion
+**       have grown to unacceptable levels or when anything affecting
+**       the refraction has changed.
 **
 **  Defined in slamac.h:  D2PI, DS2R
 **
 **  Called:  slaGeoc, slaRefco, slaEqeqx, slaAoppat
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

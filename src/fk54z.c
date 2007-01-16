@@ -11,9 +11,7 @@ void slaFk54z ( double r2000, double d2000, double bepoch,
 **  Convert a J2000.0 FK5 star position to B1950.0 FK4 assuming
 **  zero proper motion and parallax.
 **
-**  (double precision)
-**
-**  This routine converts star positions from the new, IAU 1976,
+**  This function converts star positions from the new, IAU 1976,
 **  FK5, Fricke system to the old, Bessel-Newcomb, FK4 system.
 **
 **  Given:
@@ -30,26 +28,26 @@ void slaFk54z ( double r2000, double d2000, double bepoch,
 **
 **  2)  Conversion from Julian epoch 2000.0 to Besselian epoch 1950.0
 **      only is provided for.  Conversions involving other epochs will
-**      require use of the appropriate precession routines before and
-**      after this routine is called.
+**      require use of the appropriate precession functions before and
+**      after this function is called.
 **
-**  3)  Unlike in the slaFK524 routine, the FK5 proper motions, the
+**  3)  Unlike in the slaFK524 function, the FK5 proper motions, the
 **      parallax and the radial velocity are presumed zero.
 **
 **  4)  It is the intention that FK5 should be a close approximation
 **      to an inertial frame, so that distant objects have zero proper
 **      motion;  such objects have (in general) non-zero proper motion
-**      in FK4, and this routine returns those fictitious proper
+**      in FK4, and this function returns those fictitious proper
 **      motions.
 **
-**  5)  The position returned by this routine is in the B1950
+**  5)  The position returned by this function is in the B1950
 **      reference frame but at Besselian epoch bepoch.  For
 **      comparison with catalogues the bepoch argument will
 **      frequently be 1950.0.
 **
 **  Called:  slaFk524, slaPm
 **
-**  Last revision:   30 October 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

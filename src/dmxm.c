@@ -20,7 +20,7 @@ void slaDmxm ( double a[3][3], double b[3][3], double c[3][3] )
 **
 **  Note:  the same array may be nominated more than once.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -28,7 +28,8 @@ void slaDmxm ( double a[3][3], double b[3][3], double c[3][3] )
    int i, j, k;
    double w, wm[3][3];
 
-/* Multiply into scratch matrix */
+
+/* Multiply into scratch matrix. */
    for ( i = 0; i < 3; i++ ) {
       for ( j = 0; j < 3; j++ ) {
          w = 0.0;
@@ -39,7 +40,7 @@ void slaDmxm ( double a[3][3], double b[3][3], double c[3][3] )
       }
    }
 
-/* Return the result */
+/* Return the result. */
    for ( j = 0; j < 3; j++ ) {
       for ( i = 0; i < 3; i++ ) {
          c[i][j] = wm[i][j];

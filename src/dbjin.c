@@ -45,7 +45,7 @@ void slaDbjin ( char *string, int *nstrt,
 **
 **  For details of the basic syntax, see slaDfltin.
 **
-**  Last revision:   22 December 1993
+**  Last revision:   2 January 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -57,7 +57,7 @@ void slaDbjin ( char *string, int *nstrt,
    j2a = 0;
 
 /* Length of string */
-   lenstr = strlen ( string );
+   lenstr = (int) strlen ( string );
 
 /* Position of current character */
    na = *nstrt;

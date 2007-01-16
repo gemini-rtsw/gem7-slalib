@@ -24,7 +24,7 @@ void slaSubet ( double rc, double dc, double eq, double *rm, double *dm )
 **  Explanation:
 **     Most star positions from pre-1984 optical catalogues (or
 **     derived from astrometry using such stars) embody the
-**     e-terms.  This routine converts such a position to a
+**     e-terms.  This function converts such a position to a
 **     formal mean place (allowing, for example, comparison with a
 **     pulsar timing position).
 **
@@ -32,7 +32,7 @@ void slaSubet ( double rc, double dc, double eq, double *rm, double *dm )
 **     Explanatory Supplement to the Astronomical Ephemeris,
 **     section 2D, page 48.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

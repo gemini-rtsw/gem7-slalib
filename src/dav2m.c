@@ -10,11 +10,10 @@ void slaDav2m ( double axvec[3], double rmat[3][3] )
 **
 **  (double precision)
 **
-**  A rotation matrix describes a rotation about some arbitrary axis.
-**  The axis is called the Euler axis, and the angle through which the
-**  reference frame rotates is called the Euler angle.  The axial
-**  vector supplied to this routine has the same direction as the
-**  Euler axis, and its magnitude is the Euler angle in radians.
+**  A rotation matrix describes a rotation about some arbitrary axis,
+**  called the Euler axis.  The "axial vector" supplied to this function
+**  has the same direction as the Euler axis, and its magnitude is the
+**  amount of rotation in radians.
 **
 **  Given:
 **    axvec  double[3]     axial vector (radians)
@@ -27,14 +26,14 @@ void slaDav2m ( double axvec[3], double rmat[3][3] )
 **  The reference frame rotates clockwise as seen looking along
 **  the axial vector from the origin.
 **
-**  Last revision:   25 July 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
   double x, y, z, phi, s, c, w;
 
-/* Euler angle - magnitude of axial vector - and functions */
+/* Rotation angle - magnitude of axial vector - and functions */
    x   = axvec[0];
    y   = axvec[1];
    z   = axvec[2];

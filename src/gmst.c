@@ -17,25 +17,25 @@ double slaGmst ( double ut1 )
 **  The result is the Greenwich Mean Sidereal Time (double
 **  precision, radians).
 **
-**  The IAU 1982 expression (see page S15 of the 1984 Astronomical
-**  Almanac) is used, but rearranged to reduce rounding errors.
-**  This expression is always described as giving the GMST at
-**  0 hours UT.  In fact, it gives the difference between the
-**  GMST and the UT, which happens to equal the GMST (modulo
-**  24 hours) at 0 hours UT each day.  In this routine, the
-**  entire UT is used directly as the argument for the
-**  standard formula, and the fractional part of the UT is
-**  added separately;  note that the factor 1.0027379... does
-**  not appear.
+**  The IAU 1982 expression (see page S15 of 1984 Astronomical Almanac)
+**  is used, but rearranged to reduce rounding errors.  This expression
+**  is always described as giving the GMST at 0 hours UT.  In fact, it
+**  gives the difference between the GMST and the UT, which happens to
+**  equal the GMST (modulo 24 hours) at 0 hours UT each day.  In this
+**  function, the entire UT is used directly as the argument for the
+**  standard formula, and the fractional part of the UT is added
+**  separately.  Note that the factor 1.0027379... does not appear in
+**  the IAU 1982 expression explicitly but in the form of the
+**  coefficient 8640184.812866, which is 86400x36525x0.0027379...
 **
-**  See also the routine slaGmsta, which delivers better numerical
+**  See also the function slaGmsta, which delivers better numerical
 **  precision by accepting the UT date and time as separate arguments.
 **
 **  Called:  slaDranrm
 **
 **  Defined in slamac.h:  D2PI, DS2R, dmod
 **
-**  Last revision:   19 March 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

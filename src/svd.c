@@ -12,7 +12,7 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
 **
 **  (double precision)
 **
-**  This routine expresses a given matrix a as the product of
+**  This function expresses a given matrix a as the product of
 **  three matrices u, w, v:
 **
 **     a = u x w x vt
@@ -45,35 +45,39 @@ void slaSvd ( int m, int n, int mp, int np, double *a, double *w,
 **     (n.b. v contains matrix v, not the transpose of matrix v)
 **
 **  References:
-**     The algorithm is an adaptation of the routine SVD in the EISPACK
-**     library (Garbow et al 1977, Eispack guide extension, Springer
-**     Verlag), which is a Fortran 66 implementation of the Algol
-**     routine SVD of Wilkinson & Reinsch 1971 (Handbook for Automatic
-**     Computation, vol 2, Ed Bauer et al, Springer Verlag).  For the
-**     non-specialist, probably the clearest general account of the use
-**     of SVD in least squares problems is given in Numerical Recipes
-**     (Press et al 1986, Cambridge University Press).
+**     The algorithm is an adaptation of the SVD subroutine in the
+**     EISPACK library (Garbow et al 1977, Eispack guide extension,
+**     Springer Verlag), which is a Fortran 66 implementation of the
+**     Algol procedure SVD of Wilkinson & Reinsch 1971 (Handbook for
+**     Automatic Computation, vol 2, Ed Bauer et al, Springer Verlag).
+**     For the non-specialist, probably the clearest general account of
+**     the use of SVD in least squares problems is given in Numerical
+**     Recipes (Press et al 1986, Cambridge University Press).
 **
 **  From slamac.h:  TRUE, FALSE
 **
 **  Example call (note handling of "adjustable dimension" 2D arrays):
 **
-**    double a[MP][NP], w[NP], v[NP][NP], work[NP];
+**    double a[mp][np], w[np], v[np][np], work[np];
 **    int m, n, j;
 **     :
-**    slaSvd ( m, n, MP, NP, (double *) a, w, (double *) v, work, &j );
+**    slaSvd ( m, n, mp, np, (double*) a, w, (double*) v, work, &j );
 **
-**  Last revision:   19 August 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 
 /* Maximum number of iterations in QR phase */
 #define ITMAX 30
-{
 
-   int i, k, l, j, k1, its, l1, i1, cancel;
+{
+   int l, l1, i, k, j, k1, its, i1, cancel;
    double g, scale, an, s, x, f, h, cn, c, y, z;
+
+
+/* Variable initializations to avoid compiler warnings. */
+   l = l1 = 0;
 
 /* Check that the matrix is the right size and shape. */
    if ( m < n || m > mp || n > np ) {

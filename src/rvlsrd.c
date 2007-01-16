@@ -28,18 +28,19 @@ float slaRvlsrd ( float r2000, float d2000 )
 **         motion.
 **
 **         There is another type of LSR, called a "kinematical" LSR.  A
-**         kinematical LSR is the mean standard of rest of specified star
-**         catalogues or stellar populations, and several slightly
+**         kinematical LSR is the mean standard of rest of specified
+**         star catalogues or stellar populations, and several slightly
 **         different kinematical LSRs are in use.  The Sun's motion with
-**         respect to an agreed kinematical LSR is known as the "standard"
-**         solar motion.  To obtain a radial velocity correction with
-**         respect to an adopted kinematical LSR use the routine slaRvlsrk.
+**         respect to an agreed kinematical LSR is known as the
+**         "standard" solar motion.  To obtain a radial velocity
+**         correction with respect to an adopted kinematical LSR use the
+**         function slaRvlsrk.
 **
 **  Reference:  Delhaye (1965), in "Stars and Stellar Systems", vol 5, p73.
 **
 **  Called:  slaCs2c, slaVdv
 **
-**  Last revision:   11 March 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

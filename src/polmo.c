@@ -27,15 +27,15 @@ void slaPolmo ( double elongm, double phim, double xp, double yp,
 **   1)  "Mean" longitude and latitude are the (fixed) values for the
 **       site's location with respect to the IERS terrestrial reference
 **       frame;  the latitude is geodetic.  TAKE CARE WITH THE LONGITUDE
-**       SIGN CONVENTION.  The longitudes used by the present routine
+**       SIGN CONVENTION.  The longitudes used by the present function
 **       are east-positive, in accordance with geographical convention
 **       (and right-handed).  In particular, note that the longitudes
-**       Returned by the slaObs routine are west-positive, following
+**       Returned by the slaObs function are west-positive, following
 **       astronomical usage, and must be reversed in sign before use in
-**       the present routine.
+**       the present function.
 **
-**   2)  xp and yp are the (changing) coordinates of the Celestial
-**       Ephemeris Pole with respect to the IERS Reference Pole.
+**   2)  xp and yp are the (changing) coordinates of the celestial
+**       intermediate pole with respect to the IERS Reference Pole.
 **       xp is positive along the meridian at longitude 0 degrees,
 **       and yp is positive along the meridian at longitude
 **       270 degrees (i.e. 90 degrees west).  Values for xp,yp can
@@ -43,15 +43,15 @@ void slaPolmo ( double elongm, double phim, double xp, double yp,
 **       the maximum amplitude observed so far is about 0.3 arcseconds.
 **
 **   3)  "True" longitude and latitude are the (moving) values for
-**       the site's location with respect to the celestial ephemeris
+**       the site's location with respect to the celestial intermediate
 **       pole and the meridian which corresponds to the Greenwich
 **       apparent sidereal time.  The true longitude and latitude
 **       link the terrestrial coordinates with the standard celestial
 **       models (for precession, nutation, sidereal time etc).
 **
 **   4)  The azimuths produced by slaAop and slaAopqk are with
-**       respect to due north as defined by the Celestial Ephemeris
-**       Pole, and can therefore be called "celestial azimuths".
+**       respect to due north as defined by the celestial intermediate
+**       pole, and can therefore be called "celestial azimuths".
 **       However, a telescope fixed to the Earth measures azimuth
 **       essentially with respect to due north as defined by the
 **       IERS Reference Pole, and can therefore be called "terrestrial
@@ -60,9 +60,9 @@ void slaPolmo ( double elongm, double phim, double xp, double yp,
 **       correction to be added to a celestial azimuth to produce
 **       a terrestrial azimuth.
 **
-**   5)  The present routine is rigorous.  For most practical
-**       purposes, the following simplified formulae provide an
-**       adequate approximation:
+**   5)  The present function is rigorous.  For most practical purposes,
+**       the following simplified formulae provide an adequate
+**       approximation:
 **
 **       elong = elongm+xp*cos(elongm)-yp*sin(elongm);
 **       phi   = phim+(xp*sin(elongm)+yp*cos(elongm))*tan(phim);
@@ -78,7 +78,7 @@ void slaPolmo ( double elongm, double phim, double xp, double yp,
 **               to the Astronomical Almanac", ISBN 0-935702-68-7,
 **               sections 3.27, 4.25, 4.52.
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

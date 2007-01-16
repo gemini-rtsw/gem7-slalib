@@ -11,10 +11,10 @@ void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
 **
 **  (double precision)
 **
-**  This routine converts a star position from the FK5 system to
+**  This function converts a star position from the FK5 system to
 **  the Hipparcos system, in such a way that the Hipparcos proper
 **  motion is zero.  Because such a star has, in general, a non-zero
-**  proper motion in the FK5 system, the routine requires the epoch
+**  proper motion in the FK5 system, the function requires the epoch
 **  at which the position in the FK5 system was determined.
 **
 **  Given:
@@ -42,9 +42,9 @@ void slaFk5hz ( double r5, double d5, double epoch, double *rh, double *dh )
 **
 **  Reference:
 **
-**     M.Feissel & F.Mignard, Astron. Astrophys. 331, L33-L36 (1998).
+**     M.Feissel & F.Mignard, 1998, Astron. Astrophys. 331, L33-L36
 **
-**  Last revision:   22 June 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

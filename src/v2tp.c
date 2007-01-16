@@ -12,15 +12,15 @@ void slaV2tp ( float v[3], float v0[3], float *xi, float *eta, int *j )
 **  (single precision)
 **
 **  Given:
-**     v         float[3]    direction cosines of star
-**     v0        float[3]    direction cosines of tangent point
+**     v        float[3] direction cosines of star
+**     v0       float[3] direction cosines of tangent point
 **
 **  Returned:
-**     *xi,*eta  float       tangent plane coordinates of star
-**     j         int         status:   0  =  OK
-**                                     1  =  error, star too far from axis
-**                                     2  =  error, antistar on tangent plane
-**                                     3  =  error, antistar too far from axis
+**     *xi,*eta float    tangent plane coordinates of star
+**     j        int      status: 0  =  OK
+**                               1  =  error, star too far from axis
+**                               2  =  error, antistar on tangent plane
+**                               3  =  error, antistar too far from axis
 **
 **  Notes:
 **
@@ -30,9 +30,10 @@ void slaV2tp ( float v[3], float v0[3], float *xi, float *eta, int *j )
 **  2  If v0 points at a pole, the returned xi,eta will be based on the
 **     arbitrary assumption that the RA of the tangent point is zero.
 **
-**  3  This routine is the Cartesian equivalent of the routine slaS2tp.
+**  3  This function is the Cartesian equivalent of the function
+**     slaS2tp.
 **
-**  Last revision:   27 November 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

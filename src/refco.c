@@ -17,12 +17,12 @@ void slaRefco ( double hm, double tdk, double pmb, double rh,
 **
 **  Given:
 **    hm    double    height of the observer above sea level (metre)
-**    tdk   double    ambient temperature at the observer (deg k)
+**    tdk   double    ambient temperature at the observer (K)
 **    pmb   double    pressure at the observer (millibar)
 **    rh    double    relative humidity at the observer (range 0-1)
 **    wl    double    effective wavelength of the source (micrometre)
 **    phi   double    latitude of the observer (radian, astronomical)
-**    tlr   double    temperature lapse rate in the troposphere (degk/metre)
+**    tlr   double    temperature lapse rate in the troposphere (K/metre)
 **    eps   double    precision required to terminate iteration (radian)
 **
 **  Returned:
@@ -38,14 +38,14 @@ void slaRefco ( double hm, double tdk, double pmb, double rh,
 **
 **  2  The radio refraction is chosen by specifying wl > 100 micrometres.
 **
-**  3  The routine is a slower but more accurate alternative to the
-**     slaRefcoq routine.  The constants it produces give perfect
+**  3  The function is a slower but more accurate alternative to the
+**     slaRefcoq function.  The constants it produces give perfect
 **     agreement with slaRefro at zenith distances arctan(1) (45 deg)
 **     and arctan(4) (about 76 deg).  It achieves 0.5 arcsec accuracy
 **     for ZD < 80 deg, 0.01 arcsec accuracy for ZD < 60 deg, and
 **     0.001 arcsec accuracy for ZD < 45 deg.
 **
-**  Last revision:   4 June 1997
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

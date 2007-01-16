@@ -9,14 +9,14 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **
 **  Determine the constants A and B in the atmospheric refraction
 **  model dZ = A tan Z + B tan^3 Z.  This is a fast alternative
-**  to the slaRefco routine - see notes.
+**  to the slaRefco function - see notes.
 **
 **  Z is the "observed" zenith distance (i.e. affected by refraction)
 **  and dZ is what to add to Z to give the "topocentric" (i.e. in vacuo)
 **  zenith distance.
 **
 **  Given:
-**    tdk    double    ambient temperature at the observer (deg K)
+**    tdk    double    ambient temperature at the observer (K)
 **    pmb    double    pressure at the observer (millibar)
 **    rh     double    relative humidity at the observer (range 0-1)
 **    wl     double    effective wavelength of the source (micrometre)
@@ -30,17 +30,17 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **  Notes:
 **
 **  1  The model is an approximation, for moderate zenith distances,
-**     to the predictions of the slaRefro routine.  The approximation
+**     to the predictions of the slaRefro function.  The approximation
 **     is maintained across a range of conditions, and applies to
 **     both optical/IR and radio.
 **
-**  2  The algorithm is a fast alternative to the slaRefco routine.
-**     The latter calls the slaRefro routine itself:  this involves
+**  2  The algorithm is a fast alternative to the slaRefco function.
+**     The latter calls the slaRefro function itself:  this involves
 **     integrations through a model atmosphere, and is costly in
 **     processor time.  However, the model which is produced is precisely
 **     correct for two zenith distance (45 degrees and about 76 degrees)
 **     and at other zenith distances is limited in accuracy only by the
-**     A tan Z + B tan^3 Z formulation itself.  The present routine
+**     A tan Z + B tan^3 Z formulation itself.  The present function
 **     is not as accurate, though it satisfies most practical
 **     requirements.
 **
@@ -60,7 +60,7 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **       wavelengths 0.4, 0.6, ... 2 micron, + radio
 **       zenith distances 15, 45, 75 degrees
 **
-**     The accuracy with respect to direct use of the slaRefro routine
+**     The accuracy with respect to direct use of the slaRefro function
 **     was as follows:
 **
 **                            worst         RMS
@@ -70,11 +70,11 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **
 **     For this particular set of conditions:
 **
-**       lapse rate 0.0065 degK/metre
+**       lapse rate 0.0065 K/metre
 **       latitude 50 degrees
 **       sea level
-**       pressure 1005 mB
-**       temperature 280.15 degK
+**       pressure 1005 mb
+**       temperature 280.15 K
 **       humidity 80%
 **       wavelength 5740 Angstroms
 **
@@ -104,7 +104,7 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **     up to tan^5) are taken from Hohenkerk and Sinclair (1985).
 **
 **     The results from the much slower but more accurate slaRefco
-**     routine have not been included in the tabulation as they are
+**     function have not been included in the tabulation as they are
 **     identical to those in the slaRefro column to the 0.01 arcsec
 **     resolution used.
 **
@@ -118,18 +118,17 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **        a function of temperature and temperature is taken from
 **        expressions A4.5-A4.7 of Gill (1982).
 **
-**     b) The formula for the water vapour pressure, Given the
+**     b) The formula for the water vapour pressure, given the
 **        saturation pressure and the relative humidity, is from
 **        Crane (1976), expression 2.5.5.
 **
 **     c) The refractivity of air is a function of temperature,
 **        total pressure, water-vapour pressure and, in the case
 **        of optical/IR but not radio, wavelength.  The formulae
-**        for the two cases are developed from the Essen and Froome
-**        expressions adopted in Resolution 1 of the 12th International
-**        Geodesy Association General Assembly (1963).
+**        for the two cases are developed from Hohenkerk & Sinclair
+**        (1985) and Rueger (2002).
 **
-**     The above three items are as used in the slaRefro routine.
+**     The above three items are as used in the slaRefro function.
 **
 **     d) The formula for beta, the ratio of the scale height of the
 **        atmosphere to the geocentric distance of the observer, is
@@ -149,16 +148,18 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 **
 **     Gill, Adrian E., "Atmosphere-Ocean Dynamics", Academic Press, 1982.
 **
+**     Green, R.M., "Spherical Astronomy", Cambridge University Press, 1987.
+**
 **     Hohenkerk, C.Y., & Sinclair, A.T., NAO Technical Note No. 63, 1985.
 **
-**     International Geodesy Association General Assembly, Bulletin
-**     Geodesique 70 p390, 1963.
+**     Rueger, J.M., "Refractive Index Formulae for Electronic Distance
+**     Measurement with Radio and Millimetre Waves", in Unisurv Report
+**     S-68, School of Surveying and Spatial Information Systems,
+**     University of New South Wales, Sydney, Australia, 2002.
 **
 **     Stone, Ronald C., P.A.S.P. 108 1051-1058, 1996.
 **
-**     Green, R.M., "Spherical Astronomy", Cambridge University Press, 1987.
-**
-**  Last revision:   29 May 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -182,7 +183,7 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 
 /* Water vapour pressure at the observer. */
    if ( p > 0.0 ) {
-      tdc = t - 273.155;
+      tdc = t - 273.15;
       ps = pow ( 10.0, ( 0.7859 + 0.03477 * tdc ) /
                           ( 1.0 + 0.00412 * tdc ) ) *
                  ( 1.0 + p * ( 4.5e-6 + 6e-10 * tdc * tdc )  );
@@ -194,10 +195,10 @@ void slaRefcoq ( double tdk, double pmb, double rh, double wl,
 /* Refractive index minus 1 at the observer. */
    if ( optic ) {
       wlsq = w * w;
-      gamma = ( ( 77.532e-6 + ( 4.391e-7 + 3.57e-9 / wlsq ) / wlsq ) * p
+      gamma = ( ( 77.53484e-6 + ( 4.39108e-7 + 3.666e-9 / wlsq ) / wlsq ) * p
                 - 11.2684e-6 * pw ) / t;
    } else {
-      gamma = ( 77.624e-6 * p - ( 12.92e-6 - 0.371897 / t ) * pw ) / t;
+      gamma = ( 77.6890e-6 * p - ( 6.3938e-6 - 0.375463 / t ) * pw ) / t;
    }
 
 /* Formula for beta from Stone, with empirical adjustments. */

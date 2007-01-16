@@ -8,11 +8,11 @@ void slaSvdsol ( int m, int n, int mp, int np, double *b, double *u,
 **  - - - - - - - - - -
 **
 **  From a given vector and the SVD of a matrix (as obtained from
-**  the slaSvd routine), obtain the solution vector.
+**  the slaSvd function), obtain the solution vector.
 **
 **  (double precision)
 **
-**  This routine solves the equation:
+**  This function solves the equation:
 **
 **     a . x = b
 **
@@ -24,7 +24,7 @@ void slaSvdsol ( int m, int n, int mp, int np, double *b, double *u,
 **
 **  By means of the singular value decomposition method (SVD).  In
 **  this method, the matrix a is first factorized (for example by
-**  the routine slaSvd) into the following components:
+**  the function slaSvd) into the following components:
 **
 **     a = u x w x vt
 **
@@ -54,7 +54,7 @@ void slaSvdsol ( int m, int n, int mp, int np, double *b, double *u,
 **  3)  If the solution is poorly determined, this shows up in the
 **      SVD factorization as very small or zero wj values.  Where
 **      a wj value is small but non-zero it can be set to zero to
-**      avoid ill effects.  The present routine detects such zero
+**      avoid ill effects.  The present function detects such zero
 **      wj values and produces a sensible solution, with highly
 **      correlated terms kept under control rather than being allowed
 **      to elope to infinity, and with meaningful values for the
@@ -81,12 +81,12 @@ void slaSvdsol ( int m, int n, int mp, int np, double *b, double *u,
 **
 **  Example call (note handling of "adjustable dimension" 2D arrays):
 **
-**    double a[MP][NP], w[NP], v[NP][NP], work[NP], b[MP], x[NP];
+**    double a[mp][np], w[np], v[np][np], work[np], b[mp], x[np];
 **    int m, n;
 **     :
-**    slaSvdsol ( m, n, MP, NP, b, (double *) a, w, (double *) v, work, x );
+**    slaSvdsol ( m, n, mp, np, b, (double*) a, w, (double*) v, work, x );
 **
-**  Last revision:   20 February 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

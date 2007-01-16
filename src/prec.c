@@ -8,8 +8,6 @@ void slaPrec ( double ep0, double ep1, double rmatp[3][3] )
 **
 **  Form the matrix of precession between two epochs (IAU 1976, FK5).
 **
-**  (double precision)
-**
 **  Given:
 **     ep0    double         beginning epoch
 **     ep1    double         ending epoch
@@ -33,7 +31,7 @@ void slaPrec ( double ep0, double ep1, double rmatp[3][3] )
 **      500BC to 3000AD.  The errors exceed 10 arcsec outside the
 **      range 1200BC to 3900AD, exceed 100 arcsec outside 4200BC to
 **      5600AD and exceed 1000 arcsec outside 6800BC to 8200AD.
-**      The SLALIB routine slaPrecl implements a more elaborate
+**      The SLALIB function slaPrecl implements a more elaborate
 **      model which is suitable for problems spanning several
 **      thousand years.
 **
@@ -46,12 +44,13 @@ void slaPrec ( double ep0, double ep1, double rmatp[3][3] )
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   10 July 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
 {
    double t0, t, tas2r, w, zeta, z, theta;
+
 
 /* Interval between basic epoch J2000.0 and beginning epoch (JC) */
    t0 = ( ep0 - 2000.0 ) / 100.0;

@@ -28,9 +28,10 @@ void slaTp2v ( float xi, float eta, float v0[3], float v[3] )
 **     based on the arbitrary assumption that the RA of the tangent
 **     point is zero.
 **
-**  3  This routine is the Cartesian equivalent of the routine slaTp2s.
+**  3  This function is the Cartesian equivalent of the function
+**     slaTp2s.
 **
-**  Last revision:   11 February 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

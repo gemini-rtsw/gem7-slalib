@@ -8,7 +8,7 @@ void slaSvdcov ( int n, int np, int nc, double *w, double *v,
 **  - - - - - - - - - -
 **
 **  From the w and v matrices from the SVD factorization of a matrix
-**  (as obtained from the slaSvd routine), obtain the covariance matrix.
+**  (as obtained from the slaSvd function), obtain the covariance matrix.
 **
 **  (double precision)
 **
@@ -28,12 +28,12 @@ void slaSvdcov ( int n, int np, int nc, double *w, double *v,
 **
 **  Example call (note handling of "adjustable dimension" 2D arrays):
 **
-**    double w[NP], v[NP][NP], work[NP], c[NC][NC];
+**    double w[np], v[np][np], work[np], c[np][np];
 **    int n;
 **     :
-**    slaSvdcov ( n, NP, NC, w, (double *) v, work, (double *) c );
+**    slaSvdcov ( n, np, nc, w, (double*) v, work, (double*) c );
 **
-**  Last revision:   20 February 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

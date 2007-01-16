@@ -23,7 +23,7 @@ void slaClyd ( int iy, int im, int id, int *ny, int *nd, int *jstat )
 **
 **  Notes:
 **
-**  1  This routine exists to support the low-precision routines
+**  1  This function exists to support the low-accuracy functions
 **     slaEarth, slaMoon and slaEcor.
 **
 **  2  Between 1900 March 1 and 2100 February 28 it returns answers
@@ -40,7 +40,7 @@ void slaClyd ( int iy, int im, int id, int *ny, int *nd, int *jstat )
 **              ed P.K.Seidelmann, University Science Books (1992),
 **              p604-606.
 **
-**  Last revision:   26 November 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

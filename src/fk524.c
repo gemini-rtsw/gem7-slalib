@@ -13,7 +13,7 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
 **
 **  (double precision)
 **
-**  This routine converts stars from the new, IAU 1976, FK5, Fricke
+**  This function converts stars from the new, IAU 1976, FK5, Fricke
 **  system, to the old, Bessel-Newcomb, FK4 system.  The precepts
 **  of Smith et al (Ref 1) are followed, using the implementation
 **  by Yallop et al (Ref 2) of a matrix method due to Standish.
@@ -41,7 +41,7 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
 **  2)  Note that conversion from Julian epoch 2000.0 to Besselian
 **      epoch 1950.0 only is provided for.  Conversions involving
 **      other epochs will require use of the appropriate precession,
-**      proper motion, and E-terms routines before and/or after
+**      proper motion, and E-terms functions before and/or after
 **      FK524 is called.
 **
 **  3)  In the FK4 catalogue the proper motions of stars within
@@ -55,7 +55,7 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
 **      the likelihood that the differential E-terms effect was not
 **      taken into account when allowing for proper motion in past
 **      astrometry, and the undesirability of a discontinuity in
-**      the algorithm, the decision has been made in this routine to
+**      the algorithm, the decision has been made in this function to
 **      include the effect of differential E-terms on the proper
 **      motions for all stars, whether polar or not.  At epoch 2000,
 **      and measuring on the sky rather than in terms of dRA, the
@@ -77,7 +77,7 @@ void slaFk524 ( double r2000, double d2000, double dr2000,
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -43,7 +43,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
 **     in their current states.
 **
 **     Programs can obtain a list of all currently supported
-**     stations by calling the routine repeatedly, with n=1,2,3...
+**     stations by calling the function repeatedly, with n=1,2,3...
 **     When name="?" is seen, the list of stations has been
 **     exhausted.
 **
@@ -78,7 +78,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   19 August 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -136,13 +136,13 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
          2364.0
       },
 
-/* Lick 120" (1984 Almanac) */
+/* Lick 120" (S.L.Allen, private communication, 2002) */
       {
          "LICK120",
          "Lick 120 inch",
-         WEST(121,38, 9.9),
-         NORTH(37,20,35.2),
-         1290.0
+         WEST(121,38,13.689),
+         NORTH(37,20,34.931),
+         1286.0
       },
 
 /* MMT 6.5m conversion (MMT Observatory website) */
@@ -830,13 +830,13 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
       },
 
 /* Gemini South, Cerro Pachon
-   (GPS readings by Rolando Rogers) */
+   (GPS readings by Patrick Wallace) */
       {
          "GEMINIS",
          "Gemini South 8-m telescope",
-         WEST(70,44,12.1),
+         WEST(70,44,11.5),
          SOUTH(30,14,26.7),
-         2722.0
+         2738.0
       },
 
 /* Cologne Observatory for Submillimeter Astronomy (KOSMA)
@@ -874,7 +874,7 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
 
 /* ------------------------------------------------------------------- */
 
-   int m;
+   int m, i, ic;
 
 
 /* Station specified by number or identifier? */
@@ -888,8 +888,12 @@ void slaObs ( int n, char *c, char *name, double *w, double *p, double *h )
    } else {
 
    /* Station specified by identifier:  determine corresponding number */
+      for ( i = 0; i < 10; i++ ) {
+         ic = (int) c[i];
+         if ( ic == ' ' || ic == '\0' ) break;
+      }
       for ( m = 0; m < NMAX; m++ ) {
-         if ( ! strncmp ( c, statab[m].id, 10 ) ) {
+         if ( ! strncmp ( c, statab[m].id, i ) ) {
             break;
          }
       }

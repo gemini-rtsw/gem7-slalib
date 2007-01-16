@@ -16,9 +16,10 @@ double slaEpj ( double date )
 **  The result is the Julian epoch.
 **
 **  Reference:
+**
 **     Lieske,J.H., 1979. Astron. Astrophys.,73,282.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -20,7 +20,7 @@ void slaDmxv ( double dm[3][3], double va[3], double vb[3] )
 **
 **  Note:  va and vb may be the same array.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -28,7 +28,8 @@ void slaDmxv ( double dm[3][3], double va[3], double vb[3] )
    int i, j;
    double w, vw[3];
 
-/* Matrix dm * vector va -> vector vw */
+
+/* Matrix dm * vector va -> vector vw. */
    for ( j = 0; j < 3; j++ ) {
       w = 0.0;
       for ( i = 0; i < 3; i++ ) {
@@ -37,7 +38,7 @@ void slaDmxv ( double dm[3][3], double va[3], double vb[3] )
       vw[j] = w;
    }
 
-/* Vector vw -> vector vb */
+/* Vector vw -> vector vb. */
    for ( j = 0; j < 3; j++ ) {
       vb[j] = vw[j];
    }

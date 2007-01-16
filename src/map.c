@@ -35,8 +35,8 @@ void slaMap ( double rm, double dm, double pr, double pd,
 **
 **  1)  eq is the Julian epoch specifying both the reference frame and
 **      the epoch of the position - usually 2000.  For positions where
-**      the epoch and equinox are different, use the routine slaPm to
-**      apply proper motion corrections before using this routine.
+**      the epoch and equinox are different, use the function slaPm to
+**      apply proper motion corrections before using this function.
 **
 **  2)  The distinction between the required TDB and TT is always
 **      negligible.  Moreover, for all but the most critical
@@ -44,12 +44,12 @@ void slaMap ( double rm, double dm, double pr, double pd,
 **
 **  3)  The proper motions in RA are dRA/dt rather than cos(Dec)*dRA/dt.
 **
-**  4)  This routine may be wasteful for some applications because it
+**  4)  This function may be wasteful for some applications because it
 **      recomputes the Earth position/velocity and the precession-
 **      nutation matrix each time, and because it allows for parallax
 **      and proper motion.  Where multiple transformations are to be
 **      carried out for one epoch, a faster method is to call the
-**      slaMappa routine once and then either the slaMapqk routine
+**      slaMappa function once and then either the slaMapqk function
 **      (which includes parallax and proper motion) or slaMapqkz (which
 **      assumes zero parallax and proper motion).
 **
@@ -57,12 +57,12 @@ void slaMap ( double rm, double dm, double pr, double pd,
 **      precession-nutation model (IAU 1976 precession, Shirai &
 **      Fukushima 2001 forced nutation and precession corrections).
 **
-**  6)  The accuracy is further limited by the routine slaEvp, called
+**  6)  The accuracy is further limited by the function slaEvp, called
 **      by slaMappa, which computes the Earth position and velocity
 **      using the methods of Stumpff.  The maximum error is about
 **      0.3 mas.
 **
-**  Last revision:   17 September 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

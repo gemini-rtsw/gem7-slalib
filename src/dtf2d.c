@@ -26,9 +26,9 @@ void slaDtf2d ( int ihour, int imin, double sec, double *days, int *j )
 **
 **     1)  The result is computed even if any of the range checks fail.
 **
-**     2)  The sign must be dealt with outside this routine.
+**     2)  The sign must be dealt with outside this function.
 **
-**  Last revision:   31 January 1997
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -37,23 +37,20 @@ void slaDtf2d ( int ihour, int imin, double sec, double *days, int *j )
 #define D2S 86400.0
 
 {
-/* Preset status */
-   *j = 0;
+   int jstat;
 
-/* Validate sec, min, hour */
-   if ( ( sec < 0.0 ) || ( sec >= 60.0 ) ) {
-      *j = 3;
-      return;
-   }
-   if ( ( imin < 0 ) || ( imin > 59 ) ) {
-      *j = 2;
-      return;
-   }
-   if ( ( ihour < 0 ) || ( ihour > 23 ) ) {
-      *j = 1;
-      return;
-   }
 
-/* Compute interval */
-   *days = ( 60.0 * ( 60.0 * (double) ihour + (double) imin ) + sec ) / D2S;
+/* Preset status. */
+   jstat = 0;
+
+/* Validate sec, min, hour. */
+   if ( ( sec < 0.0 ) || ( sec >= 60.0 ) ) jstat = 3;
+   if ( ( imin < 0 ) || ( imin > 59 ) ) jstat = 2;
+   if ( ( ihour < 0 ) || ( ihour > 23 ) ) jstat = 1;
+
+/* Compute interval (irrespective of validation) and return status. */
+   *days = ( 60.0 * ( 60.0 * (double) ihour
+                           + (double) imin )
+                                    + sec ) / D2S;
+   *j = jstat;
 }

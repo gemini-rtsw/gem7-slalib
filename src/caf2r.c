@@ -25,11 +25,11 @@ void slaCaf2r ( int ideg, int iamin, float asec, float *rad, int *j )
 **  Notes:
 **     1)  The result is computed even if any of the range checks fail.
 **
-**     2)  The sign must be dealt with outside this routine.
+**     2)  The sign must be dealt with outside this function.
 **
 **  Called:  slaDaf2r
 **
-**  Last revision:   31 October 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

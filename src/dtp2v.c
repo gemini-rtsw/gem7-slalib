@@ -28,9 +28,10 @@ void slaDtp2v ( double xi, double eta, double v0[3], double v[3] )
 **     based on the arbitrary assumption that the RA of the tangent
 **     point is zero.
 **
-**  3  This routine is the Cartesian equivalent of the routine slaDtp2s.
+**  3  This function is the Cartesian equivalent of the function
+**     slaDtp2s.
 **
-**  Last revision:   12 February 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

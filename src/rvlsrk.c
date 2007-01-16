@@ -18,8 +18,8 @@ float slaRvlsrk ( float r2000, float d2000 )
 **     Component of "standard" solar motion in direction R2000,D2000 (km/s)
 **
 **  Sign convention:
-**     The result is +ve when the Sun is receding from the given point on
-**     the sky.
+**     The result is +ve when the Sun is receding from the given point
+**     on the sky.
 **
 **  Note:  The Local Standard of Rest used here is one of several
 **         "kinematical" LSRs in common use.  A kinematical LSR is the
@@ -32,13 +32,14 @@ float slaRvlsrk ( float r2000, float d2000 )
 **         around the Galactic centre.  The Sun's motion with respect to
 **         the dynamical LSR is called the "peculiar" solar motion.  To
 **         obtain a radial velocity correction with respect to the
-**         dynamical LSR use the routine slaRvlsrd.
+**         dynamical LSR use the function slaRvlsrd.
 **
-**  Reference:  Delhaye (1965), in "Stars and Stellar Systems", vol 5, p73.
+**  Reference:  Delhaye (1965), in "Stars and Stellar Systems", vol 5,
+**              p73.
 **
 **  Called:  slaCs2c, slaVdv
 **
-**  Last revision:   27 November 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

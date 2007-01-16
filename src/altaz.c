@@ -10,7 +10,7 @@ void slaAltaz ( double ha, double dec, double phi,
 **  - - - - - - - - -
 **
 **  Positions, velocities and accelerations for an altazimuth
-**  telescope mount.
+**  telescope mount that is tracking a star.
 **
 **  (double precision)
 **
@@ -53,27 +53,27 @@ void slaAltaz ( double ha, double dec, double phi,
 **
 **  2)  Azimuth is returned in the range 0-2pi;  north is zero,
 **      and east is +pi/2.  Elevation and parallactic angle are
-**      returned in the range +/-pi.  Position angle is +ve
-**      for a star west of the meridian and is the angle NP-star-zenith.
+**      returned in the range +/-pi.  Parallactic angle is +ve for
+**      a star west of the meridian and is the angle NP-star-zenith.
 **
 **  3)  The latitude is geodetic as opposed to geocentric.  The
 **      hour angle and declination are topocentric.  Refraction and
 **      deficiencies in the telescope mounting are ignored.  The
-**      purpose of the routine is to give the general form of the
+**      purpose of the function is to give the general form of the
 **      quantities.  The details of a real telescope could profoundly
 **      change the results, especially close to the zenith.
 **
 **  4)  No range checking of arguments is carried out.
 **
 **  5)  In applications which involve many such calculations, rather
-**      than calling the present routine it will be more efficient to
+**      than calling the present function it will be more efficient to
 **      use inline code, having previously computed fixed terms such
 **      as sine and cosine of latitude, and (for tracking a star)
 **      sine and cosine of declination.
 **
 **  Defined in slamac.h:  DPI, D2PI
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

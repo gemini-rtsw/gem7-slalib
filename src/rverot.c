@@ -28,10 +28,10 @@ float slaRverot ( float phi, float ra, float da, float st )
 **     The simple algorithm used assumes a spherical Earth, of
 **     a radius chosen to give results accurate to about 0.0005 km/s
 **     for observing stations at typical latitudes and heights.  For
-**     applications requiring greater precision, use the routine
+**     applications requiring greater precision, use the function
 **     slaPvobs.
 **
-**  Last revision:   9 April 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

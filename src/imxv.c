@@ -12,7 +12,7 @@ void slaImxv ( float rm[3][3], float va[3], float vb[3] )
 **
 **  (single precision)
 **
-**  n.b.  The matrix must be unitary, as this routine assumes that
+**  n.b.  The matrix must be unitary, as this function assumes that
 **        the inverse and transpose are identical.
 **
 **  Given:
@@ -24,7 +24,7 @@ void slaImxv ( float rm[3][3], float va[3], float vb[3] )
 **
 **  The same vector can be specified for both va and vb.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

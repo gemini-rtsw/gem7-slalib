@@ -28,18 +28,18 @@ double slaDat ( double utc )
 **  2  For epochs from 1961 January 1 onwards, the expressions from the
 **     file ftp://maia.usno.navy.mil/ser7/tai-utc.dat are used.
 **
-**  3  The 5ms timestep at 1961 January 1 is taken from 2.58.1 (p87) of
+**  3  The 5ms time step at 1961 January 1 is taken from 2.58.1 (p87) of
 **     the 1992 Explanatory Supplement.
 **
 **  4  UTC began at 1960 January 1.0 (JD 2436934.5) and it is improper
-**     to call the routine with an earlier epoch.  However, if this
+**     to call the function with an earlier epoch.  However, if this
 **     is attempted, the TAI-UTC expression for the year 1960 is used.
 **
 **     :-----------------------------------------:
 **     :                                         :
 **     :                IMPORTANT                :
 **     :                                         :
-**     :  This routine must be updated on each   :
+**     :  This function must be updated on each  :
 **     :     occasion that a leap second is      :
 **     :                announced                :
 **     :                                         :
@@ -47,9 +47,9 @@ double slaDat ( double utc )
 **     :                                         :
 **     :-----------------------------------------:
 **
-**  Last revision:   31 May 1999
+**  Last revision:   22 October 2006
 **
-**  Copyright 1999 P.T.Wallace.  All rights reserved.
+**  Copyright P.T.Wallace.  All rights reserved.
 */
 {
 

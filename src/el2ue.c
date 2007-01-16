@@ -8,7 +8,8 @@ void slaEl2ue ( double date, int jform, double epoch, double orbinc,
 **   s l a E l 2 u e
 **  - - - - - - - - -
 **
-**  Transform conventional osculating orbital elements into "universal" form.
+**  Transform conventional osculating orbital elements into "universal"
+**  form.
 **
 **  Given:
 **     date    double     epoch (TT MJD) of osculation (Note 3)
@@ -60,14 +61,14 @@ void slaEl2ue ( double date, int jform, double epoch, double orbinc,
 **     estimate of psi, the "universal eccentric anomaly" at a given
 **     date and (v) that date.
 **
-**  2  The companion routine is slaUe2pv.  This takes the set of numbers
-**     that the present routine outputs and uses them to derive the
-**     object's position and velocity.  A single prediction requires one
-**     call to the present routine followed by one call to slaUe2pv;
-**     for convenience, the two calls are packaged as the routine
-**     slaPlanel.  Multiple predictions may be made by again calling the
-**     present routine once, but then calling slaUe2pv multiple times,
-**     which is faster than multiple calls to slaPlanel.
+**  2  The companion function is slaUe2pv.  This takes the set of
+**     numbers that the present function outputs and uses them to derive
+**     the object's position and velocity.  A single prediction requires
+**     one call to the present function followed by one call to
+**     slaUe2pv;  for convenience, the two calls are packaged as the
+**     function slaPlanel.  Multiple predictions may be made by again
+**     calling the present function once, but then calling slaUe2pv
+**     multiple times, which is faster than multiple calls to slaPlanel.
 **
 **  3  date is the epoch of osculation.  It is in the TT timescale
 **     (formerly Ephemeris Time, ET) and is a Modified Julian Date
@@ -123,7 +124,7 @@ void slaEl2ue ( double date, int jform, double epoch, double orbinc,
 **
 **  Reference:  Everhart, E. & Pitkin, E.T., Am.J.Phys. 51, 712, 1983.
 **
-**  Last revision:   11 April 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -264,7 +265,7 @@ void slaEl2ue ( double date, int jform, double epoch, double orbinc,
 
    dt = ( date - pht ) * GCON;
 
-/* First Approximation to the Universal Eccentric Anomaly, psi, */
+/* First approximation to the Universal Eccentric Anomaly, psi, */
 /* based on the circle (fc) and parabola (fp) values.           */
    fc = dt / q;
    w = pow ( 3.0 * dt + sqrt ( 9.0 * dt * dt + 8.0 * q * q * q ),

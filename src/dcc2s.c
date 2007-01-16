@@ -6,26 +6,25 @@ void slaDcc2s ( double v[3], double *a, double *b )
 **   s l a D c c 2 s
 **  - - - - - - - - -
 **
-**  Direction cosines to spherical coordinates.
+**  Cartesian to spherical coordinates.
 **
 **  (double precision)
 **
 **  Given:
-**     v      double[3]   x,y,z vector
+**     v       double[3]   x,y,z vector
 **
 **  Returned:
-**     *a,*b  double      spherical coordinates in radians
+**     *a,*b   double      spherical coordinates in radians
 **
-**  The spherical coordinates are longitude (+ve anticlockwise
-**  looking from the +ve latitude pole) and latitude.  The
-**  Cartesian coordinates are right handed, with the x axis
-**  at zero longitude and latitude, and the z axis at the
-**  +ve latitude pole.
+**  The spherical coordinates are longitude (+ve anticlockwise looking
+**  from the +ve latitude pole) and latitude.  The Cartesian coordinates
+**  are right handed, with the x axis at zero longitude and latitude,
+**  and the z axis at the +ve latitude pole.
 **
-**  If v is null, zero a and b are returned.
-**  At either pole, zero a is returned.
+**  If v is null, zero a and b are returned.  At either pole, zero a is
+**  returned.
 **
-**  Last revision:   31 October 1993
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

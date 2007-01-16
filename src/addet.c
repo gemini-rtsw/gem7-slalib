@@ -25,13 +25,13 @@ void slaAddet ( double rm, double dm, double eq, double *rc, double *dc )
 **     e-terms.  If it is necessary to convert a formal mean
 **     place (for example a pulsar timing position) to one
 **     consistent with such a star catalogue, then the RA,Dec
-**     should be adjusted using this routine.
+**     should be adjusted using this function.
 **
 **  Reference:
 **     Explanatory Supplement to the Astronomical Almanac,
 **     ed P.K.Seidelmann (1992), page 169.
 **
-**  Last revision:   25 July 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

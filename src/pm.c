@@ -42,7 +42,7 @@ void slaPm ( double r0, double d0, double pr, double pd,
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   19 January 2000
+**  Last revision:   3 August 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -52,6 +52,7 @@ void slaPm ( double r0, double d0, double pr, double pd,
 
    int i;
    double w, em[3], t, p[3];
+
 
 /* Spherical to Cartesian */
    slaDcs2c ( r0, d0, p );
@@ -64,8 +65,9 @@ void slaPm ( double r0, double d0, double pr, double pd,
 
 /* Apply the motion */
    t = ep1 - ep0;
-   for ( i = 0; i < 3; i++ )
-      p[i] = p[i] + (t * em[i]);
+   for ( i = 0; i < 3; i++ ) {
+      p[i] += t*em[i];
+   }
 
 /* Cartesian to spherical */
    slaDcc2s ( p, r1, d1 );

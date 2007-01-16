@@ -10,13 +10,11 @@ void slaM2av ( float rmat[3][3], float axvec[3] )
 **
 **  (single precision)
 **
-**  A rotation matrix describes a rotation about some arbitrary axis.
-**  The axis is called the Euler axis, and the angle through which the
-**  reference frame rotates is called the Euler angle.  The axial
-**  vector returned by this routine has the same direction as the
-**  Euler axis, and its magnitude is the Euler angle in radians.  (The
-**  magnitude and direction can be separated by means of the routine
-**  slaVn.)
+**  A rotation matrix describes a rotation about some arbitrary axis,
+**  called the Euler axis.  The "axial vector" returned by this function
+**  has the same direction as the Euler axis, and its magnitude is the
+**  amount of rotation in radians.  (The magnitude and direction can be
+**  separated by means of the function slaVn.)
 **
 **  Given:
 **    rmat   float[3][3]   rotation matrix
@@ -29,7 +27,7 @@ void slaM2av ( float rmat[3][3], float axvec[3] )
 **
 **  If rmat is null, so is the result.
 **
-**  Last revision:   9 April 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

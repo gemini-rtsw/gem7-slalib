@@ -29,11 +29,11 @@ void slaCtf2r ( int ihour, int imin, float sec, float *rad, int *j )
 **
 **     1)  The result is computed even if any of the range checks fail.
 **
-**     2)  The sign must be dealt with outside this routine.
+**     2)  The sign must be dealt with outside this function.
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   30 October 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

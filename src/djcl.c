@@ -20,11 +20,11 @@ void slaDjcl ( double djm, int *iy, int *im, int *id, double *fd, int *j)
 **     *j       int        status:
 **                      -1 = unacceptable date (before 4701BC March 1)
 **
-**  The algorithm is derived from that of Hatcher 1984 (QJRAS 25, 53-55).
+**  The algorithm is adapted from Hatcher 1984 (QJRAS 25, 53-55).
 **
 **  Defined in slamac.h:  dmod
 **
-**  Last revision:   12 March 1998
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -32,20 +32,21 @@ void slaDjcl ( double djm, int *iy, int *im, int *id, double *fd, int *j)
   double f, d;
   long jd, n4, nd10;
 
-/* Check if date is acceptable */
+
+/* Check if date is acceptable. */
    if ( ( djm <= -2395520.0 ) || ( djm >= 1e9 ) ) {
       *j = -1;
       return;
    } else {
       *j = 0;
 
-   /* Separate day and fraction */
+   /* Separate day and fraction. */
       f = dmod ( djm, 1.0 );
       if ( f < 0.0 ) f += 1.0;
       d = djm - f;
       d = dnint ( d );
 
-   /* Express day in Gregorian calendar */
+   /* Express day in Gregorian calendar. */
       jd = (long) dnint ( d ) + 2400001;
       n4 = 4L*(jd+((6L*((4L*jd-17918L)/146097L))/4L+1L)/2L-37L);
       nd10 = 10L*(((n4-237L)%1461L)/4L)+5L;

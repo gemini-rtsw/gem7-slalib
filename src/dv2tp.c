@@ -12,15 +12,15 @@ void slaDv2tp ( double v[3], double v0[3], double *xi, double *eta, int *j )
 **  (double precision)
 **
 **  Given:
-**     v         double[3]    direction cosines of star
-**     v0        double[3]    direction cosines of tangent point
+**     v         double[3]  direction cosines of star
+**     v0        double[3]  direction cosines of tangent point
 **
 **  Returned:
-**     *xi,*eta  double       tangent plane coordinates of star
-**     j         int          status:   0  =  OK
-**                                      1  =  error, star too far from axis
-**                                      2  =  error, antistar on tangent plane
-**                                      3  =  error, antistar too far from axis
+**     *xi,*eta  double     tangent plane coordinates of star
+**     j         int        status:   0  =  OK
+**                                    1  =  error, star too far from axis
+**                                    2  =  error, antistar on tangent plane
+**                                    3  =  error, antistar too far from axis
 **
 **  Notes:
 **
@@ -30,9 +30,10 @@ void slaDv2tp ( double v[3], double v0[3], double *xi, double *eta, int *j )
 **  2  If v0 points at a pole, the returned xi,eta will be based on the
 **     arbitrary assumption that the RA of the tangent point is zero.
 **
-**  3  This routine is the Cartesian equivalent of the routine slaDs2tp.
+**  3  This function is the Cartesian equivalent of the function
+**     slaDs2tp.
 **
-**  Last revision:   1 January 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

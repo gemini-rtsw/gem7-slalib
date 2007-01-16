@@ -44,14 +44,14 @@ void slaDe2h ( double ha, double dec, double phi, double *az, double *el )
 **  5)  No range checking of arguments is carried out.
 **
 **  6)  In applications which involve many such calculations, rather
-**      than calling the present routine it will be more efficient to
+**      than calling the present function it will be more efficient to
 **      use inline code, having previously computed fixed terms such
 **      as sine and cosine of latitude, and (for tracking a star)
 **      sine and cosine of declination.
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

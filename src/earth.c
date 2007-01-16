@@ -34,11 +34,12 @@ void slaEarth ( int iy, int id, float fd, float pv[6] )
 **       13/5 E-5 AU = 19200/7600 km in position
 **       47/26 E-10 AU/s = 0.0070/0.0039 km/s in speed
 **
-**  4  More precise results are obtainable with the routine slaEvp.
+**  4  More accurate results are obtainable with the functions slaEvp
+**     and slaEpv.
 **
 **  Defined in slamac.h:  D2PI, dmod
 **
-**  Last revision:   25 April 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

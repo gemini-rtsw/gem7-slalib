@@ -24,11 +24,11 @@ double slaDpav ( double v1 [ 3 ], double v2 [ 3 ] )
 **
 **  The vectors v1 and v2 need not be unit vectors.
 **
-**  The routine slaDbear performs an equivalent function except
+**  The function slaDbear performs an equivalent function except
 **  that the points are specified in the form of spherical
 **  coordinates.
 **
-**  Last revision:   12 December 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

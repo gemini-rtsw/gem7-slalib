@@ -36,10 +36,10 @@ void slaMoon ( int iy, int id, float fd, float pv[6] )
 **     for the interval 1960-2025 are 14 arcsec and 0.2 arcsec/hour in
 **     longitude, 9 arcsec and 0.2 arcsec/hour in latitude, 350 km and
 **     2 m/s in distance.)  Note that the distance accuracy is
-**     comparatively poor because this routine is principally intended
+**     comparatively poor because this function is principally intended
 **     for computing topocentric direction.
 **
-**  4  This routine is only a partial implementation of the original
+**  4  This function is only a partial implementation of the original
 **     Meeus algorithm (reference below), which offers 4 times the
 **     accuracy in direction and 30 times the accuracy in distance
 **     when fully implemented (as it is in slaDmoon).
@@ -49,7 +49,7 @@ void slaMoon ( int iy, int id, float fd, float pv[6] )
 **
 **  Defined in slamac.h:  dmod
 **
-**  Last revision:   9 April 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -15,11 +15,9 @@ double slaDvdv ( double va[3], double vb[3] )
 **      va      double(3)     first vector
 **      vb      double(3)     second vector
 **
-**
 **  The result is the scalar product va.vb (double precision)
 **
-**
-**  Last revision:   31 October 1993
+**  Last revision:   22 July 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

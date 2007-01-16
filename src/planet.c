@@ -7,13 +7,12 @@ void slaPlanet ( double date, int np, double pv[6], int *jstat )
 **  - - - - - - - - - -
 **
 **  Approximate heliocentric position and velocity of a specified
-**  major planet.
+**  planet.
 **
 **  Given:
 **     date     double      TDB (loosely ET) as a Modified Julian Date
 **                                                  (JD-2400000.5)
-**     np       int         planet (1=Mercury, 2=Venus, 3=EMB, ...
-**                                                    ... 9=Pluto)
+**     np       int         body (1=Mercury, 2=Venus, 3=EMB,...9=Pluto)
 **
 **  Returned:
 **     pv       double[6]   heliocentric x,y,z,xdot,ydot,zdot, J2000
@@ -38,13 +37,13 @@ void slaPlanet ( double date, int np, double pv[6], int *jstat )
 **     status (jstat = -1) is returned and the pv vector set to zeroes.
 **
 **  4  The algorithm for obtaining the mean elements of the planets
-**     from Mercury to Neptune is due to J.L. Simon, P. Bretagnon,
+**     (Mercury to Neptune) is due to J.L. Simon, P. Bretagnon,
 **     J. Chapront, M. Chapront-Touze, G. Francou and J. Laskar
 **     (Bureau des Longitudes, Paris).  The (completely different)
-**     algorithm for calculating the ecliptic coordinates of Pluto
-**     is by Meeus.
+**     algorithm for calculating the ecliptic coordinates of the dwarf
+**     planet Pluto is by Meeus.
 **
-**  5  Comparisons of the present routine with the JPL DE200 ephemeris
+**  5  Comparisons of the present function with the JPL DE200 ephemeris
 **     give the following RMS errors over the interval 1960-2025:
 **
 **                      position (km)     speed (metre/sec)
@@ -108,9 +107,9 @@ void slaPlanet ( double date, int np, double pv[6], int *jstat )
 **
 **  7  For np=3 the result is for the Earth-Moon Barycentre.  To
 **     obtain the heliocentric position and velocity of the Earth,
-**     either use the SLALIB routine slaEvp or use slaDmoon and
-**     subtract 0.012150581 times the geocentric Moon vector from
-**     the EMB vector produced by the present routine.  (The Moon
+**     either use the SLALIB function slaEvp (or slaEpv) or use slaDmoon
+**     and subtract 0.012150581 times the geocentric Moon vector from
+**     the EMB vector produced by the present function.  (The Moon
 **     vector should be precessed to J2000 first, but this can
 **     be omitted for modern epochs without introducing significant
 **     inaccuracy.)
@@ -120,7 +119,7 @@ void slaPlanet ( double date, int np, double pv[6], int *jstat )
 **
 **  Defined in slamac.h:  D2PI, DAS2R, DD2R, dmod
 **
-**  Last revision:   27 May 1997
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -19,7 +19,7 @@ void slaDmoon ( double date, double pv[6] )
 **
 **  Notes:
 **
-**  1  This routine is a full implementation of the algorithm
+**  1  This function is a full implementation of the algorithm
 **     published by Meeus (see reference).
 **
 **  2  Meeus quotes accuracies of 10 arcsec in longitude, 3 arcsec in
@@ -50,7 +50,7 @@ void slaDmoon ( double date, double pv[6] )
 **
 **  Defined in slamac.h:  DD2R, DAS2R, DS2R, dmod
 **
-**  Last revision:   22 January 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

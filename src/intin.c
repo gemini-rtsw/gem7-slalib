@@ -83,9 +83,9 @@ void slaIntin ( char *string, int *nstrt, long *ireslt, int *jflag )
 **           pointing to the character following the last
 **           one used before the error came to light.
 **
-**     12    See also slaFlotin and slaDfltin.
+**     12    See also slaInt2in, slaFlotin and slaDfltin.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   2 January 2004
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -128,7 +128,7 @@ void slaIntin ( char *string, int *nstrt, long *ireslt, int *jflag )
 
 
 /* Find string length */
-   l_string = strlen ( string );
+   l_string = (int) strlen ( string );
 
 /* Current character index (1st = 0) */
    nptr = *nstrt - 1;
@@ -203,8 +203,9 @@ void slaIntin ( char *string, int *nstrt, long *ireslt, int *jflag )
 
       /* Accept decimals */
          dres = dres * 1e1 + digit;
-         state = ( fabs ( dres ) <= LONG_MAX) ?
-                       seek_digit : next_field_error;
+         state = ( dres >= (double) LONG_MIN &&
+                   dres <= (double) LONG_MAX ) ? seek_digit :
+                                                 next_field_error;
          break;
 
       case seek_digit :
@@ -311,7 +312,7 @@ static int idchi ( int l_string, char *string, int *nptr, double *digit )
 **   i d c h i
 **  - - - - -
 **
-**  Internal routine used by slaIntin:
+**  Internal function used by slaIntin:
 **
 **  identify next character in string.
 **
@@ -337,7 +338,7 @@ static int idchi ( int l_string, char *string, int *nptr, double *digit )
 **                                OTHER   else
 **                                END     outside field
 **
-**  Last revision:   24 June 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

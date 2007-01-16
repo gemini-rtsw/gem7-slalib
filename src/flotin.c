@@ -89,9 +89,9 @@ void slaFlotin ( char *string, int *nstrt, float *reslt, int *jflag )
 **             b)  Detected during the decode.
 **                 (b overrides a.)
 **
-**     18    See also slaDfltin and slaIntin.
+**     18    See also slaDfltin, slaInt2in and slaIntin.
 **
-**  Last revision:   23 November 1995
+**  Last revision:   10 December 2002
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

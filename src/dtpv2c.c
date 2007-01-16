@@ -37,12 +37,13 @@ void slaDtpv2c ( double xi, double eta, double v[3], double v01[3],
 **     solutions.  The argument n indicates whether the second of the
 **     two solutions returned is useful;  n=1 indicates only one useful
 **     solution, the usual case.  Under these circumstances, the second
-**     solution can be regarded as valid if the vector v02 is interpreted
-**     as the "over-the-pole" case.
+**     solution can be regarded as valid if the vector v02 is
+**     interpreted as the "beyond the pole" case.
 **
-**  4  This routine is the Cartesian equivalent of the routine slaDtps2c.
+**  4  This function is the Cartesian equivalent of the function
+**     slaDtps2c.
 **
-**  Last revision:   5 June 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

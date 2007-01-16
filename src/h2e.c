@@ -44,11 +44,11 @@ void slaH2e ( float az, float el, float phi, float *ha, float *dec )
 **  6)  No range checking of arguments is done.
 **
 **  7)  In applications which involve many such calculations, rather
-**      than calling the present routine it will be more efficient to
+**      than calling the present function it will be more efficient to
 **      use inline code, having previously computed fixed terms such
 **      as sine and cosine of latitude.
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

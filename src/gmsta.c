@@ -12,7 +12,7 @@ double slaGmsta ( double date, double ut )
 **  (double precision)
 **
 **  Given:
-*     date   double     UT1 date (MJD: integer part of JD-2400000.5))
+**    date   double     UT1 date (MJD: integer part of JD-2400000.5)
 **    ut     double     UT1 time (fraction of a day)
 **
 **  The result is the Greenwich Mean Sidereal Time (double precision,
@@ -21,7 +21,7 @@ double slaGmsta ( double date, double ut )
 **  There is no restriction on how the UT is apportioned between the
 **  date and ut1 arguments.  Either of the two arguments could, for
 **  example, be zero and the entire date+time supplied in the other.
-**  However, the routine is designed to deliver maximum accuracy when
+**  However, the function is designed to deliver maximum accuracy when
 **  the date argument is a whole number and the ut argument lies in
 **  the range 0 to 1, or vice versa.
 **
@@ -30,15 +30,17 @@ double slaGmsta ( double date, double ut )
 **  the GMST at 0 hours UT1.  In fact, it gives the difference between
 **  the GMST and the UT, the steady 4-minutes-per-day drawing-ahead of
 **  ST with respect to UT.  When whole days are ignored, the expression
-**  happens to equal the GMST at 0 hours UT1 each day.
+**  happens to equal the GMST at 0 hours UT1 each day.  Note that the
+**  factor 1.0027379... does not appear explicitly but in the form of
+**  the coefficient 8640184.812866, which is 86400x36525x0.0027379...
 **
-**  In this routine, the entire UT1 (the sum of the two arguments date
+**  In this function, the entire UT1 (the sum of the two arguments date
 **  and ut) is used directly as the argument for the standard formula.
 **  The UT1 is then added, but omitting whole days to conserve accuracy.
 **
-**  See also the routine slaGmst, which accepts the UT1 as a single
+**  See also the function slaGmst, which accepts the UT1 as a single
 **  argument.  Compared with slaGmst, the extra numerical precision
-**  delivered by the present routine is unlikely to be important in
+**  delivered by the present function is unlikely to be important in
 **  an absolute sense, but may be useful when critically comparing
 **  algorithms and in applications where two sidereal times close
 **  together are differenced.
@@ -47,7 +49,7 @@ double slaGmsta ( double date, double ut )
 **
 **  Defined in slamac.h:  DS2R, dmod
 **
-**  Last revision:   13 April 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

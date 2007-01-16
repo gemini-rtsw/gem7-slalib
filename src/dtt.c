@@ -26,12 +26,12 @@ double slaDtt ( double utc )
 **
 **  2  Pre 1972 January 1 a fixed value of 10 + ET-TAI is returned.
 **
-**  3  See also the routine slaDt, which roughly estimates ET-UT for
+**  3  See also the function slaDt, which roughly estimates ET-UT for
 **     historical epochs.
 **
 **  Called:  slaDat
 **
-**  Last revision:   6 December 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

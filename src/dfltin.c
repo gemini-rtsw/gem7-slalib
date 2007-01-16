@@ -93,9 +93,9 @@ void slaDfltin ( char *string, int *nstrt, double *dreslt, int *jflag )
 **             b)  Detected during the decode.
 **                 (b overrides a.)
 **
-**     18    See also slaFlotin and slaIntin.
+**     18    See also slaFlotin, slaIntin and slaInt2in.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   12 April 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -142,12 +142,12 @@ void slaDfltin ( char *string, int *nstrt, double *dreslt, int *jflag )
 #define done                           9900
 
 
-   int msign, nexp, ndp, isignx, j;
+   int msign, nexp, ndp, isignx, j=0;
    double dmant;
 
 
 /* Find string length */
-   l_string = strlen ( string );
+   l_string = (int) strlen ( string );
 
 /* Current character index */
    nptr = *nstrt - 1;
@@ -533,7 +533,7 @@ static int idchf ( int l_string, char *string,
 **   i d c h f
 **  - - - - -
 **
-**  Internal routine used by slaDfltin:
+**  Internal function used by slaDfltin:
 **
 **  identify next character in string.
 **
@@ -562,7 +562,7 @@ static int idchf ( int l_string, char *string,
 **                                OTHER   else
 **                                END     outside field
 **
-**  Last revision:   24 June 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -19,7 +19,7 @@ double slaEpco ( char k0, char k, double e )
 **  Notes:
 **
 **     1) The result is always either equal to or very close to
-**        the given epoch e.  The routine is required only in
+**        the given epoch e.  The function is required only in
 **        applications where punctilious treatment of heterogeneous
 **        mixtures of star positions is necessary.
 **
@@ -30,7 +30,7 @@ double slaEpco ( char k0, char k, double e )
 **        o  If k0 is 'B' or 'b' and k isn't, the conversion is J to B.
 **        o  In all other cases, the conversion is B to J.
 **
-**  Last revision:   18 November 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

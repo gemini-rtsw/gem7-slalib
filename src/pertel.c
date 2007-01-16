@@ -91,21 +91,21 @@ void slaPertel (int jform, double date0, double date1,
 **
 **  4  Unused elements (am0 and am1 for jform=3) are not accessed.
 **
-**  5  See the slaPertue routine for details of the algorithm used.
+**  5  See the slaPertue function for details of the algorithm used.
 **
-**  6  This routine is not intended to be used for major planets, which
+**  6  This function is not intended to be used for major planets, which
 **     is why jform=1 is not available and why there is no opportunity
 **     to specify either the longitude of perihelion or the daily
 **     motion.  However, if jform=2 elements are somehow obtained for a
-**     major planet and supplied to the routine, sensible results will,
-**     in fact, be produced.  This happens because the slaPertue  routine
-**     that is called to perform the calculations checks the separation
-**     between the body and each of the planets and interprets a
-**     suspiciously small value (1E-3 AU) as an attempt to apply it to
-**     the planet concerned.  If this condition is detected, the
-**     contribution from that planet is ignored, and the status is set to
-**     the planet number (1-10 = Mercury, Venus, EMB, Mars, Jupiter,
-**     Saturn, Uranus, Neptune, Earth, Moon) as a warning.
+**     major planet and supplied to the function, sensible results will,
+**     in fact, be produced.  This happens because the slaPertue
+**     function that is called to perform the calculations checks the
+**     separation between the body and each of the planets and
+**     interprets a suspiciously small value (1E-3 AU) as an attempt to
+**     apply it to the planet concerned.  If this condition is detected,
+**     the contribution from that planet is ignored, and the status is
+**     set to the planet number (1-10 = Mercury, Venus, EMB, Mars,
+**     Jupiter, Saturn, Uranus, Neptune, Earth, Moon) as a warning.
 **
 **  Reference:
 **
@@ -114,9 +114,9 @@ void slaPertel (int jform, double date0, double date1,
 **
 **  Called:  slaEl2ue, slaPertue, slaUe2el
 **
-**  Last revision:   19 June 2004
+**  Last revision:   22 October 2006
 **
-**  Copyright 2002 P.T.Wallace.  All rights reserved.
+**  Copyright P.T.Wallace.  All rights reserved.
 */
 {
    double u[13], dm;

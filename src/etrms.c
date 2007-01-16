@@ -34,7 +34,7 @@ void slaEtrms ( double ep, double ev[3] )
 **
 **  Defined in slamac.h:  DAS2R
 **
-**  Last revision:   31 October 1993
+**  Last revision:   7 November 2001
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -56,9 +56,9 @@ void slaEtrms ( double ep, double ev[3] )
               ( 6190.67 + ( 1.65 + 0.012 * t ) * t ) * t ) * DAS2R;
 
 /* E-terms */
-  ek = e * 20.49552 * DAS2R;
-  cp = cos ( p );
-  ev[0] = ek * sin ( p );
-  ev[1] = -ek * cp * cos ( e0 );
-  ev[2] = -ek * cp * sin ( e0 );
+   ek = e * 20.49552 * DAS2R;
+   cp = cos ( p );
+   ev[0] = ek * sin ( p );
+   ev[1] = -ek * cp * cos ( e0 );
+   ev[2] = -ek * cp * sin ( e0 );
 }

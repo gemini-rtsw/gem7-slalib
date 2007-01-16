@@ -30,7 +30,7 @@ double slaDsepv ( double v1[3], double v2[3] )
 **
 **  Called:  slaDvxv, slaDvn, slaDvdv
 **
-**  Last revision:   7 May 2000
+**  Last revision:   14 June 2005
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -46,6 +46,6 @@ double slaDsepv ( double v1[3], double v2[3] )
    c = slaDvdv ( v1, v2 );
 
 /* Angle between the vectors. */
-   return s != 0.0 ? atan2 ( s, c ) : 0.0;
+   return ( s != 0.0 || c != 0.0 ) ? atan2 ( s, c ) : 0.0;
 
 }

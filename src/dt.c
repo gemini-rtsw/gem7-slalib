@@ -36,7 +36,7 @@ double slaDt ( double epoch )
 **     the Astronomical Almanac (see section K8 of the 1995 AA).
 **
 **  3  The use of double-precision for both argument and result is
-**     purely for compatibility with other SLALIB time routines.
+**     purely for compatibility with other SLALIB time functions.
 **
 **  4  The models used are based on a lunar tidal acceleration value
 **     of -26.00 arcsec per century.
@@ -47,7 +47,7 @@ double slaDt ( double epoch )
 **              the Stephenson & Morrison and McCarthy & Babcock
 **              papers.
 **
-**  Last revision:   14 February 1995
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

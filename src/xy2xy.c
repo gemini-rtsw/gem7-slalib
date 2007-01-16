@@ -8,7 +8,7 @@ void slaXy2xy ( double xc1, double yc1, double coeffs[6],
 **  - - - - - - - - -
 **
 **  Transform one [x,y] into another using a linear model of the type
-**  produced by the slaFitxy routine.
+**  produced by the slaFitxy function.
 **
 **  Given:
 **     xc1      double        x-coordinate
@@ -29,14 +29,14 @@ void slaXy2xy ( double xc1, double yc1, double coeffs[6],
 **     coeffs[4] = e
 **     coeffs[5] = f
 **
-**  the present routine performs the transformation:
+**  the present function performs the transformation:
 **
 **     xc2 = a + b*xc1 + c*yc1
 **     yc2 = d + e*xc1 + f*yc1
 **
 **  See also slaFitxy, slaPxy, slaInvf, slaDcmpf.
 **
-**  Last revision:   5 December 1994
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

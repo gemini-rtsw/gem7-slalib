@@ -131,12 +131,15 @@ void slaPv2el ( double pv[], double date, double pmass, int jformr,
 **     the other elements are automatically adjusted to compensate,
 **     and so the elements remain a valid description of the orbit.
 **
+**  7  The osculating epoch for the returned elements is the argument
+**     "date".
+**
 **  Reference:  Sterne, Theodore E., "An Introduction to Celestial
 **              Mechanics", Interscience Publishers, 1960
 **
 **  Called:  slaDranrm
 **
-**  Last revision:   30 November 2000
+**  Last revision:   7 September 2005
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
@@ -256,6 +259,9 @@ void slaPv2el ( double pv[], double date, double pmass, int jformr,
    hat = at / 2.0;
    shat = sin ( hat );
    chat = cos ( hat );
+
+/* Variable initializations to avoid compiler warnings. */
+   am = dn = pl = el = q = tp = 0.0;
 
 /* Ellipse? */
    if ( ecc < 1.0  ) {

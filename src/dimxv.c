@@ -12,7 +12,7 @@ void slaDimxv ( double dm[3][3], double va[3], double vb[3] )
 **
 **  (double precision)
 **
-**  (n.b.  The matrix must be unitary, as this routine assumes that
+**  (n.b.  The matrix must be unitary, as this function assumes that
 **   the inverse and transpose are identical)
 **
 **
@@ -25,7 +25,7 @@ void slaDimxv ( double dm[3][3], double va[3], double vb[3] )
 **
 **  Note:  va and vb may be the same array.
 **
-**  Last revision:   6 November 1999
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

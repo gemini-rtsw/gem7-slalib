@@ -13,7 +13,7 @@ void slaFk425 ( double r1950, double d1950, double dr1950,
 **
 **  (double precision)
 **
-**  This routine converts stars from the old, Bessel-Newcomb, FK4
+**  This function converts stars from the old, Bessel-Newcomb, FK4
 **  system to the new, IAU 1976, FK5, Fricke system.  The precepts
 **  of Smith et al (Ref 1) are followed, using the implementation
 **  by Yallop et al (Ref 2) of a matrix method due to Standish.
@@ -43,7 +43,7 @@ void slaFk425 ( double r1950, double d1950, double dr1950,
 **  2)  Conversion from Besselian epoch 1950.0 to Julian epoch
 **      2000.0 only is provided for.  Conversions involving other
 **      epochs will require use of the appropriate precession,
-**      proper motion, and E-terms routines before and/or
+**      proper motion, and E-terms functions before and/or
 **      after FK425 is called.
 **
 **  3)  In the FK4 catalogue the proper motions of stars within
@@ -57,7 +57,7 @@ void slaFk425 ( double r1950, double d1950, double dr1950,
 **      the likelihood that the differential E-terms effect was not
 **      taken into account when allowing for proper motion in past
 **      astrometry, and the undesirability of a discontinuity in
-**      the algorithm, the decision has been made in this routine to
+**      the algorithm, the decision has been made in this function to
 **      include the effect of differential E-terms on the proper
 **      motions for all stars, whether polar or not.  At epoch 2000,
 **      and measuring on the sky rather than in terms of dRA, the
@@ -67,19 +67,19 @@ void slaFk425 ( double r1950, double d1950, double dr1950,
 **
 **  References:
 **
-**     1  Smith, C.A. et al, 1989.  "The transformation of astrometric
-**        catalog systems to the equinox J2000.0".  Astron.J. 97, 265.
+**     1  Smith, C.A. et al, 1989, "The transformation of astrometric
+**        catalog systems to the equinox J2000.0", Astron.J. 97, 265
 **
-**     2  Yallop, B.D. et al, 1989.  "Transformation of mean star places
-**        from FK4 B1950.0 to FK5 J2000.0 using matrices in 6-space".
-**        Astron.J. 97, 274.
+**     2  Yallop, B.D. et al, 1989, "Transformation of mean star places
+**        from FK4 B1950.0 to FK5 J2000.0 using matrices in 6-space",
+**        Astron.J. 97, 274
 **
-**     3  Seidelmann, P.K. (ed), 1992.  "Explanatory Supplement to
-**        the Astronomical Almanac", ISBN 0-935702-68-7.
+**     3  Seidelmann, P.K. (ed), 1992, "Explanatory Supplement to
+**        the Astronomical Almanac", ISBN 0-935702-68-7
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   30 November 2000
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

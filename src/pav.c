@@ -24,13 +24,13 @@ double slaPav ( float v1 [ 3 ], float v2 [ 3 ] )
 **
 **  The vectors v1 and v2 need not be unit vectors.
 **
-**  The routine slaBear performs an equivalent function except
+**  The function slaBear performs an equivalent function except
 **  that the points are specified in the form of spherical
 **  coordinates.
 **
 **  Called:  slaDpav
 **
-**  Last revision:   9 December 1996
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

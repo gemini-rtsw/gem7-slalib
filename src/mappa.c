@@ -9,7 +9,7 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **  Compute star-independent parameters in preparation for
 **  conversions between mean place and geocentric apparent place.
 **
-**  The parameters produced by this routine are required in the
+**  The parameters produced by this function are required in the
 **  parallax, light deflection, aberration, and precession/nutation
 **  parts of the mean/apparent transformations.
 **
@@ -43,15 +43,15 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **  2)  The vectors amprms(1-3) and amprms(4-6) are referred to the
 **      mean equinox and equator of epoch eq.
 **
-**  3)  The parameters AMPRMS produced by this routine are used by
+**  3)  The parameters AMPRMS produced by this function are used by
 **      slaAmpqk, slaMapqk and slaMapqkz.
 **
 **  4)  The accuracy is sub-milliarcsecond, limited by the
 **      precession-nutation model (IAU 1976 precession, Shirai &
 **      Fukushima 2001 forced nutation and precession corrections).
 **
-**  5)  A further limit to the accuracy of routines using the parameter
-**      array AMPRMS is imposed by the routine slaEvp, used here to
+**  5)  A further limit to the accuracy of functions using the parameter
+**      array AMPRMS is imposed by the function slaEvp, used here to
 **      compute the Earth position and velocity by the methods of
 **      Stumpff.  The maximum error in the resulting aberration
 **      corrections is about 0.3 milliarcsecond.
@@ -59,7 +59,7 @@ void slaMappa ( double eq, double date, double amprms[21] )
 **  Called:
 **     slaEpj, slaEvp, slaDvn, slaPrenut
 **
-**  Last revision:   17 September 2001
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

@@ -23,14 +23,14 @@ void slaEqgal ( double dr, double dd, double *dl, double *db )
 **     slaDcs2c, slaDmxv, slaDcc2s, slaDranrm, slaDrange
 **
 **  Note:
-**     The equatorial coordinates are J2000.0.  Use the routine
+**     The equatorial coordinates are J2000.0.  Use the function
 **     slaEg50 if conversion from B1950.0 'FK4' coordinates is
 **     required.
 **
 **  Reference:
-**     Blaauw et al, Mon.Not.R.astron.Soc.,121,123 (1960)
+**     Blaauw et al., 1960, Mon.Not.R.astron.Soc., 121, 123
 **
-**  Last revision:   21 September 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

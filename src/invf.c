@@ -6,7 +6,7 @@ void slaInvf ( double fwds[6], double bkwds[6], int *j )
 **   s l a I n v f
 **  - - - - - - - -
 **
-**  Invert a linear model of the type produced by the slaFitxy routine.
+**  Invert a linear model of the type produced by the slaFitxy function.
 **
 **  Given:
 **     fwds    double[6]      model coefficients
@@ -31,7 +31,7 @@ void slaInvf ( double fwds[6], double bkwds[6], int *j )
 **     x2 = a + b*x1 + c*y1
 **     y2 = d + e*x1 + f*y1
 **
-**  The present routine generates a new set of coefficients:
+**  The present function generates a new set of coefficients:
 **
 **     bkwds[0] = p
 **     bkwds[1] = q
@@ -50,7 +50,7 @@ void slaInvf ( double fwds[6], double bkwds[6], int *j )
 **
 **  See also slaFitxy, slaPxy, slaXy2xy, slaDcmpf
 **
-**  Last revision:   30 October 1993
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */

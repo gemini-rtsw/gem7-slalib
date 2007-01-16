@@ -10,11 +10,11 @@ void slaFk45z ( double r1950, double d1950, double bepoch,
 **  Convert B1950.0 FK4 star data to J2000.0 FK5 assuming zero
 **  proper motion in the FK5 frame (double precision)
 **
-**  This routine converts stars from the old, Bessel-Newcomb, FK4
+**  This function converts stars from the old, Bessel-Newcomb, FK4
 **  system to the new, IAU 1976, FK5, Fricke system, in such a
 **  way that the FK5 proper motion is zero.  Because such a star
 **  has, in general, a non-zero proper motion in the FK4 system,
-**  the routine requires the epoch at which the position in the
+**  the function requires the epoch at which the position in the
 **  FK4 system was determined.
 **
 **  The method is from Appendix 2 of Ref 1, but using the constants
@@ -36,7 +36,7 @@ void slaFk45z ( double r1950, double d1950, double bepoch,
 **  2)  Conversion from Besselian epoch 1950.0 to Julian epoch
 **      2000.0 only is provided for.  Conversions involving other
 **      epochs will require use of the appropriate precession,
-**      proper motion, and E-terms routines before and/or
+**      proper motion, and E-terms functions before and/or
 **      after FK45Z is called.
 **
 **  3)  In the FK4 catalogue the proper motions of stars within
@@ -50,7 +50,7 @@ void slaFk45z ( double r1950, double d1950, double bepoch,
 **      the likelihood that the differential E-terms effect was not
 **      taken into account when allowing for proper motion in past
 **      astrometry, and the undesirability of a discontinuity in
-**      the algorithm, the decision has been made in this routine to
+**      the algorithm, the decision has been made in this function to
 **      include the effect of differential E-terms on the proper
 **      motions for all stars, whether polar or not.  At epoch 2000,
 **      and measuring on the sky rather than in terms of dRA, the
@@ -60,23 +60,23 @@ void slaFk45z ( double r1950, double d1950, double bepoch,
 **
 **  References:
 **
-**     1  Aoki,S., et al, 1983.  Astron. Astrophys., 128, 263.
+**     1  Aoki,S., et al, 1983, Astron. Astrophys., 128, 263
 **
-**     2  Smith, C.A. et al, 1989.  "The transformation of astrometric
-**        catalog systems to the equinox J2000.0".  Astron.J. 97, 265.
+**     2  Smith, C.A. et al, 1989, "The transformation of astrometric
+**        catalog systems to the equinox J2000.0", Astron.J. 97, 265
 **
-**     3  Yallop, B.D. et al, 1989.  "Transformation of mean star places
-**        from FK4 B1950.0 to FK5 J2000.0 using matrices in 6-space".
-**        Astron.J. 97, 274.
+**     3  Yallop, B.D. et al, 1989, "Transformation of mean star places
+**        from FK4 B1950.0 to FK5 J2000.0 using matrices in 6-space",
+**        Astron.J. 97, 274
 **
-**     4  Seidelmann, P.K. (ed), 1992.  "Explanatory Supplement to
-**        the Astronomical Almanac", ISBN 0-935702-68-7.
+**     4  Seidelmann, P.K. (ed), 1992, "Explanatory Supplement to
+**        the Astronomical Almanac", ISBN 0-935702-68-7
 **
 **  Called:  slaDcs2c, slaEpj, slaEpb2d, slaDcc2s, slaDranrm
 **
 **  Defined in slamac.h:  D2PI
 **
-**  Last revision:   21 September 1998
+**  Last revision:   22 October 2006
 **
 **  Copyright P.T.Wallace.  All rights reserved.
 */
