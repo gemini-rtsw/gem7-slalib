@@ -18,7 +18,7 @@
       Modified slalibInstall to allow compiling for EPICS releases other
       than GEM8.5
 
-16 January 2007 V1-7
+16 January 2007 V1-9
       Updated routines from PTW.
       New files c2i.c c2ipa.c c2ipad.c c2ipas.c c2iqk.c c2iqkz.c 
          eo.c eors.c era.c fw2m.c fw2xy.c g2ixys.c gst.c i2c.c i2cqk.c 
