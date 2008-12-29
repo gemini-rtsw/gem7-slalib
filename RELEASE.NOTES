@@ -24,3 +24,7 @@
          eo.c eors.c era.c fw2m.c fw2xy.c g2ixys.c gst.c i2c.c i2cqk.c 
          i2o.c i2opa.c i2opad.c i2opat.c i2oqk.c int2in.c nu.c nu00a.c 
          o2i.c o2iqk.c pfw.c pncio.c pneqx.c pomom.c s.c sp.c
+
+29 December 2008 V1-9-1
+      Modified dat.c to account for leap second 
+
