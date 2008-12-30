@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# slalibUninstall -- Remove directories and files in the slalib directory to
+# leave it in the state after a checkout from the CVS repository.
+#
+
+if [ -d ./adl -a -d ./capfast -a -d ./src -a -d ./startup ]; then
+
+    echo "Removing directories..."
+    /usr/bin/rm -rf bin
+    /usr/bin/rm -rf config
+    /usr/bin/rm -rf data
+    /usr/bin/rm -rf db
+    /usr/bin/rm -rf dbd
+    /usr/bin/rm -rf dl
+    /usr/bin/rm -rf include
+    /usr/bin/rm -rf javalib
+    /usr/bin/rm -rf lib
+
+    echo "Removing files..."
+    /usr/bin/rm -rf Distfile
+    /usr/bin/rm -rf `find . -name "O.*"      -print`
+    /usr/bin/rm -rf `find . -name ".applTop" -print`
+
+    echo "Done, you can now rerun slalibInstall"
+
+else
+   echo "This script can only be executed in a top level UAE directory." 
+   exit
+fi
