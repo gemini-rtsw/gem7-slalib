@@ -4,7 +4,7 @@
 # leave it in the state after a checkout from the CVS repository.
 #
 
-if [ -d ./adl -a -d ./capfast -a -d ./src -a -d ./startup ]; then
+if [ -d ./src -a -d ./startup ]; then
 
     echo "Removing directories..."
     /usr/bin/rm -rf bin
