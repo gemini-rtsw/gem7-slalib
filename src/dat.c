@@ -59,7 +59,7 @@ double slaDat ( double utc )
 /* the preamble comments appropriately.      */
 /* - - - - - - - - - - - - - - - - - - - - - */
 
-/* 2009 January 1 */
+/* 2012 June 1 */
    if ( utc >= 56109.0 ) return 35.0; 
 
 /* 2009 January 1 */
