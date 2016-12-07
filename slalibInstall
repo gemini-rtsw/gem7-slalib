@@ -9,7 +9,11 @@ else
     ppc=ppc604;
 fi
 
-applSetup.pl -T mv167 -T $ppc -I src -I startup $1 > $2 2>&1
+if [ "`echo $EPICS | egrep 'GEM8\.7'`" != "" ]; then
+    applSetup.pl -T mv2700 -T $ppc -T sv3 -I src -I startup $1 > $2 2>&1
+else
+    applSetup.pl -T mv167 -T $ppc -I src -I startup $1 > $2 2>&1
+fi
 
 # gmake >> $2 2>&1
 
