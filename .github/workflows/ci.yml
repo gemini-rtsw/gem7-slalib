@@ -1,0 +1,29 @@
+name: Build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        # Cross-compiles for vxWorks ppc604 with the 32-bit Tornado 2.0.2
+        # tools; the host only has to run those and the EPICS Linux host
+        # tools. EL9 only -- and el_version defaults to 8, so it must be
+        # named explicitly.
+        el: ['9']
+    uses: gemini-rtsw/gemini-rtsw-ci/.github/workflows/ci.yml@main
+    with:
+      scripts_dir: gemini-rtsw-ci
+      el_version: ${{ matrix.el }}
+
+  # Rebuilds rpm-repo:latest ONCE after all EL legs have pushed their scratch
+  # tags. Without this the RPM never lands in the served repo.
+  publish:
+    needs: build
+    uses: gemini-rtsw/gemini-rtsw-ci/.github/workflows/publish.yml@main
+    secrets: inherit
