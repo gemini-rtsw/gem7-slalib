@@ -98,11 +98,10 @@ applSetup.pl -d flag names %{instdir}.
 # Environment from the gem-epics3134gem7 package.
 . /etc/profile.d/gem7.sh
 
-# applSetup.pl stamps the checkout's absolute path into config/, so it must run
-# here rather than being baked into an image. Its shebang is the Solaris perl
-# path, hence the explicit interpreter.
-echo "APPLIC_TOP = $PWD" > .applTop
-perl $EPICS_BASE/bin/$HOST_ARCH/applSetup.pl -T ppc604 -I src -I startup
+# The bootstrap lives in setup.sh so an interactive build and this one
+# run identical steps and cannot drift. It also drops any host-only
+# subdirectory that will not build on Linux.
+./setup.sh
 make
 
 # The three files an IOC actually loads. A missing one is a crate that stops
